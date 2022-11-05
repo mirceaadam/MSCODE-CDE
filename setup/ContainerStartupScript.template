@@ -1,0 +1,28 @@
+#!/bin/bash -e
+pwd
+
+#Copy Credentials to local container
+echo "Setting up your aws..."
+mkdir -p ~/.aws
+cp -Rv .secrets/.aws/* ~/.aws/
+echo "done!"
+
+#GIT setup
+echo "Setting up your git..."
+git config --global user.email "%GIT_EMAIL%"
+git config --global user.name "%GIT_USERNAME%"
+echo "done!"
+
+#Run ContainerSetToken
+cd .devcontainer
+chmod +x ContainerSetToken.sh
+bash ContainerSetToken.sh
+
+if [ $? -ne 0 ]; then
+  echo "Check errors above. Exiting.."
+  exit 1
+else
+  echo "Have fun creating wonderfull things!"
+fi
+
+
