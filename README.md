@@ -1,10 +1,18 @@
-# MSCODE-CDE Version 2.0
-# MS CODE CUSTOM DEVELOPMENT ENVIRONMENT
+# MS CODE CUSTOM DEVELOPMENT ENVIRONMENT (CDE)
+#           Version 2.0
 
-## Authors
+
+### Main Author
 - [Mircea Adam](https://github.com/mirceaadam)
 
-## BEFORE YOU BEGIN
+### Contributions
+- [Trond Kristiansen](https://github.com)
+
+### Based On
+- [Developing Inside A Container](https://code.visualstudio.com/docs/devcontainers/containers#_quick-start-open-an-existing-folder-in-a-container)
+
+
+## REQUIREMENTS
 ---------
     - install MSCODE (https://code.visualstudio.com/download)
     - (!) install WSL2 & docker locally on your laptop, link: https://docs.google.com/document/d/1E6XzLu-tamuM6lcvXxd_wgpj7R7L3ufri3f4yFgxDDQ/edit?usp=sharing
