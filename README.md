@@ -1,7 +1,5 @@
-# MS CODE CUSTOM DEVELOPMENT ENVIRONMENT (CDE)
-#           Version 2.0
-
-
+# MS CODE CUSTOM DEVELOPMENT ENVIRONMENT
+# a.k.a MSCODE-CDE
 ### Main Author
 - [Mircea Adam](https://github.com/mirceaadam)
 
@@ -24,3 +22,7 @@
     - extract and place in a folder of your choosing
     - setup will create 
 
+### Major Versions 
+- Version 3.0 ( november 2022 )
+- Version 2.0 ( january 2022 )
+- Version 1 (november 2021)
