@@ -1,5 +1,5 @@
 # MS CODE CUSTOM DEVELOPMENT ENVIRONMENT
-# a.k.a MSCODE-CDE
+# MSCODE-CDE v3.0
 ### Main Author
 - [Mircea Adam](https://github.com/mirceaadam)
 
