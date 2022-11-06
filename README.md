@@ -63,8 +63,7 @@
     ```
     cd MSCODE-CDE
     chmod +x setup.sh
-    bash setup.sh
-    cd .. && code .
+    bash setup.sh && cd .. && code .
     ```     
 - `Note:` the script will delete the cloned repo at the end.
 ## OTHER INFORMATION
