@@ -9,10 +9,10 @@ AWS_USER_PROFILE=iam
 AWS_2AUTH_PROFILE=mfa
 ARN_OF_MFA=$AWS_ARN_OF_MFA
 DURATION=$AWS_TOKEN_DURATION
-USER=$AWS_IAM_USERNAME
+USER=`echo $AWS_IAM_USERNAME | tr -d '\012\015'`
 
-echo "Hi $USER. "
-echo "MFA ARN Detected: $ARN_OF_MFA , let's login."
+echo -e "Hi $USER ! "
+echo -e "MFA ARN Detected: $ARN_OF_MFA , let's login."
 
 unset password
 prompt="Enter Your MFA TOKEN: "

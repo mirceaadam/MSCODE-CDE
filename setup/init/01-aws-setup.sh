@@ -4,7 +4,7 @@ HOME=".devcontainer"
 
 echo "Setting up your aws credentials in the container..."
 mkdir -p ~/.aws
-ls HOME/.secrets/.aws/
+ls $HOME/.secrets/.aws/
 cp -v $HOME/.secrets/.aws/* ~/.aws/
 echo -e "completed \xE2\x9C\x94"
 
