@@ -1,7 +1,7 @@
 #!/bin/bash
 INSTALL_DIR=`pwd`
-source user.config
 cd ..
+source user.config
 WORKDIR=${PWD##*/}
 DEVCONTAINER=".devcontainer"
 

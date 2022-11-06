@@ -36,8 +36,9 @@
     ```
     mkdir work && cd work
     git clone https://github.com/mirceaadam/MSCODE-CDE.git && cd MSCODE-CDE
+    cp user.config-example ../user.config && cd ..
     ```
-- after cloning, customize the variables in `user.config` replace `john.doe` with your name:
+- next, customize the variables in `user.config` replace `john.doe` with your name:
     
     [ CONTAINER-SPECIFIC ]
     - CONTAINER_NAME="MY-AWEOSAME-CDE" `#the name that will be displayed in MSCODE`
@@ -60,6 +61,7 @@
     - just replace: `xxxxxx` in `config` and `credentials`
 - run:
     ```
+    cd MSCODE-CDE
     chmod +x setup.sh
     bash setup.sh
     cd .. && code .
