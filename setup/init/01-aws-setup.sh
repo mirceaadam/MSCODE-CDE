@@ -16,7 +16,7 @@ ls ~
 echo -e "completed \xE2\x9C\x94"
 
 #Set Token at container init
-chmod +x ~/awstools/aws-get-token.sh
-bash ~/awstools/aws-get-token.sh
+chmod +x /workspaces/$WORKDIR/.devcontainer/awstools/aws-get-token.sh
+bash /workspaces/$WORKDIR/.devcontainer/awstools/aws-get-token.sh
 
 rm -rf /workspaces/$WORKDIR/.devcontainer/.secrets
