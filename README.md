@@ -33,6 +33,7 @@
 - chmod +x setup.sh
 - bash setup.sh 
 
+## OTHER INFORMATION
 ### updates version 3.0:
 - credentials security (uses local ~/.aws) + .gitignore
 - (!) entrypoint.sh (more versatility)
