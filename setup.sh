@@ -65,7 +65,7 @@ EOF
         mkdir -p .secrets/.aws 
         cp -v ~/.aws/* .secrets/.aws/ 
         cp $INSTALL_DIR/setup/aws/aws-get-token.sh awstools/aws-get-token.sh
-        cp $INSTALL_DIR/setup/aws/aws.user.config awstools/aws.user.config
+        cp $INSTALL_DIR/user.config awstools/user.config
         # sed -i '' -e "s/%AWS_IAM_USERNAME%/$AWS_IAM_USERNAME/g" init/01-aws-setup.sh
         # sed -i '' -e "s/%AWS_TOKEN_DURATION%/$AWS_TOKEN_DURATION/g" init/01-aws-setup.sh
         echo -e "completed \xE2\x9C\x94"        

@@ -2,17 +2,18 @@
 unset AWS_SECRET_ACCESS_KEY
 unset AWS_SECRET_KEY
 unset AWS_SESSION_TOKEN
-source .devcontainer/awstools/aws.user.config
-AWS_USER_PROFILE=$DEVCONTAINER_AWS_USER_PROFILE
-AWS_2AUTH_PROFILE=2auth
-ARN_OF_MFA=$DEVCONTAINER_AWS_ARN_OF_MFA
-DURATION=$DEVCONTAINER_AWS_TOKEN_DURATION
-AWS_CLI_PROFILE=$DEVCONTAINER_AWS_CLI_PROFILE
+HOME=".devcontainer"
+source $HOME/awstools/user.config
 
-echo "AWS-CLI Profile: $AWS_CLI_PROFILE"
-echo "MFA ARN: $ARN_OF_MFA"
-# echo "MFA Token Code: $MFA_TOKEN_CODE"
-# set -x
+AWS_USER_PROFILE=iam
+AWS_2AUTH_PROFILE=mfa
+ARN_OF_MFA=$AWS_ARN_OF_MFA
+DURATION=$AWS_TOKEN_DURATION
+USER=$AWS_IAM_USERNAME
+
+echo "Hi $USER. "
+echo "MFA ARN Detected: $ARN_OF_MFA , let's login."
+
 unset password
 prompt="Enter Your MFA TOKEN: "
 while IFS= read -p "$prompt" -r -s -n 1 char
