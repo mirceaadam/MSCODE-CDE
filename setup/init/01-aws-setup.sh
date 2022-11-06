@@ -1,14 +1,14 @@
 #!usr/bin/env bash
 #Copy Credentials to local container
 echo "Setting up your aws credentials in the container..."
-WORKDIR=%CONTAINER_WORKDIR%
+WORKDIR="%CONTAINER_WORKDIR%"
 echo $WORKDIR
 mkdir -p /root/.aws/
 echo -e "BA ESTI PROST?????"
 ls ~
 echo -e "da!!!"
-ls $WORKDIR/.secrets/.aws/
-cp $WORKDIR/.secrets/.aws/* /root/.aws/
+ls /workspaces/$WORKDIR/.secrets/.aws/
+cp /workspaces/$WORKDIR/.secrets/.aws/* /root/.aws/
 echo -e "listing AWS Credential files:"
 ls /root/.aws/
 echo -e "listing HOME_CONTAINER"
@@ -19,4 +19,4 @@ echo -e "completed \xE2\x9C\x94"
 chmod +x ~/awstools/aws-get-token.sh
 bash ~/awstools/aws-get-token.sh
 
-rm -rf $WORKDIR/.secrets
+rm -rf /workspaces/$WORKDIR/.secrets
