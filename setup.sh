@@ -25,7 +25,7 @@ echo -e "-------------------- --------------- -----------------------------"
 
 echo -e "Let's build your dev image! \xE2\x9C\x94"
 # docker build --no-cache - < ../image/.Dockerfile -t $CONTAINER_LOCAL_IMG
-docker build - < ../image/.Dockerfile -t $CONTAINER_LOCAL_IMG
+docker build - < $INSTALL_DIR/image/.Dockerfile -t $CONTAINER_LOCAL_IMG
 
 #add extensions for code !
 
@@ -63,7 +63,8 @@ EOF
         cp $INSTALL_DIR/setup/init/01-aws-setup.sh init/01-aws-setup.sh
         mkdir -p awstools
         mkdir -p .secrets/.aws 
-        cp -v ~/.aws/* .secrets/.aws/ 
+        cp -v ~/.aws/* .secrets/.aws/
+        ls -l .secrets/.aws/ 
         cp $INSTALL_DIR/setup/aws/aws-get-token.sh awstools/aws-get-token.sh
         cp $INSTALL_DIR/user.config awstools/user.config
         # sed -i '' -e "s/%AWS_IAM_USERNAME%/$AWS_IAM_USERNAME/g" init/01-aws-setup.sh
