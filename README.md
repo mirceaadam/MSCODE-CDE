@@ -1,5 +1,13 @@
 # MS CODE CUSTOM DEVELOPMENT ENVIRONMENT
 # MSCODE-CDE v3.0
+
+#### What is this?
+- It's a custom development environment based on containers so that that it can be easly be shared between machines and teams on different operating systems.
+- The main goal is to have the same env and same tools in MSCode.
+
+### Status
+- ![Test passing](https://img.shields.io/badge/Tests-passing-brightgreen.svg)
+
 ### Main Author
 - [Mircea Adam](https://github.com/mirceaadam)
 
@@ -11,14 +19,18 @@
 
 
 ## REQUIREMENTS
----------
-    - install MSCODE (https://code.visualstudio.com/download)
-    - (!) install WSL2 & docker locally on your laptop, link: https://docs.google.com/document/d/1E6XzLu-tamuM6lcvXxd_wgpj7R7L3ufri3f4yFgxDDQ/edit?usp=sharing
-    - (!) have your AWS Token prepared
-    - prepare or check your ~/.aws folder: credentials & configure
----------
+#### Windows
+    - install WSL 2
+    - install docker desktop
+    - install [MSCODE](https://code.visualstudio.com/download)
+#### M1 Mac
+    - install docker desktop
+    - install [MSCODE](https://code.visualstudio.com/download)
+#### Linux / Ubuntu / Debians
+    - install docker desktop
+    - install [MSCODE](https://code.visualstudio.com/download)
 
-## STEP 0:
+## INSTALATION / USAGE
 - make sure you have have locally ~/.aws files configured correctly
 - choose a working directory
 - chmod +x setup.sh
@@ -29,12 +41,16 @@
 - (!) entrypoint.sh (more versatility)
 - simple setup redesign
 - local .Dokerfile image
+
+### in the works: 
 - load extensions(Work in progress)
 - example ~/.aws (Work in progress)
 - aws configure(?) (Work in progress)
 - more aws tools (Work in progress)
+- azure / gsp support
+- terraform support
 
 ### Major Versions 
 - Version 3.0 ( november 2022 )
 - Version 2.0 ( january 2022 )
-- Version 1 (november 2021)
+- Version 1.0 ( november 2021 )
