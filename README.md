@@ -18,9 +18,21 @@
     - prepare or check your ~/.aws folder: credentials & configure
 ---------
 
-## STEP 0: setup.zip
-    - extract and place in a folder of your choosing
-    - setup will create 
+## STEP 0:
+- make sure you have have locally ~/.aws files configured correctly
+- choose a working directory
+- chmod +x setup.sh
+- bash setup.sh 
+
+### updates version 3.0:
+- credentials security (uses local ~/.aws) + .gitignore
+- (!) entrypoint.sh (more versatility)
+- simple setup redesign
+- local .Dokerfile image
+- load extensions(Work in progress)
+- example ~/.aws (Work in progress)
+- aws configure(?) (Work in progress)
+- more aws tools (Work in progress)
 
 ### Major Versions 
 - Version 3.0 ( november 2022 )

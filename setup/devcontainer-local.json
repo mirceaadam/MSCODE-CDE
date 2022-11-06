@@ -1,6 +1,0 @@
-{
-    "name": "AWS Azets",
-    "image": "aws-azets:latest",
-    "forwardPorts": [3000],
-    "postCreateCommand": "bash scripts/init.sh"
-  }

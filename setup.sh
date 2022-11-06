@@ -1,16 +1,20 @@
 #!/bin/bash
 #unlink repo if cloned !
 #git remote rm origin
+INSTALL_DIR=`pwd`
 source user.config
 cd ..
 
 #Varitables Parsing because newlines or tabs are introduced sometimes.
 DEVCONTAINER=".devcontainer"
+INIT_DIR="init"
 AWS_IAM_USERNAME=`echo $AWS_IAM_USERNAME | tr -d '\012\015'`
 CONTAINER_NAME=`echo $CONTAINER_NAME | tr -d '\012\015'`
 CONTAINER_LOCAL_IMG=`echo $CONTAINER_LOCAL_IMG | tr -d '\012\015'`
+AWS_SETUP=`echo $AWS_SETUP | tr -d '\012\015'`
 AWS_REGION=`echo $AWS_REGION | tr -d '\012\015'`
 AWS_TOKEN_DURATION=`echo $AWS_TOKEN_DURATION | tr -d '\012\015'`
+GIT_SETUP=`echo $GIT_SETUP | tr -d '\012\015'`
 GIT_EMAIL=`echo $GIT_EMAIL | tr -d '\012\015'`
 GIT_USERNAME=`echo $GIT_USERNAME | tr -d '\012\015'`
 
@@ -25,32 +29,48 @@ docker build - < ../image/.Dockerfile -t $CONTAINER_LOCAL_IMG
 
 #add extensions for code !
 
-if [ ! -d "$DEVCONTAINER" ]; then    
-    mkdir -p $DEVCONTAINER
+if [ ! -d "$DEVCONTAINER" ]; then
+    echo -e "::SETUP:: .devcontainer not found - starting config."    
+    mkdir -p $DEVCONTAINER/init
     cd $DEVCONTAINER
-
+    cp $INSTALL_DIR/setup/entrypoint.sh .
     echo "setting up .devcontainer.json"
     cat <<EOF > devcontainer.json
 {
   "name": "$CONTAINER_NAME", 
   "image": "$CONTAINER_LOCAL_IMG",
   "forwardPorts": [3000],
-  "postCreateCommand": "bash .devcontainer/ContainerStartupScript.sh"
+  "postCreateCommand": "bash .devcontainer/entrypoint.sh",
+  "vscode": {
+    "extensions": [
+      "ms-vscode.remote-explorer", 
+      "ms-vscode-remote.remote-ssh"
+      ]
+  }
 }
 EOF
-    echo -e ".devcontainer folder does not exist - creating & configuring... \xE2\x9C\x94"
+    echo -e "::SETUP:: preparing your git"
+    if [ "$GIT_SETUP" = "yes" ]; then    
+        cp $INSTALL_DIR/setup/init/00-git-setup.sh init/00-git-setup.sh
+        sed -i '' -e "s/%GIT_EMAIL%/$GIT_EMAIL/g" init/00-git-setup.sh
+        sed -i '' -e "s/%GIT_USERNAME%/$GIT_USERNAME/g" init/00-git-setup.sh
+        chmod +x init/00-git-setup.sh
+        echo -e "completed \xE2\x9C\x94"
+    fi
 
-    cp ../setup/ContainerStartupScript.template ContainerStartupScript.sh
-    sed -i "s/%GIT_EMAIL%/$GIT_EMAIL/g" ContainerStartupScript.sh
-    sed -i "s/%GIT_USERNAME%/$GIT_USERNAME/g" ContainerStartupScript.sh
-    chmod +x ContainerStartupScript.sh
-    echo -e "configuring ContainerStartupScript.sh \xE2\x9C\x94"
+    if [ "$AWS_SETUP" = "yes" ]; then
+        echo -e "::SETUP:: configuring AWS MFA TOKEN Script"     
+        cp $INSTALL_DIR/setup/init/01-aws-setup.sh init/01-aws-setup.sh
+        mkdir -p awstools
+        mkdir -p .secrets/.aws 
+        cp -v ~/.aws/* .secrets/.aws/ 
+        cp $INSTALL_DIR/setup/aws/aws-get-token.sh awstools/aws-get-token.sh
+        cp $INSTALL_DIR/setup/aws/aws.user.config awstools/aws.user.config
+        # sed -i '' -e "s/%AWS_IAM_USERNAME%/$AWS_IAM_USERNAME/g" init/01-aws-setup.sh
+        # sed -i '' -e "s/%AWS_TOKEN_DURATION%/$AWS_TOKEN_DURATION/g" init/01-aws-setup.sh
+        echo -e "completed \xE2\x9C\x94"        
+    fi    
 
-    cp ../setup/ContainerSetToken.template ContainerSetToken.sh
-    sed -i "s/%AWS_IAM_USERNAME%/$AWS_IAM_USERNAME/g" ContainerSetToken.sh
-    sed -i "s/%AWS_TOKEN_DURATION%/$AWS_TOKEN_DURATION/g" ContainerSetToken.sh
-    chmod +x ContainerSetToken.sh
-    echo -e "configuring ContainerSetToken.sh \xE2\x9C\x94"
     echo -e "\n"
     echo -e "CONFIG COMPLETE."
     echo -e "\n"
@@ -62,6 +82,3 @@ EOF
     echo -e "                         code .                                   "
     echo -e "-------------------- --------------- -----------------------------"         
 fi
-
-
-

@@ -1,14 +1,17 @@
-#!/bin/bash -e
-
+#!/bin/bash
 unset AWS_SECRET_ACCESS_KEY
 unset AWS_SECRET_KEY
 unset AWS_SESSION_TOKEN
+source .devcontainer/awstools/aws.user.config
+AWS_USER_PROFILE=$DEVCONTAINER_AWS_USER_PROFILE
+AWS_2AUTH_PROFILE=2auth
+ARN_OF_MFA=$DEVCONTAINER_AWS_ARN_OF_MFA
+DURATION=$DEVCONTAINER_AWS_TOKEN_DURATION
+AWS_CLI_PROFILE=$DEVCONTAINER_AWS_CLI_PROFILE
 
-AWS_USER_PROFILE=iam
-AWS_2AUTH_PROFILE=mfa
-ARN_OF_MFA="arn:aws:iam::130868257547:mfa/%AWS_IAM_USERNAME%"
-DURATION=%AWS_TOKEN_DURATION%
-
+echo "AWS-CLI Profile: $AWS_CLI_PROFILE"
+echo "MFA ARN: $ARN_OF_MFA"
+# echo "MFA Token Code: $MFA_TOKEN_CODE"
 # set -x
 unset password
 prompt="Enter Your MFA TOKEN: "
@@ -21,12 +24,13 @@ do
     prompt='*'
     password+="$char"
 done
+echo
 read AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN <<< \
-  $( aws --profile $AWS_USER_PROFILE sts get-session-token \
-    --duration $DURATION  \
-    --serial-number $ARN_OF_MFA \
-    --token-code $password \
-    --output text  | awk '{ print $2, $4, $5 }' )
+$( aws --profile $AWS_USER_PROFILE sts get-session-token \
+  --duration $DURATION  \
+  --serial-number $ARN_OF_MFA \
+  --token-code $password \
+  --output text  | awk '{ print $2, $4, $5 }')
 echo "AWS_ACCESS_KEY_ID: " $AWS_ACCESS_KEY_ID
 echo "AWS_SECRET_ACCESS_KEY: " $AWS_SECRET_ACCESS_KEY
 echo "AWS_SESSION_TOKEN: " $AWS_SESSION_TOKEN
