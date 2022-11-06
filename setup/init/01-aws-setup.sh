@@ -2,7 +2,7 @@
 #Copy Credentials to local container
 HOME=".devcontainer"
 echo "Setting up your aws credentials in the container..."
-mkdir -p ~/.aws
+mkdir -p /root/.aws/
 cp .secrets/.aws/* /root/.aws/
 echo -e "listing AWS Credential files:"
 ls /root/.aws/
