@@ -71,11 +71,12 @@
 ### updates version 3.0:
 - credentials security (uses local ~/.aws) + .gitignore
 - homedir fixes
-- (!) entrypoint.sh (more versatility)
+- added (!) entrypoint.sh (more versatility)
 - simple setup redesign
 - local .Dokerfile image
 
-### in the works: 
+### in the works:
+- add support to build a container from inside the devcontainer  
 - load extensions(Work in progress)
 - example ~/.aws (Work in progress)
 - aws configure(?) (Work in progress)
