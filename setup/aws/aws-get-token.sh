@@ -2,7 +2,9 @@
 unset AWS_SECRET_ACCESS_KEY
 unset AWS_SECRET_KEY
 unset AWS_SESSION_TOKEN
-source ~/awstools/user.config
+WORKDIR="%CONTAINER_WORKDIR%"
+echo $WORKDIR
+source /workspaces/$WORKDIR/.devcontainer/awstools/user.config
 
 AWS_USER_PROFILE=iam
 AWS_2AUTH_PROFILE=mfa
