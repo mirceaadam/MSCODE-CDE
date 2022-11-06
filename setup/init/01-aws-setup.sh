@@ -2,6 +2,9 @@
 #Copy Credentials to local container
 echo "Setting up your aws credentials in the container..."
 mkdir -p /root/.aws/
+echo -e "BA ESTI PROST?????"
+ls ~
+echo -e "da!!!"
 ls ~/.secrets/.aws/
 cp ~/.secrets/.aws/* /root/.aws/
 echo -e "listing AWS Credential files:"
