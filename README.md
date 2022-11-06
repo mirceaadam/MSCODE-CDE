@@ -36,7 +36,7 @@
     ```
     mkdir work && cd work
     git clone https://github.com/mirceaadam/MSCODE-CDE.git && cd MSCODE-CDE
-    cp user.config-example ../user.config && cd ..
+    cp setup/user.config-example ../user.config && cd ..
     ```
 - next, customize the variables in `user.config` replace `john.doe` with your name:
     
