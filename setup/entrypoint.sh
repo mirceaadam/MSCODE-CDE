@@ -12,4 +12,5 @@ for file in `ls -1 $INIT_DIR/ | sort`; do
     fi
 done
 
+chsh -s $(which zsh)
 echo -e "Have fun creating wonderfull things!"

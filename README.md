@@ -59,6 +59,7 @@
     ```
     chmod +x setup.sh
     bash setup.sh
+    cd .. && code .
     ```     
 
 ## OTHER INFORMATION
