@@ -61,6 +61,8 @@ EOF
     if [ "$AWS_SETUP" = "yes" ]; then
         echo -e "::SETUP:: configuring AWS MFA TOKEN Script"     
         cp $INSTALL_DIR/setup/init/01-aws-setup.sh init/01-aws-setup.sh
+        WORKDIR=`pwd`
+        sed -i '' -e "s/%CONTAINER_WORKDIR%/$WORKDIR/g" init/01-aws-setup.sh
         mkdir -p awstools
         mkdir -p .secrets/.aws 
         cp -v ~/.aws/* .secrets/.aws/
