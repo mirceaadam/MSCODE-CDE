@@ -32,12 +32,12 @@
 ### Establish a preffered working directory
 - this will be somewhere you have alot of repositories
 - we will assume you use `~`
-- run the following:
+- run the following (as an example):
     ```
     mkdir work && cd work
     git clone https://github.com/mirceaadam/MSCODE-CDE.git && cd MSCODE-CDE
     ```
-- after cloning, customize the variables in `user.config`:
+- after cloning, customize the variables in `user.config` replace `john.doe` with your name:
     
     [ CONTAINER-SPECIFIC ]
     - CONTAINER_NAME="MY-AWEOSAME-CDE" `#the name that will be displayed in MSCODE`
@@ -46,25 +46,29 @@
     [ AWS ]
     - AWS_SETUP="yes"
     - AWS_IAM_USERNAME="john.doe"
+    - AWS_ARN_OF_MFA="arn:aws:iam::12345678910:mfa/john.doe" `#add your mfa ARN from IAM from your AWS user` 
     - AWS_TOKEN_DURATION=129600
     
     [ GIT ]
     - GIT_SETUP="yes"
     - GIT_EMAIL="john.doe@company.com"
     - GIT_USERNAME="John Doe"
-- If you are using AWS, make sure you have have locally files configured correctly: 
+    - If you are using AWS, make sure you have have locally files configured correctly: 
     - in `~/.aws` for linux
     - in `C:\User\your.name\.aws`
+    - in this repository, `.aws-example` is an example of credentials
+    - just replace: `xxxxxx` in `config` and `credentials`
 - run:
     ```
     chmod +x setup.sh
     bash setup.sh
     cd .. && code .
     ```     
-
+- `Note:` the script will delete the cloned repo at the end.
 ## OTHER INFORMATION
 ### updates version 3.0:
 - credentials security (uses local ~/.aws) + .gitignore
+- homedir fixes
 - (!) entrypoint.sh (more versatility)
 - simple setup redesign
 - local .Dokerfile image
