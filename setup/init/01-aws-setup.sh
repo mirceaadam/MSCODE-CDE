@@ -1,8 +1,10 @@
 #!usr/bin/env bash
 #Copy Credentials to local container
 HOME=".devcontainer"
-
 echo "Setting up your aws credentials in the container..."
+echo -e "listing HOME_CONTAINER"
+ls ~
+echo -e "next"
 mkdir -p ~/.aws
 ls $HOME/.secrets/.aws/
 cp -v $HOME/.secrets/.aws/* ~/.aws/
