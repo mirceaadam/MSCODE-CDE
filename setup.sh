@@ -1,9 +1,8 @@
 #!/bin/bash
-#unlink repo if cloned !
-#git remote rm origin
 INSTALL_DIR=`pwd`
 source user.config
 cd ..
+WORKDIR=${PWD##*/}
 
 #Varitables Parsing because newlines or tabs are introduced sometimes.
 DEVCONTAINER=".devcontainer"
@@ -60,8 +59,7 @@ EOF
 
     if [ "$AWS_SETUP" = "yes" ]; then
         echo -e "::SETUP:: configuring AWS MFA TOKEN Script"     
-        cp $INSTALL_DIR/setup/init/01-aws-setup.sh init/01-aws-setup.sh
-        WORKDIR=${PWD##*/} 
+        cp $INSTALL_DIR/setup/init/01-aws-setup.sh init/01-aws-setup.sh 
         echo -e "workdir is: $WORKDIR"
         sed -i '' -e "s/%CONTAINER_WORKDIR%/$WORKDIR/g" init/01-aws-setup.sh
         mkdir -p awstools
