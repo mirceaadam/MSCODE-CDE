@@ -5,13 +5,8 @@ WORKDIR="%CONTAINER_WORKDIR%"
 echo $WORKDIR
 SETUP_PATH="/workspaces/$WORKDIR/.devcontainer"
 mkdir -p /root/.aws/
-echo -e "BA ESTI PROST?????"
-ls ~
-echo -e "da!!!"
 ls $SETUP_PATH/.secrets/.aws/
 cp $SETUP_PATH/.secrets/.aws/* /root/.aws/
-echo -e "listing AWS Credential files:"
-ls /root/.aws/
 echo -e "listing HOME_CONTAINER"
 ls ~
 echo -e "completed \xE2\x9C\x94"
