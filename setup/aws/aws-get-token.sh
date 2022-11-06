@@ -7,8 +7,8 @@ source $HOME/awstools/user.config
 
 AWS_USER_PROFILE=iam
 AWS_2AUTH_PROFILE=mfa
-ARN_OF_MFA=$AWS_ARN_OF_MFA
-DURATION=$AWS_TOKEN_DURATION
+ARN_OF_MFA=`echo $AWS_ARN_OF_MFA | tr -d '\012\015'`
+DURATION=`echo $AWS_TOKEN_DURATION | tr -d '\012\015'`
 USER=`echo $AWS_IAM_USERNAME | tr -d '\012\015'`
 
 echo -e "Hi $USER ! "
