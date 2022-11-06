@@ -3,10 +3,9 @@ INSTALL_DIR=`pwd`
 source user.config
 cd ..
 WORKDIR=${PWD##*/}
+DEVCONTAINER=".devcontainer"
 
 #Varitables Parsing because newlines or tabs are introduced sometimes.
-DEVCONTAINER=".devcontainer"
-INIT_DIR="init"
 AWS_IAM_USERNAME=`echo $AWS_IAM_USERNAME | tr -d '\012\015'`
 CONTAINER_NAME=`echo $CONTAINER_NAME | tr -d '\012\015'`
 CONTAINER_LOCAL_IMG=`echo $CONTAINER_LOCAL_IMG | tr -d '\012\015'`
