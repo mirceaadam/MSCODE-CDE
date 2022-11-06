@@ -67,7 +67,7 @@ EOF
         ls -l .secrets/.aws/ 
         cp $INSTALL_DIR/setup/aws/aws-get-token.sh awstools/aws-get-token.sh
         sed -i '' -e "s/%CONTAINER_WORKDIR%/$WORKDIR/g" awstools/aws-get-token.sh
-        cp user.config awstools/user.config
+        cp ../user.config awstools/user.config
         # sed -i '' -e "s/%AWS_IAM_USERNAME%/$AWS_IAM_USERNAME/g" init/01-aws-setup.sh
         # sed -i '' -e "s/%AWS_TOKEN_DURATION%/$AWS_TOKEN_DURATION/g" init/01-aws-setup.sh
         echo -e "completed \xE2\x9C\x94"        
