@@ -35,8 +35,7 @@
 - run the following:
     ```
     mkdir work && cd work
-    git clone https://github.com/mirceaadam/MSCODE-CDE.git
-    cd MSCODE-CDE
+    git clone https://github.com/mirceaadam/MSCODE-CDE.git && cd MSCODE-CDE
     ```
 - after cloning, customize the variables in `user.config`:
     
@@ -47,7 +46,6 @@
     [ AWS ]
     - AWS_SETUP="yes"
     - AWS_IAM_USERNAME="john.doe"
-    - AWS_REGION="eu-north-1"
     - AWS_TOKEN_DURATION=129600
     
     [ GIT ]
