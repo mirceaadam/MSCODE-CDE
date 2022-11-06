@@ -1,12 +1,8 @@
 # MS CODE CUSTOM DEVELOPMENT ENVIRONMENT
 # MSCODE-CDE v3.0
-
-#### What is this?
-- It's a custom development environment based on containers so that that it can be easly be shared between machines and teams on different operating systems.
+- It's a custom development environment based on containers so that that it can be easy to share between machines and teams across different operating systems.
 - The main goal is to have the same env and same tools in MSCode.
-
-### Status
-- ![Test passing](https://img.shields.io/badge/Tests-passing-brightgreen.svg)
+- Current main tools: git, aws-tools(awscli, MFA, ecs, k8s, etc.), cdk, etc.
 
 ### Main Author
 - [Mircea Adam](https://github.com/mirceaadam)
@@ -20,15 +16,16 @@
 
 ## REQUIREMENTS
 #### Windows
-    - install WSL 2
-    - install docker desktop
-    - install [MSCODE](https://code.visualstudio.com/download)
+- install WSL 2
+- install docker desktop
+- install [MSCODE](https://code.visualstudio.com/download)
 #### M1 Mac
-    - install docker desktop
-    - install [MSCODE](https://code.visualstudio.com/download)
+- ![Test passing](https://img.shields.io/badge/Tests-passing-brightgreen.svg)
+- install docker desktop
+- install [MSCODE](https://code.visualstudio.com/download)
 #### Linux / Ubuntu / Debians
-    - install docker desktop
-    - install [MSCODE](https://code.visualstudio.com/download)
+- install docker desktop
+- install [MSCODE](https://code.visualstudio.com/download)
 
 ## INSTALATION / USAGE
 - make sure you have have locally ~/.aws files configured correctly
