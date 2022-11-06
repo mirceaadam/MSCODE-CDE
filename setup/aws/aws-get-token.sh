@@ -2,8 +2,7 @@
 unset AWS_SECRET_ACCESS_KEY
 unset AWS_SECRET_KEY
 unset AWS_SESSION_TOKEN
-HOME=".devcontainer"
-source $HOME/awstools/user.config
+source ~/awstools/user.config
 
 AWS_USER_PROFILE=iam
 AWS_2AUTH_PROFILE=mfa
