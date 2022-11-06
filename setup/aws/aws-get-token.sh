@@ -4,7 +4,8 @@ unset AWS_SECRET_KEY
 unset AWS_SESSION_TOKEN
 WORKDIR="%CONTAINER_WORKDIR%"
 echo $WORKDIR
-source /workspaces/$WORKDIR/.devcontainer/awstools/user.config
+SETUP_PATH="/workspaces/$WORKDIR/.devcontainer"
+source $SETUP_PATH/awstools/user.config
 
 AWS_USER_PROFILE=iam
 AWS_2AUTH_PROFILE=mfa
