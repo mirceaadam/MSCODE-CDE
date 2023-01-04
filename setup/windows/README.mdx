@@ -1,0 +1,23 @@
+PLAN FOR WINDOWS INSTALLATION
+
+
+
+Phases:
+- WSL + Ubuntu + MSCODE (Minimal)
+    - powershell permissions
+```
+start-process PowerShell -verb runas
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+```
+
+1.ps1
+    - dsm features
+    
+    - wsl: install & configure
+    - wsl: ubuntu download
+    - mscode: download & install (under current user!)
+- restart
+- Docker + Configs(Container Capability)
+
+- restart
