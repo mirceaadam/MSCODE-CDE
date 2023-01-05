@@ -4,11 +4,11 @@ $ubuntu_url = 'https://aka.ms/wslubuntu2204'
 $kernel_update_url = 'https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi'
 $mscode_url = 'https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user'
 
-$local_ubuntu_location = 'C:\temp\Ubuntu.appx'
-$local_kernel_installer = 'C:\temp\wsl_update_x64.msi'
-$local_mscode_installer = 'C:\temp\VSCodeUserSetup-x64.exe'
+$local_ubuntu_location = 'C:\Temp\Ubuntu.appx'
+$local_kernel_installer = 'C:\Temp\wsl_update_x64.msi'
+$local_mscode_installer = 'C:\Temp\VSCodeUserSetup-x64.exe'
 
-
+$TaskName = "devopsEnvironmentInstaller"
 
 #------ MSCODE INSTALLATION ---------
 "Fetching the latest version of MSCODE.. please wait do not close this window!"
@@ -60,3 +60,6 @@ $TotalMinutes = $ElapsedTime.TotalMinutes
 wsl --set-default-version 2
 Add-AppxPackage $local_ubuntu_location
 Start-Process PowerShell $local_ubuntu_location -wait
+
+"Removing from ScheduledTasks.."
+schtasks /delete /tn $TaskName /F 2>$null
