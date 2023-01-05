@@ -1,21 +1,20 @@
 PLAN FOR WINDOWS INSTALLATION
 
+in C:\Temp\devops:
+- 1.ps1
+- 2.ps1
+- 3.ps1
+- getToken.ps1
+in C:\Temp:
+- Ubuntu.appx
 
-
-Phases:
-- WSL + Ubuntu + MSCODE (Minimal)
-    - powershell permissions
+To run the script:
+Open powershell as administrator and run the following two commands [A - TO ALL !] :
 ```
-start-process PowerShell -verb runas
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine 
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass 
+cd C:\Temp\devops
+.\1.ps1
 ```
-    
-    - dsm features: `1.ps1`    
-    - wsl: install & configure
-    - wsl: ubuntu download
-    - mscode: download & install (under current user!)
-- restart
-- Docker + Configs(Container Capability)
 
-- restart
+
