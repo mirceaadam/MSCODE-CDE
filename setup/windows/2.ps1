@@ -11,7 +11,7 @@ $local_mscode_installer = 'C:\Temp\VSCodeUserSetup-x64.exe'
 $local_docker_installer = 'C:\Temp\DockerDesktopInstaller.exe'
 
 $TaskName = "devopsEnvironmentInstaller"
-$TaskName2 = "devopsEnvironmentInstaller2"
+
 " "
 "Hello! If you see this window, I have revived myself after reboot"
 "So, I am removing myself from ScheduledTasks.."
@@ -20,12 +20,6 @@ schtasks /delete /tn $TaskName /F 2>$null
 " ....::: DevOps Container Setup Part I :::...."
 "Let's begin."
 " "
-
-# Create the scheduled task
-# "Creating Scheduled Task OnRestart.."
-$TaskCommand = "powershell.exe -File `"$ScriptPath`""
-$ScriptPath = "C:\Temp\devops\3.ps1"
-schtasks /Create /SC ONLOGON /TN $TaskName2 /TR $TaskCommand /RL HIGHEST
 
 #------ MSCODE INSTALLATION ---------
 "Fetching the latest version of MSCODE.."
@@ -40,10 +34,10 @@ $TotalMinutes = $ElapsedTime.TotalMinutes
 "Finished Download, Elapsed time: $TotalMinutes minutes"
 #Start-Process PowerShell $local_mscode_installer -wait
 "Installing mscode, do not close this window, please wait.."
+" "
+" "
+"When prompted, you can close MSCODE so that the installation may continue."
 Start-Process $local_mscode_installer /VERYSILENT -NoNewWindow -Wait -PassThru
-" "
-" "
-"You can close MSCODE so that the installation may continue."
 " "
 #------ KERNEL UPDATE INSTALLATION ---------
 "Fetching the kernel update.."
@@ -59,6 +53,15 @@ $TotalMinutes = $ElapsedTime.TotalMinutes
 "Installing kernel update, do not close this windows, please wait.."
 # Wait for the MSI installer to finish
 Start-Process C:\Windows\System32\msiexec.exe -ArgumentList "/i $local_kernel_installer /qn" -wait
+
+#------ Create the scheduled task
+# "Creating Scheduled Task OnRestart.."
+$TaskName2 = "devopsEnvironmentInstaller2"
+$ScriptPath2 = "C:\Temp\devops\3.ps1"
+$TaskCommand2 = "powershell.exe -File `"$ScriptPath2`""
+
+schtasks /Create /SC ONLOGON /TN $TaskName2 /TR $TaskCommand2 /RL HIGHEST
+
 
 #------ UBUNTU Download & INSTALLATION ---------
 " " 
@@ -130,7 +133,7 @@ if ($input2 -eq "Y") {
     } else { 
         "OK, not installing Docker."
     }
-
+    
 "::Please Check::"        
 "Tools have been installed. "
 "For perfect results, a restart is highly recommended."
