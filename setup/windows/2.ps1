@@ -28,7 +28,7 @@ schtasks /delete /tn $TaskName /F 2>$null
 # schtasks /Create /SC ONLOGON /TN $TaskName2 /TR $TaskCommand /RL HIGHEST
 
 #------ MSCODE INSTALLATION ---------
-"Fetching the latest version of MSCODE.. please wait do not close this window!"
+"Fetching the latest version of MSCODE.."
 $ElapsedTime = Measure-Command {
   # The command to be timed goes here
   $wc = New-Object net.webclient
@@ -38,8 +38,9 @@ $ElapsedTime = Measure-Command {
 $TotalMinutes = $ElapsedTime.TotalMinutes
 # Display the elapsed time in minutes
 "Finished Download, Elapsed time: $TotalMinutes minutes"
-Start-Process PowerShell $local_mscode_installer -wait
-
+#Start-Process PowerShell $local_mscode_installer -wait
+"Installing mscode, do not close this window, please wait.."
+Start-Process $local_mscode_installer /VERYSILENT -NoNewWindow -Wait -PassThru
 
 #------ KERNEL UPDATE INSTALLATION ---------
 "Fetching the kernel update.."
@@ -52,8 +53,7 @@ $ElapsedTime = Measure-Command {
 $TotalMinutes = $ElapsedTime.TotalMinutes
 # Display the elapsed time in minutes
 "Finished Download, Elapsed time: $TotalMinutes minutes"
-
-"Follow the install wizard."
+"Installing kernel update, do not close this windows, please wait.."
 # Wait for the MSI installer to finish
 Start-Process C:\Windows\System32\msiexec.exe -ArgumentList "/i $local_kernel_installer /qn" -wait
 
@@ -88,6 +88,9 @@ if ($input -eq "Y") {
             
             # Display the elapsed time in minutes
             "Finished Download, Elapsed time: $TotalMinutes minutes"
+            " "
+            "When prompted, Hit LAUNCH and install ubuntu. DO NOT CLOSE THIS WINDOW."
+            "Provide a username/password when prompted and DO NOT LOSE IT !"
             wsl --set-default-version 2
             Add-AppxPackage $local_ubuntu_installer
             Start-Process PowerShell $local_ubuntu_installer -wait  
@@ -96,6 +99,9 @@ if ($input -eq "Y") {
             Write-Host "Wise choice, Fetching Locally.."
             wsl --set-default-version 2
             Add-AppxPackage $local_ubuntu_installer
+            " "
+            "When prompted, Hit LAUNCH and install ubuntu. DO NOT CLOSE THIS WINDOW."
+            "Provide a username/password when prompted and DO NOT LOSE IT !"            
             Start-Process PowerShell $local_ubuntu_installer -wait
 }
 
@@ -115,10 +121,26 @@ if ($input2 -eq "Y") {
                 
                 # Display the elapsed time in minutes
                 "Finished Download, Elapsed time: $TotalMinutes minutes"
-                Start-Process PowerShell $local_docker_installer -wait
+                #Start-Process PowerShell $local_docker_installer -wait
+				"Installing docker, do not close this window, please wait.."
+				Start-Process $local_docker_installer "install --quiet" -Wait -NoNewWindow -PassThru
     } else { 
         "OK, not installing Docker."
-}
+    }
+
+"::Please Check::"        
+"Tools have been installed. "
+"For perfect results, a restart is highly recommended."
+"If the final script does not Start automatically, start Docker using the 3rd script after restart."
+
+$input3 = Read-Host "Can I restart one last time? [Y]es / [N]o"
+  if ($input2 -eq "Y") {
+    "Restarting.."
+    shutdown /r /t 0
+    } else {
+    "Don't forget to just start Docker manually after a restart."
+    "Bye."
+  }
 
 
 
