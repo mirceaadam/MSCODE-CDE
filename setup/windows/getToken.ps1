@@ -46,11 +46,11 @@ if (!$MFA_TOKEN_CODE){
 }
 if (!$IAMUSERNAME){
   #Set your iam username to dont have to pass it along each time
-  $IAMUSERNAME = "mircea.adam"
+  $IAMUSERNAME = "your.username"
 }
 $AWS_USER_PROFILE="iam"
 $AWS_2AUTH_PROFILE="mfa"
-$ARN_OF_MFA="arn:aws:iam::130868257547:mfa/$IAMUSERNAME"
+$ARN_OF_MFA="arn:aws:iam::12345678910:mfa/$IAMUSERNAME"
 $DURATION=129600
 Write-Output "AWS-CLI Profile: $AWS_USER_PROFILE"
 Write-Output "MFA ARN: $ARN_OF_MFA"
