@@ -11,6 +11,7 @@ $local_mscode_installer = 'C:\Temp\VSCodeUserSetup-x64.exe'
 $local_docker_installer = 'C:\Temp\DockerDesktopInstaller.exe'
 
 $TaskName = "devopsEnvironmentInstaller"
+$TaskName2 = "devopsEnvironmentInstaller2"
 " "
 "Hello! If you see this window, I have revived myself after reboot"
 "So, I am removing myself from ScheduledTasks.."
@@ -22,10 +23,9 @@ schtasks /delete /tn $TaskName /F 2>$null
 
 # Create the scheduled task
 # "Creating Scheduled Task OnRestart.."
-# $TaskName2 = "devopsEnvironmentInstaller2"
-# $TaskCommand = "powershell.exe -File `"$ScriptPath`""
-# $ScriptPath = "C:\Temp\devops\3.ps1"
-# schtasks /Create /SC ONLOGON /TN $TaskName2 /TR $TaskCommand /RL HIGHEST
+$TaskCommand = "powershell.exe -File `"$ScriptPath`""
+$ScriptPath = "C:\Temp\devops\3.ps1"
+schtasks /Create /SC ONLOGON /TN $TaskName2 /TR $TaskCommand /RL HIGHEST
 
 #------ MSCODE INSTALLATION ---------
 "Fetching the latest version of MSCODE.."
@@ -41,7 +41,10 @@ $TotalMinutes = $ElapsedTime.TotalMinutes
 #Start-Process PowerShell $local_mscode_installer -wait
 "Installing mscode, do not close this window, please wait.."
 Start-Process $local_mscode_installer /VERYSILENT -NoNewWindow -Wait -PassThru
-
+" "
+" "
+"You can close MSCODE so that the installation may continue."
+" "
 #------ KERNEL UPDATE INSTALLATION ---------
 "Fetching the kernel update.."
 $ElapsedTime = Measure-Command {
