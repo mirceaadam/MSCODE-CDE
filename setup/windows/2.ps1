@@ -113,7 +113,8 @@ if ($input -eq "Y") {
 
 " "
 "Proceed with next step?"
-$input2 = Read-Host "Install Docker? [Y](yes) or [N](no)"
+"Complete WSL installation from the prompts."
+$input2 = Read-Host "Ready to install Docker? [Y](yes) or [N](no)"
 if ($input2 -eq "Y") {
                 # Time the execution of a command
                 $ElapsedTime = Measure-Command {
