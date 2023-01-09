@@ -1,20 +1,29 @@
-PLAN FOR WINDOWS INSTALLATION
+INSTALLATION STEPS:
 
-in C:\Temp\devops:
-- 1.ps1
-- 2.ps1
-- 3.ps1
-- getToken.ps1
-in C:\Temp:
-- Ubuntu.appx
+1. Make sure you have locally this structure:
+(mandatory) in C:\Temp\devops:
+  - 1.ps1
+  - 2.ps1
+  - 3.ps1
+  - getToken.ps1
 
-To run the script:
+(optional) in C:\Temp:
+  - Ubuntu.appx
+
+2. START THE INSTALLATION:
 Open powershell as administrator and run the following two commands [A - TO ALL !] :
 ```
+cd C:\Temp\devops
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine 
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass 
-cd C:\Temp\devops
 .\1.ps1
 ```
+
+3. Observations:
+- it will perform in total: 2 restarts.
+- follow the instructions in the powershell installer.
+
+
+
 
 
