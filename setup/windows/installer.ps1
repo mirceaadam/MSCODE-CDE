@@ -54,6 +54,8 @@ if ($input -eq "Y") {
 			clear
 			"DONE. git installed.."
 			" "
+			"Cleaning up after myself.."
+			rm $local_git_installer
 } else {
 			"git install skipped."		
 }
@@ -87,16 +89,17 @@ if ($input -eq "Y") {
 			"Installing Python..."
 			" "
             "!!! DO NOT CLOSE THIS WINDOW !!!"
-            Start-Process $local_python_installer -ArgumentList "/quiet InstallAllUsers=0 PrependPath=1" -Wait
+            Start-Process $local_python_installer -ArgumentList "/quiet InstallAllUsers=0" -Wait
 			
 			"Installing the rest of tools in a separate window...(because windows..)"
 			Start-Process Powershell $local_pip_helper_installer -wait
 			
 			"Cleaning up after myself.."
 			rm $local_python_installer 
-			rm $local_git_installer
-			
+
 			"Done. You can close this window. Have fun!"
+			$input = Read-Host "Install complete, just press ANY Key.."
+			break
 			
 			
 } else {
