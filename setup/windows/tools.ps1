@@ -7,5 +7,5 @@ pip install git-remote-codecommit
 " "			
 "Done. Have fun !"
 " "
-$input = Read-Host "Install complete, just press ANY Key.."
+$input = Read-Host "Install complete, just press ANY Key & then ENTER Key.."
 break

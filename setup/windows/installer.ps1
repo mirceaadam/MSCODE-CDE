@@ -1,16 +1,21 @@
 #Script to install python, pip and git-commit-helper
 
+#GLOBALS
+$INSTALL_DIR = 'C:\Temp\tools'
+$USER = $env:UserName
+$local_pip_helper_installer = "$INSTALL_DIR\tools.ps1"
+
 #Get new version here: https://www.python.org/ftp/python/
 $python_url  = 'https://www.python.org/ftp/python/3.10.10/python-3.10.10-amd64.exe'
-$local_python_installer = 'C:\Temp\devops\python-installer-amd64.exe'
+$local_python_installer = "$INSTALL_DIR\python-installer-amd64.exe"
+$PYTHON_VERSION = 'Python310'
+$PYTHON_PATH = "C:\Users\$USER\AppData\Local\Programs\Python\$PYTHON_VERSION\"
+$PYTHON_PATH_SCRIPTS = "C:\Users\$USER\AppData\Local\Programs\Python\$PYTHON_VERSION\Scripts\" 
 
 #Get new version here: https://github.com/git-for-windows/git/releases
 $git_url  = 'https://github.com/git-for-windows/git/releases/download/v2.39.1.windows.1/Git-2.39.1-64-bit.exe'
-$local_git_installer = 'C:\Temp\devops\git-installer.exe'
+$local_git_installer = "$INSTALL_DIR\git-installer.exe"
 
-
-
-$local_pip_helper_installer = 'C:\Temp\devops\tools.ps1'
 clear
 "Hi! This will install: "
 "	- git (silent install)"
@@ -90,9 +95,41 @@ if ($input -eq "Y") {
 			" "
             "!!! DO NOT CLOSE THIS WINDOW !!!"
             Start-Process $local_python_installer -ArgumentList "/quiet InstallAllUsers=0" -Wait
-			
-			"Installing the rest of tools in a separate window...(because windows..)"
-			Start-Process Powershell $local_pip_helper_installer -wait
+
+            "Setting up Environment Variables for python in case it does not exist.."
+            # C:\Users\mircea.adam\AppData\Local\Programs\Python\Python310\Scripts\
+            # C:\Users\mircea.adam\AppData\Local\Programs\Python\Python310\
+            
+            $pathValue = "$PYTHON_PATH"
+
+            if ($env:Path -notlike "*$pathValue*") {
+                $env:Path += ";$PYTHON_PATH;$PYTHON_PATH_SCRIPTS"
+                [Environment]::SetEnvironmentVariable("Path", $env:Path, [EnvironmentVariableTarget]::User)
+            }
+
+            # "Fix for python specific app execution aliases.."
+            # # Get the policy for the AppExecutionAlias value
+            # $AppExecutionPolicy = Get-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "DisallowRun"
+
+            # # Check if the policy exists
+            # if ($AppExecutionPolicy) {
+            #     # Check if the Python app execution alias is already disabled
+            #     if ($AppExecutionPolicy.DisallowRun -notlike "*.py") {
+            #         # Add the Python app execution alias to the policy
+            #         $AppExecutionPolicy.DisallowRun = "$($AppExecutionPolicy.DisallowRun);*.py"
+            #         Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "DisallowRun" -Value $AppExecutionPolicy.DisallowRun
+            #         Write-Output "App execution alias for Python has been disabled."
+            #     } else {
+            #         Write-Output "App execution alias for Python is already disabled."
+            #     }
+            # } else {
+            #     # Create the policy and add the Python app execution alias
+            #     New-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "DisallowRun" -PropertyType String -Value "*.py"
+            #     Write-Output "App execution alias for Python has been disabled."
+            # }
+            
+            "Installing the rest of tools in a separate window...(because windows..)"
+			Start-Process Powershell $local_pip_helper_installer -wait	
 			
 			"Cleaning up after myself.."
 			rm $local_python_installer 
