@@ -16,6 +16,10 @@ $PYTHON_PATH_SCRIPTS = "C:\Users\$USER\AppData\Local\Programs\Python\$PYTHON_VER
 $git_url  = 'https://github.com/git-for-windows/git/releases/download/v2.39.1.windows.1/Git-2.39.1-64-bit.exe'
 $local_git_installer = "$INSTALL_DIR\git-installer.exe"
 
+#Get SAM CLI
+$SAM_url = 'https://github.com/aws/aws-sam-cli/releases/latest/download/AWS_SAM_CLI_64_PY3.msi'
+$local_SAM_installer = "$INSTALL_DIR\sam-installer.msi"
+
 clear
 "Hi! This will install: "
 "	- git (silent install)"
@@ -133,6 +137,50 @@ if ($input -eq "Y") {
 			
 			"Cleaning up after myself.."
 			rm $local_python_installer 
+
+			"Done. You can close this window. Have fun!"
+			$input = Read-Host "Install complete, just press ANY Key.."
+			break
+			
+			
+} else {
+			"Ok, Bye."		
+}
+
+
+#------ SAM Download & INSTALLATION ---------
+"Press Y to start SAM installation."
+"OR" 
+"Press N to exit"
+" "
+$input = Read-Host "Enter Y or N, CTRL+C to exit."
+# Check the input and branch based on the result
+if ($input -eq "Y") {
+            # Do something if the input is "Y"
+            Write-Host "You entered Y, starting to download..."
+            "Fething the defined SAM Image (it could take a while - DO NOT CLOSE this powershell window)"
+            $currentTime = Get-Date
+                # Time the execution of a command
+                $ElapsedTime = Measure-Command {
+                    # The command to be timed goes here
+                    $wc = New-Object net.webclient
+                    $wc.Downloadfile($SAM_url, $local_SAM_installer)
+                }
+            
+            # Get the total elapsed time in minutes
+            $TotalMinutes = $ElapsedTime.TotalMinutes
+            
+            # Display the elapsed time in minutes
+            "Finished Download, Elapsed time: $TotalMinutes minutes"
+            " "
+			" "
+			"Installing SAM..."
+			" "
+            "!!! DO NOT CLOSE THIS WINDOW !!!"
+           Start-Process C:\Windows\System32\msiexec.exe -ArgumentList "/i $local_SAM_installer /qn" -wait
+			
+			"Cleaning up after myself.."
+			rm $local_SAM_installer 
 
 			"Done. You can close this window. Have fun!"
 			$input = Read-Host "Install complete, just press ANY Key.."
