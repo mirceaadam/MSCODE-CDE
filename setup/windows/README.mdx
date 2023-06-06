@@ -32,7 +32,9 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 - follow the instructions in the powershell installer window that opens up.
 
 
-#### 4. If you installed Docker and you want to use the container:
+#### 4. If you installed Docker and you want to use the container
+-> additional configuration is required to have a perfect experience
+### a) establish a working directory
 1. Open Powershell AS ADMINISTRATOR
 2. type:
 ``` bash ```
@@ -45,6 +47,19 @@ cd /mnt/c/Users/[YOUR_WINDOWS_USERNAME]
 Then run this:
     ```
     mkdir work && cd work
+    ```
+##### b) configure `~/.aws`
+###### b.1: if you already have an `~/.aws` saved then, just copy it to:
+-  `~/.aws` if WSL
+-  or `C:\User\[YOUR_WINDOWS_USERNAME]\.aws` if using windows explorer
+###### b.2: if you don't have it, you have to configure it. 
+- in `~/.aws` for linux
+- in `C:\User\[YOUR_WINDOWS_USERNAME]\.aws`
+- in this repository, `.aws-example` is an example of credentials
+- just replace: `xxxxxx` in `config` and `credentials`
+
+### c) configure user.settings file of this setup
+    ```
     git clone https://github.com/mirceaadam/MSCODE-CDE.git && cd MSCODE-CDE
     cp setup/user.config-example ../user.config && cd ..
     ```
@@ -64,25 +79,14 @@ Then run this:
     - GIT_SETUP="yes"
     - GIT_EMAIL="john.doe@company.com"
     - GIT_USERNAME="John Doe"
-    - If you are using AWS, make sure you have have locally files configured correctly: 
-    - in `~/.aws` for linux
-    - in `C:\User\your.name\.aws`
-    - in this repository, `.aws-example` is an example of credentials
-    - just replace: `xxxxxx` in `config` and `credentials`
-- run:
+
+### d) run the setup
     ```
     cd MSCODE-CDE
     chmod +x setup.sh
     bash setup.sh && cd .. && code .
     ```     
 - `Note:` the script will delete the cloned repo at the end.
-## OTHER INFORMATION
-### updates version 3.0:
-- credentials security (uses local ~/.aws) + .gitignore
-- homedir fixes
-- added (!) entrypoint.sh (more versatility)
-- simple setup redesign
-- local .Dokerfile image
 
 #### STRUCTURE:
 
