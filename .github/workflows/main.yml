@@ -8,7 +8,7 @@ jobs:
         uses: actions/checkout@v3
       
       - name: Create zip
-        run: zip -r ./setup/windows
+        run: zip -r MSCODE-Windows11.zip ./setup/windows
         
       - name: Upload Release
         uses: actions/upload-artifact@v2
