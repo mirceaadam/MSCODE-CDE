@@ -1,6 +1,8 @@
 #2
 # WE INSTALL MSCODE + KERNEL UPDATE for WSL + UBUNTU
-$ubuntu_url = 'https://aka.ms/wslubuntu2204' #https://learn.microsoft.com/en-us/windows/wsl/install-manual?source=docs#downloading-distributions
+$ubuntu_url = 'https://aka.ms/wslubuntu2204' 
+#https://learn.microsoft.com/en-us/windows/wsl/install-manual?source=docs#downloading-distributions
+# (check here for latest ubuntu): https://github.com/microsoft/WSL/blob/master/distributions/DistributionInfo.json
 $kernel_update_url = 'https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi'
 $mscode_url = 'https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user'
 $docker_url = 'https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe'
