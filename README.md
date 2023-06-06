@@ -18,6 +18,7 @@
 
 ## REQUIREMENTS
 #### Windows
+[![Release New Version of MSCODE-CDE](https://github.com/mirceaadam/MSCODE-CDE/actions/workflows/main.yml/badge.svg)](https://github.com/mirceaadam/MSCODE-CDE/actions/workflows/main.yml)
 - install WSL 2
 - install docker desktop
 - install [MSCODE](https://code.visualstudio.com/download)
