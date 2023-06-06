@@ -3,7 +3,7 @@ name: Release New Version of MSCODE-CDE
 on:
   push:
     tags:
-      - '*'
+      - 'release'
 
 jobs:
   release:
