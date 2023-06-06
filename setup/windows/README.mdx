@@ -3,12 +3,13 @@
 #### 1. Download, unzip, prepare installation.
 
 1. Open Powershell AS ADMINISTRATOR
-2. RUN: mkdir C:\Temp\devops
-3. RUN: C:\Temp\devops
-4. RUN: Invoke-WebRequest -Uri "https://github.com/mirceaadam/MSCODE-CDE/archive/refs/heads/main.zip" -OutFile "C:\Temp\devops\MSCODE-CDE.zip"
-5. RUN: Expand-Archive -Path "./MSCODE-CDE.zip" -DestinationPath "./MSCODE-CDE"
-6. RUN: cd C:\Temp\devops\MSCODE-CDE\MSCODE-CDE-main\setup\windows
-
+2. RUN the following commands in succesion:
+```
+mkdir C:\Temp\devops
+cd C:\Temp\devops
+Invoke-WebRequest -Uri "https://github.com/mirceaadam/MSCODE-CDE/archive/refs/heads/main.zip" -OutFile "C:\Temp\devops\MSCODE-CDE.zip"
+Expand-Archive -Path "./MSCODE-CDE.zip" -DestinationPath "./MSCODE-CDE"
+```
 
 #### 2. START THE INSTALLATION:
 
@@ -23,10 +24,16 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 #### 3. Observations:
 - it will perform in total: 2 restarts (1 automatically , last one asks nicely)
-- if it does not continue automatically, then run manually:
+- if it does not continue automatically, after the 1st install, then run manually:
+```
 ./2.ps1
 ./3.ps1
-- follow the instructions in the powershell installer.
+```
+- follow the instructions in the powershell installer window that opens up.
+
+
+#### 4. If you installed Docker and you want to use the container:
+
 
 #### STRUCTURE:
 
