@@ -81,10 +81,10 @@ $input = Read-Host "Enter Y or N"
 if ($input -eq "Y") {
             # Do something if the input is "Y"
             Write-Host "You entered Y, good luck waiting."
-            "Fething the defined Ubuntu Image (~1Gb, it could take a while - DO NOT CLOSE this powershell window)"
+            "Fething the defined Ubuntu Image (~600Mb, it could take a while - DO NOT CLOSE this powershell window)"
             $currentTime = Get-Date
             "Windows is windows so do not expect any fancy progress bar, instead I can tell you.. started the download at: $currentTime"
-            "...please wait around 9.1 minutes."
+            "...please wait around 5 minutes."
                 # Time the execution of a command
                 $ElapsedTime = Measure-Command {
                     # The command to be timed goes here
