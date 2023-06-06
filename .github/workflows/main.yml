@@ -1,18 +1,38 @@
-name: Create Zip
-on: [push]
+name: Release New Version of MSCODE-CDE
+
+on:
+  push:
+    tags:
+      - '*'
+
 jobs:
-  To-Zip:
+  release:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout 
-        uses: actions/checkout@v3
-      
-      - name: Create zip
-        run: zip -r MSCODE-Windows11.zip ./setup/windows
-        
-      - name: Upload Release
-        uses: actions/upload-artifact@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create release archive
+        run: |
+          zip -r MSCODE-CDE.zip ./setup/windows
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: release
-          path: MSCODE-Windows11.zip      
-      
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload release artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          asset_path: ./MSCODE-CDE.zip
+          asset_name: MSCODE-CDE.zip
+          asset_content_type: application/zip
