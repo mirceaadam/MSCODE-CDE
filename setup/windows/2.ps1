@@ -1,6 +1,7 @@
 #2
 # WE INSTALL MSCODE + KERNEL UPDATE for WSL + UBUNTU
-$ubuntu_url = 'https://aka.ms/wslubuntu2204' 
+$ubuntu_url = 'https://aka.ms/wslubuntu2204'
+$ubuntu_url = 'https://wslstorestorage.blob.core.windows.net/wslblob/Ubuntu2204LTS-230418_x64.appx'
 #https://learn.microsoft.com/en-us/windows/wsl/install-manual?source=docs#downloading-distributions
 # (check here for latest ubuntu): https://github.com/microsoft/WSL/blob/master/distributions/DistributionInfo.json
 $kernel_update_url = 'https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi'
