@@ -5,9 +5,9 @@
 1. Open Powershell AS ADMINISTRATOR
 2. RUN: mkdir C:\Temp\devops
 3. RUN: C:\Temp\devops
-4. RUN: Invoke-WebRequest -Uri "https://github.com/mirceaadam/MSCODE-CDE/archive/refs/tags/release.zip" -OutFile "C:\Temp\devops\MSCODE-CDE.zip"
+4. RUN: Invoke-WebRequest -Uri "https://github.com/mirceaadam/MSCODE-CDE/archive/refs/heads/main.zip" -OutFile "C:\Temp\devops\MSCODE-CDE.zip"
 5. RUN: Expand-Archive -Path "./MSCODE-CDE.zip" -DestinationPath "./MSCODE-CDE"
-6. RUN: cd C:\Temp\devops\MSCODE-CDE\MSCODE-CDE-release\setup\windows
+6. RUN: cd C:\Temp\devops\MSCODE-CDE\MSCODE-CDE-main\setup\windows
 
 
 #### 2. START THE INSTALLATION:
@@ -15,7 +15,7 @@
 Next, RUN the following two commands with 
 **[A] - YES TO ALL !** :
 ```
-cd C:\Temp\devops\MSCODE-CDE\MSCODE-CDE-release\setup\windows
+cd C:\Temp\devops\MSCODE-CDE\MSCODE-CDE-main\setup\windows
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine 
 Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass 
 .\1.ps1
