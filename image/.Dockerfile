@@ -6,6 +6,8 @@ RUN apt-get update && apt-get install -y -qq \
     python3-pip \
     git \
     curl \
+    vim \
+    jq \
     wget
 RUN pip3 install awscli
 RUN pip3 install git-remote-codecommit
