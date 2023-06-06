@@ -1,0 +1,14 @@
+[
+    {
+        "id": "aws-scripting-guy.csharp-aws-lambda",
+        "version": "*"
+    },
+    {
+        "id": "ms-vscode-remote.remote-ssh",
+        "version": "*"
+    },
+    {
+        "id": "eamodio.gitlens",
+        "version": "*"
+    }
+]

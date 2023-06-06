@@ -75,12 +75,12 @@
 - added (!) entrypoint.sh (more versatility)
 - simple setup redesign
 - local .Dokerfile image
+- load extensions
+- example ~/.aws
 
 ### in the works:
 - add support to build a container from inside the devcontainer  
-- load extensions(Work in progress)
-- example ~/.aws (Work in progress)
-- aws configure(?) (Work in progress)
+- load extensions with version number (Work in progress)
 - more aws tools (Work in progress)
 - azure / gsp support
 - terraform support
