@@ -15,6 +15,7 @@ AWS_TOKEN_DURATION=`echo $AWS_TOKEN_DURATION | tr -d '\012\015'`
 GIT_SETUP=`echo $GIT_SETUP | tr -d '\012\015'`
 GIT_EMAIL=`echo $GIT_EMAIL | tr -d '\012\015'`
 GIT_USERNAME=`echo $GIT_USERNAME | tr -d '\012\015'`
+MSCODE_EXTENSIONS=`echo $MSCODE_EXTENSIONS | tr -d '\012\015'`
 
 
 echo -e "-------------------- --------------- -----------------------------"
@@ -57,11 +58,19 @@ EOF
         echo -e "completed \xE2\x9C\x94"
     fi
 
+    echo -e "::SETUP:: preparing your vscode in the container"
+    if [ "$MSCODE_EXTENSIONS" = "yes" ]; then    
+        cp $INSTALL_DIR/setup/init/01-vscode-setup.sh init/01-vscode-setup.sh
+        cp $INSTALL_DIR/setup/setup/vscode/extensions.json vscode/extensions.json
+        chmod +x init/01-vscode-setup.sh
+        echo -e "completed \xE2\x9C\x94"
+    fi
+
     if [ "$AWS_SETUP" = "yes" ]; then
         echo -e "::SETUP:: configuring AWS MFA TOKEN Script"     
-        cp $INSTALL_DIR/setup/init/01-aws-setup.sh init/01-aws-setup.sh 
+        cp $INSTALL_DIR/setup/init/02-aws-setup.sh init/02-aws-setup.sh 
         echo -e "workdir is: $WORKDIR"
-        sed -i '' -e "s/%CONTAINER_WORKDIR%/$WORKDIR/g" init/01-aws-setup.sh
+        sed -i '' -e "s/%CONTAINER_WORKDIR%/$WORKDIR/g" init/02-aws-setup.sh
         mkdir -p awstools
         mkdir -p .secrets/.aws 
         cp -v ~/.aws/* .secrets/.aws/
@@ -69,10 +78,10 @@ EOF
         cp $INSTALL_DIR/setup/aws/aws-get-token.sh awstools/aws-get-token.sh
         sed -i '' -e "s/%CONTAINER_WORKDIR%/$WORKDIR/g" awstools/aws-get-token.sh
         cp ../user.config awstools/user.config
-        # sed -i '' -e "s/%AWS_IAM_USERNAME%/$AWS_IAM_USERNAME/g" init/01-aws-setup.sh
-        # sed -i '' -e "s/%AWS_TOKEN_DURATION%/$AWS_TOKEN_DURATION/g" init/01-aws-setup.sh
+        # sed -i '' -e "s/%AWS_IAM_USERNAME%/$AWS_IAM_USERNAME/g" init/02-aws-setup.sh
+        # sed -i '' -e "s/%AWS_TOKEN_DURATION%/$AWS_TOKEN_DURATION/g" init/02-aws-setup.sh
         echo -e "completed \xE2\x9C\x94"        
-    fi    
+    fi
 
     echo -e "\n"
     echo -e "CONFIG COMPLETE."
