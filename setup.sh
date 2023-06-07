@@ -40,13 +40,10 @@ if [ ! -d "$DEVCONTAINER" ]; then
   "image": "$CONTAINER_LOCAL_IMG",
   "forwardPorts": [3000],
   "postCreateCommand": "bash .devcontainer/entrypoint.sh",
-  "vscode": {
-    "extensions": [
-      "ms-vscode.remote-explorer", 
-      "ms-vscode-remote.remote-ssh",
-      "eamodio.gitlens"
-      ]
-  }
+  "dev.containers.defaultExtensions": [
+    "eamodio.gitlens",
+    "mutantdino.resourcemonitor"
+] 
 }
 EOF
     echo -e "::SETUP:: preparing your git"
