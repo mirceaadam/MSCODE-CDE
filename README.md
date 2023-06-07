@@ -79,6 +79,7 @@
 - example ~/.aws
 
 ### in the works:
+- add user.settings in ~/.aws ?
 - add support to build a container from inside the devcontainer  
 - load extensions with version number (Work in progress)
 - more aws tools (Work in progress)
