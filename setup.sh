@@ -19,7 +19,7 @@ MSCODE_EXTENSIONS=`echo $MSCODE_EXTENSIONS | tr -d '\012\015'`
 
 
 echo -e "-------------------- --------------- -----------------------------"
-echo -e "-----------   MS CODE Custom Development ENV v2.0   --------------"
+echo -e "-----------   MS CODE Custom Development ENV v3.5   --------------"
 echo -e "-------------------- --------------- -----------------------------" 
 
 echo -e "Let's build your dev image! \xE2\x9C\x94"
