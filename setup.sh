@@ -51,7 +51,7 @@ if [ ! -d "$DEVCONTAINER" ]; then
 EOF
     echo -e "::SETUP:: preparing your git"
     if [ "$GIT_SETUP" = "yes" ]; then    
-        cp $INSTALL_DIR/setup/init/00-git-setup.sh init/00-git-setup.sh
+        cp -v $INSTALL_DIR/setup/init/00-git-setup.sh init/00-git-setup.sh
         sed -i '' -e "s/%GIT_EMAIL%/$GIT_EMAIL/g" init/00-git-setup.sh
         sed -i '' -e "s/%GIT_USERNAME%/$GIT_USERNAME/g" init/00-git-setup.sh
         chmod +x init/00-git-setup.sh
@@ -59,9 +59,10 @@ EOF
     fi
 
     echo -e "::SETUP:: preparing your vscode in the container"
-    if [ "$MSCODE_EXTENSIONS" = "yes" ]; then    
-        cp $INSTALL_DIR/setup/init/01-vscode-setup.sh init/01-vscode-setup.sh
-        cp $INSTALL_DIR/setup/setup/vscode/extensions.json vscode/extensions.json
+    if [ "$MSCODE_EXTENSIONS" = "yes" ]; then
+        mkdir -p vscode
+        cp -v $INSTALL_DIR/setup/init/01-vscode-setup.sh init/01-vscode-setup.sh
+        cp -v $INSTALL_DIR/setup/setup/vscode/extensions.json vscode/extensions.json
         chmod +x init/01-vscode-setup.sh
         echo -e "completed \xE2\x9C\x94"
     fi
