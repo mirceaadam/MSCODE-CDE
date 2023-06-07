@@ -7,3 +7,4 @@ AWS_TOKEN_DURATION=129600
 GIT_SETUP="yes"
 GIT_EMAIL="john.doe@company.com"
 GIT_USERNAME="John Doe"
+MSCODE_EXTENSIONS="yes"
