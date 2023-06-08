@@ -27,7 +27,7 @@ function Show-Help {
 }
 
 function Install-Mandatory-WinGet {
-    $MandatoryOptionalOptionalPackagesFile = "install_mandatory.txt"
+    $MandatoryOptionalOptionalPackagesFile = "$REPO_HOME\v4\windows\minimal\install_mandatory.txt"
 
     # Read the package names from the file
     $packageNames = Get-Content -Path $MandatoryOptionalOptionalPackagesFile
@@ -52,7 +52,7 @@ function Install-Mandatory-WinGet {
 }
 
 function Install-Optional-WinGet {
-    $OptionalPackagesFile = "install_optional.txt"
+    $OptionalPackagesFile = "$REPO_HOME\v4\windows\minimal\install_optional.txt"
 
     # Read the package names from the file
     $packageNames = Get-Content -Path $OptionalPackagesFile
