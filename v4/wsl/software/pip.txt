@@ -1,2 +1,0 @@
-awscli
-git-remote-codecommit

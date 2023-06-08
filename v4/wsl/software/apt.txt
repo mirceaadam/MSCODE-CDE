@@ -1,8 +1,0 @@
-python3-pip
-git
-curl
-vim
-jq
-wget
-nodejs
-npm

@@ -8,7 +8,9 @@
 - [Mircea Adam](https://github.com/mirceaadam)
 
 ### Contributions
-- [Trond Kristiansen](https://github.com)
+- [ChatGPT4](https://chat.openai.com/)
+- [devops Team](https://google.com)
+- [Trond Kristiansen](https://github.com) //access docker socket from container
 
 ### Based On
 - [Developing Inside A Container](https://code.visualstudio.com/docs/devcontainers/containers#_quick-start-open-an-existing-folder-in-a-container)
@@ -16,9 +18,11 @@
 ### Requirements
 
 #### HW:
-- a decent x86/ARM64, 4-core machine, 16GB RAM for containers
+- a decent x86/ARM64 minimum 4-core machine, 16GB RAM for containers
+- decent internet access
 
 #### OS:
+- administrator / root access
 - Have AWS Credentials Configured with profiles in:
     Windows `$HOME\.aws`
     macOS `$HOME/.aws`
@@ -43,7 +47,25 @@ bash v4/wsl/setup.sh
 ```
 #### MacOS
 #### Dev Containers 
-#### Powershell Only
+#### Windows
+
+1. Open Powershell AS ADMINISTRATOR
+2. RUN the following commands in succesion:
+```
+mkdir C:\Temp\CDE
+cd C:\Temp\CDE
+Invoke-WebRequest -Uri "https://github.com/mirceaadam/MSCODE-CDE/archive/refs/heads/main.zip" -OutFile "C:\Temp\CDE\MSCODE-CDE.zip"
+Expand-Archive -Path "./MSCODE-CDE.zip" -DestinationPath "./MSCODE-CDE"
+```
+Next, RUN the following two commands with 
+**[A] - YES TO ALL !** :
+```
+cd C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\setup\windows
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine 
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass 
+.\1.ps1
+```
+
    
 
 ### Major Versions 
