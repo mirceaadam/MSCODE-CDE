@@ -6,6 +6,8 @@ $REPO_HOME = 'C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main'
 $AWS = "$HOME\.aws"
 $USER = $env:UserName
 $PacketManagersFolder = "$REPO_HOME\v4\windows\managers\mandatory"
+$MinimalSetup = "$REPO_HOME\v4\windows\minimal\minimal.ps1"
+$FullSetup = "$REPO_HOME\v4\windows\full\full.ps1"
 
 
 # ESENTIAL CHECKS
@@ -95,10 +97,11 @@ if (-not $validOptions.Contains($selectedOption.ToLower())) {
 else {
     switch ($selectedOption.ToLower()) {
         "minimal" {
-            Show-MinimalSetup
+            Start-Process Powershell $MinimalSetup -wait
+            
         }
         "full" {
-            Show-FullSetup
+            Start-Process Powershell $FullSetup -wait
         }
         "update" {
             Show-UpdateSetup
