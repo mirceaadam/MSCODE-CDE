@@ -60,6 +60,7 @@ function Install-Mandatory-Script {
 }
 
 function Install-Optional-Script {
+    choco install vscode -y
     #vscode-extensions (script:optional)
     $install_extensions = "$REPO_HOME\v4\common\extensions\extensions.ps1"
     Start-Process powershell.exe -ArgumentList "-File `"$install_extensions`""
