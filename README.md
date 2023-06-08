@@ -60,10 +60,13 @@ Expand-Archive -Path "./MSCODE-CDE.zip" -DestinationPath "./MSCODE-CDE"
 Next, RUN the following two commands with 
 **[A] - YES TO ALL !** :
 ```
-cd C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\setup\windows
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine 
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass 
-.\1.ps1
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+```
+Let's start the windows setup:
+``` 
+cd C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\windows
+.\setup.ps1
 ```
 
    

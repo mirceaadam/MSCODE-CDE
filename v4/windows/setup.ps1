@@ -3,7 +3,7 @@
 #GLOBALS
 $INSTALL_DIR = 'C:\Temp\CDE'
 $REPO_HOME = 'C:\Temp\CDE\MSCODE-CDE'
-$AWS = '$HOME/.aws'
+$AWS = '$HOME\.aws'
 $USER = $env:UserName
 
 
