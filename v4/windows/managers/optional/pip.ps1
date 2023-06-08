@@ -7,6 +7,3 @@ pip install cfn-lint
 
 " "			
 "Done. Have fun !"
-" "
-$input = Read-Host "Install complete, just press ANY Key & then ENTER Key.."
-break

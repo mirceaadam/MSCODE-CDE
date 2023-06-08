@@ -22,79 +22,41 @@ clear
 "	- git-remote-codecommit (needs pip & git)"
 
 #------ PYTHON Download & INSTALLATION ---------
-"Press Y to start python installation."
-"OR" 
-"Press N to exit"
+"Fething the defined PYTHON Image (it could take a while - DO NOT CLOSE this powershell window)"
+$currentTime = Get-Date
+    # Time the execution of a command
+    $ElapsedTime = Measure-Command {
+        # The command to be timed goes here
+        $wc = New-Object net.webclient
+        $wc.Downloadfile($python_url, $local_python_installer)
+    }
+
+# Get the total elapsed time in minutes
+$TotalMinutes = $ElapsedTime.TotalMinutes
+
+# Display the elapsed time in minutes
+"Finished Download, Elapsed time: $TotalMinutes minutes"
 " "
-$input = Read-Host "Enter Y or N, CTRL+C to exit."
-# Check the input and branch based on the result
-if ($input -eq "Y") {
-            # Do something if the input is "Y"
-            Write-Host "You entered Y, starting to download..."
-            "Fething the defined PYTHON Image (it could take a while - DO NOT CLOSE this powershell window)"
-            $currentTime = Get-Date
-                # Time the execution of a command
-                $ElapsedTime = Measure-Command {
-                    # The command to be timed goes here
-                    $wc = New-Object net.webclient
-                    $wc.Downloadfile($python_url, $local_python_installer)
-                }
-            
-            # Get the total elapsed time in minutes
-            $TotalMinutes = $ElapsedTime.TotalMinutes
-            
-            # Display the elapsed time in minutes
-            "Finished Download, Elapsed time: $TotalMinutes minutes"
-            " "
-			" "
-			"Installing Python..."
-			" "
-            "!!! DO NOT CLOSE THIS WINDOW !!!"
-            Start-Process $local_python_installer -ArgumentList "/quiet InstallAllUsers=0" -Wait
+" "
+"Installing Python..."
+" "
+"!!! DO NOT CLOSE THIS WINDOW !!!"
+Start-Process $local_python_installer -ArgumentList "/quiet InstallAllUsers=0" -Wait
 
-            "Setting up Environment Variables for python in case it does not exist.."
-            # C:\Users\mircea.adam\AppData\Local\Programs\Python\Python310\Scripts\
-            # C:\Users\mircea.adam\AppData\Local\Programs\Python\Python310\
-            
-            $pathValue = "$PYTHON_PATH"
+"Setting up Environment Variables for python in case it does not exist.."
 
-            if ($env:Path -notlike "*$pathValue*") {
-                $env:Path += ";$PYTHON_PATH;$PYTHON_PATH_SCRIPTS"
-                [Environment]::SetEnvironmentVariable("Path", $env:Path, [EnvironmentVariableTarget]::User)
-            }
+$pathValue = "$PYTHON_PATH"
 
-            # "Fix for python specific app execution aliases.."
-            # # Get the policy for the AppExecutionAlias value
-            # $AppExecutionPolicy = Get-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "DisallowRun"
-
-            # # Check if the policy exists
-            # if ($AppExecutionPolicy) {
-            #     # Check if the Python app execution alias is already disabled
-            #     if ($AppExecutionPolicy.DisallowRun -notlike "*.py") {
-            #         # Add the Python app execution alias to the policy
-            #         $AppExecutionPolicy.DisallowRun = "$($AppExecutionPolicy.DisallowRun);*.py"
-            #         Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "DisallowRun" -Value $AppExecutionPolicy.DisallowRun
-            #         Write-Output "App execution alias for Python has been disabled."
-            #     } else {
-            #         Write-Output "App execution alias for Python is already disabled."
-            #     }
-            # } else {
-            #     # Create the policy and add the Python app execution alias
-            #     New-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "DisallowRun" -PropertyType String -Value "*.py"
-            #     Write-Output "App execution alias for Python has been disabled."
-            # }
-            
-            "Installing the rest of tools in a separate window...(because windows..)"
-			Start-Process Powershell $local_pip_helper_installer -wait	
-			
-			"Cleaning up after myself.."
-			rm $local_python_installer 
-
-			"Done. You can close this window. Have fun!"
-			$input = Read-Host "Install complete, just press ANY Key.."
-			break
-			
-			
-} else {
-			"Ok, Bye."		
+if ($env:Path -notlike "*$pathValue*") {
+    $env:Path += ";$PYTHON_PATH;$PYTHON_PATH_SCRIPTS"
+    [Environment]::SetEnvironmentVariable("Path", $env:Path, [EnvironmentVariableTarget]::User)
 }
+
+"Installing the rest of tools in a separate window...(because windows..)"
+Start-Process Powershell $local_pip_helper_installer -wait	
+
+"Cleaning up after myself.."
+rm $local_python_installer
+			
+			
+
