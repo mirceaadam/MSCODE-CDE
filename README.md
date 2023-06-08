@@ -1,10 +1,8 @@
 # MS CODE CUSTOM DEVELOPMENT ENVIRONMENT
-# MSCODE-CDE v3.0
+# MSCODE-CDE v4.0
 - It's a custom development environment based on containers so that that it can be easy to share between machines and teams across different operating systems.
 - The main goal is to have the same env and same tools in MSCode.
-- Current main tools: 
-    - check `image/.Dockerfile` 
-    - git, aws-tools(awscli, MFA, ecs, k8s, etc.), cdk v2, etc.
+- Current main tools: git, aws-tools(awscli, MFA, ecs, k8s, etc.), cdk v2, etc.
 
 ### Main Author
 - [Mircea Adam](https://github.com/mirceaadam)
@@ -14,6 +12,27 @@
 
 ### Based On
 - [Developing Inside A Container](https://code.visualstudio.com/docs/devcontainers/containers#_quick-start-open-an-existing-folder-in-a-container)
+
+### Requirements
+
+#### HW:
+- a decent x86/ARM64, 4-core machine, 16GB RAM for containers
+
+#### OS:
+- Have AWS Credentials Configured with profiles in:
+    Windows `$HOME\.aws`
+    macOS `$HOME/.aws`
+    Linux `$HOME/.aws`
+- If you do not have AWS Credentials configured:
+    - in `common\.aws-example` you have a pre-configured set of credentials that you can inspire
+    - or check this: [Configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
+
+### INSTALL AND USE
+#### Linux & WSL
+#### MacOS
+#### MSCode Dev Containers 
+#### Powershell Only
+   
 
 ### Major Versions 
 - Version 4.0 ( June 2023 )
