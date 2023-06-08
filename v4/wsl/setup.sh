@@ -24,14 +24,15 @@ echo -e "-------------------- --------------- -----------------------------"
 echo -e "-----------------  DEVOPS WSL CDE v4.0   ---------------------"
 echo -e "-------------------- --------------- -----------------------------" 
 
-bash $SETUP_DIR/software/install.sh
+#bash $SETUP_DIR/software/install.sh
 
 INIT_DIR=${SETUP_DIR}/init
 
 for file in `ls -1 $INIT_DIR/ | sort`; do
     file=$INIT_DIR/$file
-
+    echo -e "processing: $file"
     if [ -x $file ]; then
+        echo -e "running: $file"
         bash $file
     fi
 done
