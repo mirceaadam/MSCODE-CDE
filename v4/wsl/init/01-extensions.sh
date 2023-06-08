@@ -12,7 +12,9 @@ echo -e "-------------------- --------------- -----------------------------"
 echo -e "-----------------  MSCODE EXTENSIONS   ---------------------"
 echo -e "-------------------- --------------- -----------------------------" 
 if [ "$MSCODE_EXTENSIONS" = "yes" ]; then
-    bash $REPO_HOME/v4/common/extensions/extensions.sh
+    cd $REPO_HOME/v4/common/extensions
+    bash extensions.sh
+    cd $SETUP_DIR # (!) get back in the install dir
 else
     echo "Skipped by request."
     exit
