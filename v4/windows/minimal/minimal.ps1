@@ -64,9 +64,9 @@ function Install-Optional-Script {
     $install_extensions = "$REPO_HOME\v4\common\extensions\extensions.ps1"
     Start-Process powershell.exe -ArgumentList "-File `"$install_extensions`""
     #code-commit-helper (command:optional)
-    pip install git-remote-codecommit    
+    #pip install git-remote-codecommit    
     #cfn-lint (command:optional)
-    pip install cfn-lint     
+    #pip install cfn-lint     
 }
 
 $validOptions = @("y", "n")

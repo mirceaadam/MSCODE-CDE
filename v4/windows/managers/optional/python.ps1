@@ -1,24 +1,100 @@
+#chco failed
+#winget failed
+#Script to install python, pip and git-commit-helper
+
 #GLOBALS
-# $PYTHON_PATH = "C:\Users\$USER\AppData\Local\Programs\Python\$PYTHON_VERSION\"
-# $PYTHON_PATH_SCRIPTS = "C:\Users\$USER\AppData\Local\Programs\Python\$PYTHON_VERSION\Scripts\"
-# $PYTHON_VERSION = 'Python311'
-# $packageName = "Python.Python.3.11"
-#     # Install Python using WinGet
-#     Write-Host "Installing $packageName using WinGet..."
-#     winget install -q $packageName
-#     Write-Host "Installing pip.. "
-#     python -m pip install --upgrade pip
-#     # WINDOWS ENVIRONMENT VARIABLE FIX. STUPID, JUST STUPID.
-#     $pathValue = "$PYTHON_PATH"
+$INSTALL_DIR = 'C:\Temp\CDE'
+$REPO_HOME = 'C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main'
+$USER = $env:UserName
+$local_pip_helper_installer = "$REPO_HOME\v4\windows\managers\optional\pip.ps1"
 
-#     if ($env:Path -notlike "*$pathValue*") {
-#         $env:Path += ";$PYTHON_PATH;$PYTHON_PATH_SCRIPTS"
-#         [Environment]::SetEnvironmentVariable("Path", $env:Path, [EnvironmentVariableTarget]::User)
-#     }
+#Get new version here: https://www.python.org/ftp/python/
+$python_url  = 'https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe'
+$local_python_installer = "$INSTALL_DIR\python-installer-amd64.exe"
+$PYTHON_VERSION = 'Python311'
+$PYTHON_PATH = "C:\Users\$USER\AppData\Local\Programs\Python\$PYTHON_VERSION\"
+$PYTHON_PATH_SCRIPTS = "C:\Users\$USER\AppData\Local\Programs\Python\$PYTHON_VERSION\Scripts\"
 
-#winget python installation does not fix ENV variables, fallback to choco.
-choco install python311 -y
-$install_pip = "$REPO_HOME\v4\windows\managers\optional\pip.ps1"
+clear
+"Hi! This will install: "
+"	- python 3.11 (as of 07 Feb 2023) (silent install)"
+" 	- pip"
+"	- git-remote-codecommit (needs pip & git)"
 
-# WINDOWS ENVIRONMENT VARIABLE FIX. STUPID, JUST STUPID.
-Start-Process Powershell $install_pip -wait
+#------ PYTHON Download & INSTALLATION ---------
+"Press Y to start python installation."
+"OR" 
+"Press N to exit"
+" "
+$input = Read-Host "Enter Y or N, CTRL+C to exit."
+# Check the input and branch based on the result
+if ($input -eq "Y") {
+            # Do something if the input is "Y"
+            Write-Host "You entered Y, starting to download..."
+            "Fething the defined PYTHON Image (it could take a while - DO NOT CLOSE this powershell window)"
+            $currentTime = Get-Date
+                # Time the execution of a command
+                $ElapsedTime = Measure-Command {
+                    # The command to be timed goes here
+                    $wc = New-Object net.webclient
+                    $wc.Downloadfile($python_url, $local_python_installer)
+                }
+            
+            # Get the total elapsed time in minutes
+            $TotalMinutes = $ElapsedTime.TotalMinutes
+            
+            # Display the elapsed time in minutes
+            "Finished Download, Elapsed time: $TotalMinutes minutes"
+            " "
+			" "
+			"Installing Python..."
+			" "
+            "!!! DO NOT CLOSE THIS WINDOW !!!"
+            Start-Process $local_python_installer -ArgumentList "/quiet InstallAllUsers=0" -Wait
+
+            "Setting up Environment Variables for python in case it does not exist.."
+            # C:\Users\mircea.adam\AppData\Local\Programs\Python\Python310\Scripts\
+            # C:\Users\mircea.adam\AppData\Local\Programs\Python\Python310\
+            
+            $pathValue = "$PYTHON_PATH"
+
+            if ($env:Path -notlike "*$pathValue*") {
+                $env:Path += ";$PYTHON_PATH;$PYTHON_PATH_SCRIPTS"
+                [Environment]::SetEnvironmentVariable("Path", $env:Path, [EnvironmentVariableTarget]::User)
+            }
+
+            # "Fix for python specific app execution aliases.."
+            # # Get the policy for the AppExecutionAlias value
+            # $AppExecutionPolicy = Get-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "DisallowRun"
+
+            # # Check if the policy exists
+            # if ($AppExecutionPolicy) {
+            #     # Check if the Python app execution alias is already disabled
+            #     if ($AppExecutionPolicy.DisallowRun -notlike "*.py") {
+            #         # Add the Python app execution alias to the policy
+            #         $AppExecutionPolicy.DisallowRun = "$($AppExecutionPolicy.DisallowRun);*.py"
+            #         Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "DisallowRun" -Value $AppExecutionPolicy.DisallowRun
+            #         Write-Output "App execution alias for Python has been disabled."
+            #     } else {
+            #         Write-Output "App execution alias for Python is already disabled."
+            #     }
+            # } else {
+            #     # Create the policy and add the Python app execution alias
+            #     New-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "DisallowRun" -PropertyType String -Value "*.py"
+            #     Write-Output "App execution alias for Python has been disabled."
+            # }
+            
+            "Installing the rest of tools in a separate window...(because windows..)"
+			Start-Process Powershell $local_pip_helper_installer -wait	
+			
+			"Cleaning up after myself.."
+			rm $local_python_installer 
+
+			"Done. You can close this window. Have fun!"
+			$input = Read-Host "Install complete, just press ANY Key.."
+			break
+			
+			
+} else {
+			"Ok, Bye."		
+}
