@@ -2,8 +2,8 @@
 
 #GLOBALS
 $INSTALL_DIR = 'C:\Temp\CDE'
-$REPO_HOME = 'C:\Temp\CDE\MSCODE-CDE'
-$AWS = '$HOME\.aws'
+$REPO_HOME = 'C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main'
+$AWS = "$HOME\.aws"
 $USER = $env:UserName
 
 
@@ -26,7 +26,7 @@ else {
 
 # PACKAGE MANAGERS CHECK
 Write-Host "Setup is checking local package managers.."
-$scriptFolder = "$REPO_HOME\packet-manager"  # Replace with the path to your script folder
+$scriptFolder = "$REPO_HOME\v4\windows\packet-manager"  # Replace with the path to your script folder
 
 $scripts = Get-ChildItem -Path $scriptFolder -Filter "*.ps1" | Sort-Object
 
