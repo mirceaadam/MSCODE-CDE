@@ -1,0 +1,10 @@
+[default]
+region = eu-central-1
+output = json
+
+[profile xxxxxx]
+account = xxxxxx
+role_arn = arn:aws:iam::xxxxxx:role/xxxxxx
+source_profile = mfa
+region = eu-central-1
+output = json
