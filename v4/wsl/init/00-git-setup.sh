@@ -18,7 +18,7 @@ if [ "$GIT_SETUP" = "yes" ]; then
     git config --global user.email "$GIT_EMAIL"
     git config --global user.name "$GIT_USERNAME"
     echo -e "completed \xE2\x9C\x94"
-    git config --list
+    #git config --list
 else
     echo "Skipped by request."
     exit
