@@ -6,9 +6,23 @@ SETUP_DIR=${PWD}/v4/wsl
 
 
 sudo apt-get update
-cat $SETUP_DIR/software/apt.txt | xargs -L 1 sudo apt-get install -y -qq
-cat $SETUP_DIR/software/pip.txt | xargs -L 1 pip3 install 
+sudo apt-get install -y -qq \
+    python3-pip \
+    git \
+    curl \
+    vim \
+    jq \
+    wget
 
+pip3 install \
+    awscli \
+    git-remote-codecommit
+
+# NVM / NODE
+# check this: https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+source ~/.bashrc
+nvm use node
 # curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
 # sh nodesource_setup.sh
 #install CDK
