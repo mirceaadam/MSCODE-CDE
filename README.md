@@ -35,11 +35,11 @@ git clone https://github.com/mirceaadam/MSCODE-CDE.git && cd MSCODE-CDE
 ```
 2. Edit `user.config` with your personal details
 ```
-cd v4/common/user.config && nano user.config
+nano v4/common/user.config
 ```
 3. Run the setup
 ```
-cd ../../wsl && bash setup.sh
+bash v4/wsl/setup.sh
 ```
 #### MacOS
 #### Dev Containers 
