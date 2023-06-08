@@ -97,11 +97,11 @@ if (-not $validOptions.Contains($selectedOption.ToLower())) {
 else {
     switch ($selectedOption.ToLower()) {
         "minimal" {
-            Start-Process Powershell $MinimalSetup -wait
+            & $MinimalSetup
             
         }
         "full" {
-            Start-Process Powershell $FullSetup -wait
+            & $FullSetup
         }
         "update" {
             Show-UpdateSetup
