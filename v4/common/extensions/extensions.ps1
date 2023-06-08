@@ -7,3 +7,4 @@ $PacketManagersFolder = "$REPO_HOME\v4\windows\managers\mandatory"
 
 Write-Host " ....::: Installing MSCode Extensions :::...."
 Get-Content "$REPO_HOME\v4\common\extensions\extensions.txt" | ForEach-Object { code --install-extension $_ }
+Start-Sleep -Seconds 10
