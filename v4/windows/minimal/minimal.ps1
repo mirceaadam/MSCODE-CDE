@@ -27,27 +27,16 @@ function Show-Help {
 }
 
 function Install-Mandatory-WinGet {
-    $MandatoryOptionalOptionalPackagesFile = "$REPO_HOME\v4\windows\minimal\install_mandatory.txt"
+    $MandatoryPackagesFile = "$REPO_HOME\v4\windows\minimal\install_mandatory.txt"
 
     # Read the package names from the file
-    $packageNames = Get-Content -Path $MandatoryOptionalOptionalPackagesFile
+    $packageNames = Get-Content -Path $MandatoryPackagesFile
 
     # Process each package
     foreach ($packageName in $packageNames) {
-        # Check if the package is installed
-        $packageInstalled = winget search $packageName | Select-String -Pattern "$packageName"
-
-        if ($packageInstalled) {
-            Write-Host "$packageName is already installed."
-            # Update the package using Winget
-            Write-Host "Updating $packageName using Winget..."
-            winget upgrade $packageName -e
-        }
-        else {
             # Install the package using Winget
             Write-Host "Installing $packageName using Winget..."
             winget install $packageName -e
-        }
     }
 }
 
@@ -59,20 +48,9 @@ function Install-Optional-WinGet {
 
     # Process each package
     foreach ($packageName in $packageNames) {
-        # Check if the package is installed
-        $packageInstalled = winget search $packageName | Select-String -Pattern "$packageName"
-
-        if ($packageInstalled) {
-            Write-Host "$packageName is already installed."
-            # Update the package using Winget
-            Write-Host "Updating $packageName using Winget..."
-            winget upgrade $packageName -e
-        }
-        else {
             # Install the package using Winget
             Write-Host "Installing $packageName using Winget..."
             winget install $packageName -e
-        }
     }
 }
 
@@ -104,6 +82,7 @@ else {
         "y" {
             Install-Mandatory-WinGet
             Install-Mandatory-Script
+            & $REPO_HOME\v4\windows\managers\optiional\python-pip.ps1
             Install-Optional-WinGet
             Install-Optional-Script
 
