@@ -28,9 +28,21 @@
     - or check this: [Configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
 
 ### INSTALL AND USE
-#### Linux & WSL
+#### Ubuntu-Based Linux & WSL
+1. Clone & Change Dir:
+```
+git clone https://github.com/mirceaadam/MSCODE-CDE.git && cd MSCODE-CDE
+```
+2. Edit `user.config` with your personal details
+```
+cd v4/common/user.config && nano user.config
+```
+3. Run the setup
+```
+cd ../../wsl && bash setup.sh
+```
 #### MacOS
-#### MSCode Dev Containers 
+#### Dev Containers 
 #### Powershell Only
    
 
