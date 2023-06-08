@@ -14,7 +14,7 @@ echo -e "-------------------- --------------- -----------------------------"
 if [ "$AWS_SETUP" = "yes" ]; then
     #copying..
     echo "Adding get-token script.."
-    cp -v $REPO_HOME/common/aws/* $HOME/.aws/
+    cp -v $REPO_HOME/v4/common/aws/* $HOME/.aws/
     chmod +x $HOME/.aws/getToken.sh
     #add to bash for quick access
     alias getToken='bash ~/.aws/getToken.sh'
