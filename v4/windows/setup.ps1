@@ -8,11 +8,11 @@ $USER = $env:UserName
 
 
 # ESENTIAL CHECKS
-if (Test-Path -Path $REPO_NAME -PathType Container) {
-    Write-Host "The directory '$REPO_NAME' exists."
+if (Test-Path -Path $REPO_HOME -PathType Container) {
+    Write-Host "The directory '$REPO_HOME' exists."
 }
 else {
-    Write-Host "The directory '$REPO_NAME' does not exist."
+    Write-Host "The directory '$REPO_HOME' does not exist."
     Exit
 }
 
