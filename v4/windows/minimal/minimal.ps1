@@ -82,7 +82,7 @@ else {
         "y" {
             Install-Mandatory-WinGet
             Install-Mandatory-Script
-            & $REPO_HOME\v4\windows\managers\optiional\python-pip.ps1
+            & $REPO_HOME\v4\windows\managers\optional\python-pip.ps1
             Install-Optional-WinGet
             Install-Optional-Script
 
