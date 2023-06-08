@@ -26,6 +26,9 @@ aws --version
 # git-remote-codecommit
 pip3 install git-remote-codecommit
 
+# cfn-lint
+pip3 install cfn-lint
+
 # NVM / NODE
 # check this: https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
