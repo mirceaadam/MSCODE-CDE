@@ -62,7 +62,7 @@ function Install-Mandatory-Script {
 function Install-Optional-Script {
     #vscode-extensions (script:optional)
     $install_extensions = "$REPO_HOME\v4\common\extensions\extensions.ps1"
-    & $install_extensions
+    Start-Process powershell.exe -ArgumentList "-File `"$install_extensions`""
     #code-commit-helper (command:optional)
     pip install git-remote-codecommit    
     #cfn-lint (command:optional)
