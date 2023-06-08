@@ -1,4 +1,9 @@
-#!usr/bin/env bash
+#!usr/bin/env bash -e
+#GLOBALS
+PWD=`pwd`
+REPO_HOME=${PWD}
+SETUP_DIR=${PWD}/v4/wsl
+
 echo "I am in:" 
 echo ${PWD##*/}
 SETUP_PATH="${PWD##*/}"

@@ -1,7 +1,13 @@
 #!/bin/bash -e
-apt-get update
-cat ./apt.txt | xargs -L 1 apt-get install -y -qq
-cat ./pip.txt | xargs -L 1 pip3 install 
+#GLOBALS
+PWD=`pwd`
+REPO_HOME=${PWD}
+SETUP_DIR=${PWD}/v4/wsl
+
+
+sudo apt-get update
+cat $SETUP_DIR/software/apt.txt | xargs -L 1 sudo apt-get install -y -qq
+cat $SETUP_DIR/software/pip.txt | xargs -L 1 pip3 install 
 
 curl -sL https://deb.nodesource.com/setup_16.x -o nodesource_setup.sh
 sh nodesource_setup.sh
