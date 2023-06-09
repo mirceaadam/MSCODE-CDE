@@ -91,15 +91,18 @@ if (-not $validOptions.Contains($selectedOption.ToLower())) {
 else {
     switch ($selectedOption.ToLower()) {
         "minimal" {
+            clear
             PacketManagers
             & $MinimalSetup
             
         }
         "full" {
+            clear
             PacketManagers
             & $FullSetup
         }
         "update" {
+            clear
             PacketManagers
             Show-UpdateSetup
         }

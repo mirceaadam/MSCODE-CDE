@@ -26,34 +26,6 @@ function Show-Help {
     Write-Host " Options are y or n. Type y or n. "
 }
 
-function Install-Mandatory-WinGet {
-    $MandatoryPackagesFile = "$REPO_HOME\v4\windows\minimal\install_mandatory.txt"
-
-    # Read the package names from the file
-    $packageNames = Get-Content -Path $MandatoryPackagesFile
-
-    # Process each package
-    foreach ($packageName in $packageNames) {
-            # Install the package using Winget
-            Write-Host "Installing $packageName using Winget..."
-            winget install $packageName -e
-    }
-}
-
-function Install-Optional-WinGet {
-    $OptionalPackagesFile = "$REPO_HOME\v4\windows\minimal\install_optional.txt"
-
-    # Read the package names from the file
-    $packageNames = Get-Content -Path $OptionalPackagesFile
-
-    # Process each package
-    foreach ($packageName in $packageNames) {
-            # Install the package using Winget
-            Write-Host "Installing $packageName using Winget..."
-            winget install $packageName -e
-    }
-}
-
 function Configure-GetToken {
     # getToken (script:mandatory)
     Write-Host "Fetching getToken and adding to $HOME\.aws"
@@ -76,16 +48,16 @@ if (-not $validOptions.Contains($selectedOption.ToLower())) {
 else {
     switch ($selectedOption.ToLower()) {
         "y" {
-            Install-Mandatory-WinGet
+            $ $REPO_HOME\v4\windows\shared\awscli.ps1
             & $REPO_HOME\v4\windows\shared\python.ps1
+            $ $REPO_HOME\v4\windows\shared\git.ps1
             & $REPO_HOME\v4\windows\shared\pip-tools.ps1
-            & $REPO_HOME\v4\windows\shared\vscode.ps1
+            & $REPO_HOME\v4\windows\shared\vscodeV2.ps1
             Start-Process Powershell $REPO_HOME\v4\common\extensions\extensions.ps1 -wait
-            Install-Optional-WinGet
             Configure-GetToken            
         }
         "n" {
-            Install-Mandatory-WinGet
+            $ $REPO_HOME\v4\windows\shared\awscli.ps1            
             Configure-GetToken            
         }
     }
