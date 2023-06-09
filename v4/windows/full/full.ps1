@@ -36,11 +36,9 @@ function Render-FinalMessage {
     Write-Host " Start-Process Powershell $REPO_HOME\v4\common\extensions\extensions.ps1 -wait   "
 }
 
-function WSL {
+function WSL-install {
     #INSTALL WSL
-    Write-Host "hei in fct"
-    & $REPO_HOME\v4\windows\shared\wsl-custom.ps1
-    Write-Host "hei in fct 2" 
+    & $REPO_HOME\v4\windows\shared\wsl-custom.ps1 
 }
 
 function WSL-prep {
@@ -56,7 +54,7 @@ function WSL-prep {
         }
 }
 
-function Docker {
+function Docker-install {
     #INSTALL DOCKER with winget
     & $REPO_HOME\v4\windows\shared\docker.ps1
 }
@@ -119,10 +117,9 @@ else {
             $flagExists = Check-Restart -FlagFile $flagFile
             if ($flagExists) {
                 Write-Host "Restart performed, resuming.."
-                WSL
-                Write-Host "hei sal"
+                WSL-install
                 WSL-prep
-                Docker
+                Docker-install
                 Container-Prep                
                 Render-FinalMessage
             } else {
@@ -136,8 +133,7 @@ else {
             $flagExists = Check-Restart -FlagFile $flagFile
             if ($flagExists) {
                 Write-Host "Restart performed, resuming.."
-                WSL
-                Write-Host "hei sal"
+                WSL-install
                 WSL-prep
                 Render-FinalMessage
             } else {
