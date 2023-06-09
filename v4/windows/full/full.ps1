@@ -36,6 +36,53 @@ function Render-FinalMessage {
     Write-Host " Start-Process Powershell $REPO_HOME\v4\common\extensions\extensions.ps1 -wait   "
 }
 
+function WSL {
+    #INSTALL WSL
+    & $REPO_HOME\v4\windows\shared\wsl-custom.ps1
+}
+
+function WSL-prep {
+    Write-Host "Trigger WSL-prep ?"
+    Write-Host "WSL-prep = use in WSL getToken, awscli, cdk, cfn-lint, codecommit, etc."
+    $input_prep = Read-Host "Enter [y]es or [n]o:" 
+        if ($input_prep -eq "y"){
+            & $REPO_HOME\v4\windows\shared\wsl-prep.ps1
+        } else {
+            Write-Host "WSL-Prep Skipped."
+            Write-Host "You can still trigger manually from: "
+            Write-Host "/mnt/[$REPO_HOME]/v4/wsl/setup.sh"           
+        }
+}
+
+function Docker {
+    #INSTALL DOCKER with winget
+    & $REPO_HOME\v4\windows\shared\docker.ps1
+}
+
+function Container-Prep {
+    Write-Host "Trigger Container-Prep ?"
+    Write-Host "Container-Prep = custom docker image with getToken, awscli, cdk, cfn-lint, codecommit, etc."
+    $input_prep = Read-Host "Enter [y]es or [n]o:" 
+        if ($input_prep -eq "y"){
+            & $REPO_HOME\v4\windows\shared\container-prep.ps1
+        } else {
+            Write-Host "WSL-Prep Skipped."
+            Write-Host "You can still trigger manually from: "
+            Write-Host "/mnt/[$REPO_HOME]/v3/setup.sh"           
+        }
+}
+
+
+function Check-Restart {
+    $flagFile = "C:\Temp\CDE\PerformedRestart.flag"
+    if (Test-Path $flagFile) {
+        Write-Host "Restart performed, resuming.."
+    } else {
+        Write-Host "Fresh Install detected, Enable Windows Features..."
+        & $REPO_HOME\v4\windows\shared\win-features.ps1
+    }
+}
+
 function Show-Help {
     Write-Host " Options are y or n. Type y or n. "
 }
@@ -51,11 +98,20 @@ if (-not $validOptions.Contains($selectedOption.ToLower())) {
 else {
     switch ($selectedOption.ToLower()) {
         "y" {
-            & $REPO_HOME\v4\windows\shared\win-features.ps1
+            VSCODE
+            check-restart
+            WSL
+            WSL-prep
+            Docker
+            Container-Prep
             Render-FinalMessage
         }
         "n" {
-            Exit
+            VSCODE
+            check-restart
+            WSL
+            WSL-prep
+            Render-FinalMessage
         }
     }
 }
