@@ -48,7 +48,7 @@ if (-not $validOptions.Contains($selectedOption.ToLower())) {
 else {
     switch ($selectedOption.ToLower()) {
         "y" {
-            $ $REPO_HOME\v4\windows\shared\awscli.ps1
+            & $REPO_HOME\v4\windows\shared\awscli.ps1
             & $REPO_HOME\v4\windows\shared\python.ps1
             & $REPO_HOME\v4\windows\shared\git.ps1
             & $REPO_HOME\v4\windows\shared\pip-tools.ps1
