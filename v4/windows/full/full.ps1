@@ -8,11 +8,11 @@ $PacketManagersFolder = "$REPO_HOME\v4\windows\shared"
 function Render-Full {
     Write-Host " "
     Write-Host "     ... :: Full Setup ::: ... "
-    Write-Host "Setup Will Install:
-                    VSCODE                              (stable release)
+    Write-Host "SETUP Will Install:
+                    VSCODE                               (stable release)
                     VSCODE-Extensions                   (script:afterSetup)    
                     Windows Subsystem For Linux (WSL)
-                        |_Enable Windows Features        (req. restart!)
+                        |_Enable Windows Features       (REQUIRES RESTART)
                         |_Kernel+WSL+Ubuntu             (latest available)
                         |_WSL-Prep                      (WillAskToInstall) 
                             |_awscli
