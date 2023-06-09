@@ -51,7 +51,7 @@ function Render-FinalMessage {
 $validOptions = @("y", "n")
 
 Render-Full
-$selectedOption = Read-Host " Install Optional? [y]es or [n]o"
+$selectedOption = Read-Host " Begin Installation ? [y]es or [n]o"
 
 if (-not $validOptions.Contains($selectedOption.ToLower())) {
     Show-Help
@@ -59,18 +59,11 @@ if (-not $validOptions.Contains($selectedOption.ToLower())) {
 else {
     switch ($selectedOption.ToLower()) {
         "y" {
-            & $REPO_HOME\v4\windows\shared\awscli.ps1
-            & $REPO_HOME\v4\windows\shared\python.ps1
-            & $REPO_HOME\v4\windows\shared\git.ps1
-            & $REPO_HOME\v4\windows\shared\pip-tools.ps1
-            & $REPO_HOME\v4\windows\shared\vscode.ps1
-            #& $REPO_HOME\v4\common\extensions\extensions.ps1
-            Configure-GetToken
+            CheckScriptStatus
             Render-FinalMessage
         }
         "n" {
-            & $REPO_HOME\v4\windows\shared\awscli.ps1
-            Configure-GetToken          
+            Exit
         }
     }
 }
