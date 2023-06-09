@@ -1,67 +1,55 @@
 #
-# Based on : https://github.com/EvidentSecurity/MFAonCLI/blob/master/aws-temp-token.sh
-#
-# Parameters
-$ProgressPreference = 'SilentlyContinue'
-param($MFA_TOKEN_CODE, $IAMUSERNAME);
-#If you dont want to pass along username each time you could input your name on line 24
-#install-module -name AWSPowerShell.NetCore -AllowClobber
-#import-module AWSPowerShell.NetCore
-$awstools;
-try { 
-  $awstools = (Get-STSSessionToken) | Out-String
+$env:AWS_SECRET_ACCESS_KEY = $null
+$env:AWS_SECRET_KEY = $null
+$env:AWS_SESSION_TOKEN = $null
+
+$userConfigFile = "~/.aws/user.config"
+if (Test-Path $userConfigFile) {
+    $userConfig = Get-Content $userConfigFile
+    $userConfig | ForEach-Object {
+        $line = $_ -replace '\s+', ''
+        if ($line -match '^(.*?)=(.*)$') {
+            $envName = $Matches[1]
+            $envValue = $Matches[2]
+            Set-Item -Path "env:$envName" -Value $envValue
+        }
+    }
 }
-catch {
-  $awstools = $_ | Out-String
+
+
+$AWS_USER_PROFILE = "iam"
+$AWS_2AUTH_PROFILE = "mfa"
+$ARN_OF_MFA = $env:AWS_ARN_OF_MFA -replace '[\r\n]+'
+$DURATION = $env:AWS_TOKEN_DURATION -replace '[\r\n]+'
+$USER = $env:AWS_IAM_USERNAME -replace '[\r\n]+'
+
+Write-Output "Hi $USER!"
+Write-Output "MFA ARN Detected: $ARN_OF_MFA, let's login."
+
+$password = Read-Host -Prompt "Enter Your MFA TOKEN" -AsSecureString
+$plainPassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))
+
+$credentials = aws --profile $AWS_USER_PROFILE sts get-session-token `
+  --duration $DURATION `
+  --serial-number $ARN_OF_MFA `
+  --token-code $plainPassword `
+  --output text | ForEach-Object {
+      $tokens = $_ -split '\s+' -replace '[\r\n]+'
+      $tokens[1], $tokens[3], $tokens[4]
+  }
+
+#Write-Host $credentials  
+  
+$AWS_ACCESS_KEY_ID, $AWS_SECRET_ACCESS_KEY, $AWS_SESSION_TOKEN = $credentials
+
+Write-Output "AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID"
+Write-Output "AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY"
+Write-Output "AWS_SESSION_TOKEN: $AWS_SESSION_TOKEN"
+
+if ([string]::IsNullOrEmpty($AWS_ACCESS_KEY_ID)) {
+    exit 1
 }
-if($awstools.Contains("CommandNotFoundException")){
-  Write-Output "AWSTOOLS POWERSHELL not installed, installing it"
-  #Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-  Set-ExecutionPolicy Bypass -Force
-  install-module -name AWSPowerShell.NetCore -AllowClobber -Force
-  import-module AWSPowerShell.NetCore
-}
-# save output of the commend to check wether aws cli is installed
-$awscli;
-try { 
-  $awscli = (aws --version) 
-}
-catch {
-  $awscli = $_ | Out-String
-}
-# loook for the is not recognized as, which means its not installed
-$awscli = $awscli.Contains("is not recognized as")
-# if this is true, that means cli is not installed, hence install it
-if ($awscli) {
-  write-host "AWS CLI not installed, installing it"
- 
-  Invoke-WebRequest -Uri https://awscli.amazonaws.com/AWSCLIV2.msi -OutFile AWSCLIV2.msi
-  MsiExec.exe /i AWSCLIV2.msi /qn
-}
-if (!$MFA_TOKEN_CODE){
-  Write-Output "Usage: setCrendentials MFA_TOKEN_CODE=<MFA_TOKEN_CODE>"
-  Write-Output "Where:"
-  Write-Output "   <MFA_TOKEN_CODE> = Code from virtual MFA device"
-  exit 2
-}
-if (!$IAMUSERNAME){
-  #Set your iam username to dont have to pass it along each time
-  $IAMUSERNAME = "your.username"
-}
-$AWS_USER_PROFILE="iam"
-$AWS_2AUTH_PROFILE="mfa"
-$ARN_OF_MFA="arn:aws:iam::12345678910:mfa/$IAMUSERNAME"
-$DURATION=129600
-Write-Output "AWS-CLI Profile: $AWS_USER_PROFILE"
-Write-Output "MFA ARN: $ARN_OF_MFA"
-Write-Output "MFA Token Code: $MFA_TOKEN_CODE"
-$awsResult = Get-STSSessionToken -ProfileName $AWS_USER_PROFILE -DurationInSeconds $DURATION -SerialNumber $ARN_OF_MFA -TokenCode $MFA_TOKEN_CODE
-#Setting the aws credential in the shell
-Set-AWSCredential -ProfileLocation ~\.aws\credentials  -AccessKey $awsResult.AccessKeyId -SecretKey $awsResult.SecretAccessKey -SessionToken $awsResult.SessionToken -StoreAs $AWS_2AUTH_PROFILE
-if (!$awsResult){
-  exit 1
-}
-#Writing the profile to persistent credential file using the standard aws cli command
-aws --profile $AWS_2AUTH_PROFILE configure set aws_access_key_id $awsResult.AccessKeyId
-aws --profile $AWS_2AUTH_PROFILE configure set aws_secret_access_key $awsResult.SecretAccessKey
-aws --profile $AWS_2AUTH_PROFILE configure set aws_session_token $awsResult.SessionToken
+
+aws --profile $AWS_2AUTH_PROFILE configure set aws_access_key_id "$AWS_ACCESS_KEY_ID"
+aws --profile $AWS_2AUTH_PROFILE configure set aws_secret_access_key "$AWS_SECRET_ACCESS_KEY"
+aws --profile $AWS_2AUTH_PROFILE configure set aws_session_token "$AWS_SESSION_TOKEN"
