@@ -18,10 +18,13 @@ function Render-Full {
                             |_awscli
                             |_getToken
                             |_cdk, etc.                                          
-                OPTIONAL List Includes:
-                        AWS DEV CONTAINER               (WillAskToInstall)
+                OPTIONAL List Includes:                 (   OPTIONAL    )
+                        AWS DEV CONTAINER               
                             |_Docker                    (WillAskToInstall)
-                            |_Container-Prep            (WillAskToInstall) "               
+                            |_Container-Prep            (WillAskToInstall) 
+                                |_awscli
+                                |_getToken
+                                |_cdk, etc. "               
 }
 
 function Show-Help {
