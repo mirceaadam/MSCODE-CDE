@@ -26,16 +26,15 @@ function Show-Help {
     Write-Host " Options are y or n. Type y or n. "
 }
 
-function Configure-GetToken {
-    # getToken (script:mandatory)
-    Write-Host "Fetching getToken and adding to $HOME\.aws"
-    cp $REPO_HOME\v4\common\aws\getToken.ps1 $HOME\.aws\
-    Write-Host "Adding the script system-wide"
-    New-Item -ItemType Directory -Path "C:\Program Files\AWS"
-    New-Item -ItemType SymbolicLink -Path "C:\Program Files\AWS\getToken.ps1" -Target "$HOME\.aws\getToken.ps1"
-    [Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Program Files\AWS", [EnvironmentVariableTarget]::Machine)
-    Write-Host "getToken is now available system-wide."
+function Render-FinalMessage {
+    Write-Host "Install complete."
+    Write-Host ""
+    Write-Host "vscode has issues with env and extensions fail at 1st try."
+    Write-Host "To fix that, run in an elevated powershell this command:"
+    Write-Host " Start-Process Powershell $REPO_HOME\v4\common\extensions\extensions.ps1 -wait   "
 }
+
+
 
 $validOptions = @("y", "n")
 
@@ -53,12 +52,11 @@ else {
             & $REPO_HOME\v4\windows\shared\git.ps1
             & $REPO_HOME\v4\windows\shared\pip-tools.ps1
             & $REPO_HOME\v4\windows\shared\vscode.ps1
-            Start-Process Powershell $REPO_HOME\v4\common\extensions\extensions.ps1 -wait
-            Configure-GetToken            
+            & $REPO_HOME\v4\common\extensions\extensions.ps1
+            Render-FinalMessage
         }
         "n" {
             & $REPO_HOME\v4\windows\shared\awscli.ps1            
-            Configure-GetToken            
         }
     }
 }

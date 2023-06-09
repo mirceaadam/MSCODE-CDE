@@ -31,8 +31,8 @@ function AddToPath {
     $existingPath = [Environment]::GetEnvironmentVariable("PATH", "Machine")
 
     if ($existingPath -split ';' -notcontains $vscodePath) {
-        $newPath = $existingPath + ";" + $vscodePath
-        [Environment]::SetEnvironmentVariable("PATH", $newPath, "Machine")
+        #$newPath = $existingPath + ";" + $vscodePath
+        [Environment]::SetEnvironmentVariable("Path", "$env:Path;$vscodePath", [EnvironmentVariableTarget]::User)      
         Write-Host "VS Code path added to the system's PATH variable."
     } else {
         Write-Host "VS Code path is already present in the system's PATH variable."
