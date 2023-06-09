@@ -50,7 +50,7 @@ else {
         "y" {
             $ $REPO_HOME\v4\windows\shared\awscli.ps1
             & $REPO_HOME\v4\windows\shared\python.ps1
-            $ $REPO_HOME\v4\windows\shared\git.ps1
+            & $REPO_HOME\v4\windows\shared\git.ps1
             & $REPO_HOME\v4\windows\shared\pip-tools.ps1
             & $REPO_HOME\v4\windows\shared\vscodeV2.ps1
             Start-Process Powershell $REPO_HOME\v4\common\extensions\extensions.ps1 -wait
