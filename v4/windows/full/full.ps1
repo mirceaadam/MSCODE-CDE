@@ -38,7 +38,9 @@ function Render-FinalMessage {
 
 function WSL {
     #INSTALL WSL
+    Write-Host "hei in fct"
     & $REPO_HOME\v4\windows\shared\wsl-custom.ps1
+    Write-Host "hei in fct 2" 
 }
 
 function WSL-prep {
@@ -118,6 +120,7 @@ else {
             if ($flagExists) {
                 Write-Host "Restart performed, resuming.."
                 WSL
+                Write-Host "hei sal"
                 WSL-prep
                 Docker
                 Container-Prep                
@@ -134,6 +137,7 @@ else {
             if ($flagExists) {
                 Write-Host "Restart performed, resuming.."
                 WSL
+                Write-Host "hei sal"
                 WSL-prep
                 Render-FinalMessage
             } else {

@@ -16,15 +16,8 @@ $local_kernel_installer = 'C:\Temp\wsl_update_x64.msi'
 
 #------ KERNEL UPDATE INSTALLATION ---------
 "Fetching the kernel update.."
-$ElapsedTime = Measure-Command {
-    # The command to be timed goes here
-    $wc = New-Object net.webclient
-    $wc.Downloadfile($kernel_update_url, $local_kernel_installer)
-}
-# Get the total elapsed time in minutes
-$TotalMinutes = $ElapsedTime.TotalMinutes
-# Display the elapsed time in minutes
-"Finished Download, Elapsed time: $TotalMinutes minutes"
+$wc = New-Object net.webclient
+$wc.Downloadfile($kernel_update_url, $local_kernel_installer)
 "Installing kernel update, do not close this windows, please wait.."
 # Wait for the MSI installer to finish
 Start-Process C:\Windows\System32\msiexec.exe -ArgumentList "/i $local_kernel_installer /qn" -wait
@@ -35,22 +28,15 @@ Start-Process C:\Windows\System32\msiexec.exe -ArgumentList "/i $local_kernel_in
 $currentTime = Get-Date
 "Started the download at: $currentTime"
 "...please wait around 5 minutes."
-    # Time the execution of a command
-    $ElapsedTime = Measure-Command {
-        # The command to be timed goes here
-        $wc = New-Object net.webclient
-        $wc.Downloadfile($ubuntu_url, $local_ubuntu_installer)
-    }
-
-# Get the total elapsed time in minutes
-$TotalMinutes = $ElapsedTime.TotalMinutes
-
-# Display the elapsed time in minutes
-"Finished Download, Elapsed time: $TotalMinutes minutes"
+$wc = New-Object net.webclient
+$wc.Downloadfile($ubuntu_url, $local_ubuntu_installer)
 " "
 "DO NOT CLOSE THIS WINDOW."
 "When prompted, Hit LAUNCH and install ubuntu."
 "Provide a username/password when prompted - DO NOT LOSE IT !"
 wsl --set-default-version 2
+Write-Host "loop?"
 Add-AppxPackage $local_ubuntu_installer
+Write-Host "loop 2"
 Start-Process PowerShell $local_ubuntu_installer -wait
+Write-Host "loop 3"
