@@ -28,8 +28,8 @@ Start-Process C:\Windows\System32\msiexec.exe -ArgumentList "/i $local_kernel_in
 $currentTime = Get-Date
 "Started the download at: $currentTime"
 "...please wait around 5 minutes."
-$wc = New-Object net.webclient
-$wc.Downloadfile($ubuntu_url, $local_ubuntu_installer)
+$wc2 = New-Object net.webclient
+$wc2.Downloadfile($ubuntu_url, $local_ubuntu_installer)
 " "
 "DO NOT CLOSE THIS WINDOW."
 "When prompted, Hit LAUNCH and install ubuntu."
