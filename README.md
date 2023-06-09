@@ -1,26 +1,14 @@
 # MS CODE CUSTOM DEVELOPMENT ENVIRONMENT
-# MSCODE-CDE v4.0
+# MSCODE-CDE
+
+- The main goal is to have the same env quickly reinstalled and same tools in MSCode.
 - It's a custom development environment based on containers so that that it can be easy to share between machines and teams across different operating systems.
-- The main goal is to have the same env and same tools in MSCode.
 - Current main tools: git, aws-tools(awscli, MFA, ecs, k8s, etc.), cdk v2, etc.
 
-### Main Author
-- [Mircea Adam](https://github.com/mirceaadam)
-
-### Contributions
-- [ChatGPT4](https://chat.openai.com/)
-- [devops Team](https://google.com)
-- [Trond Kristiansen](https://github.com) //access docker socket from container
-
-### Based On
-- [Developing Inside A Container](https://code.visualstudio.com/docs/devcontainers/containers#_quick-start-open-an-existing-folder-in-a-container)
-
 ### Requirements
-
 #### HW:
 - a decent x86/ARM64 minimum 4-core machine, 16GB RAM for containers
 - decent internet access
-
 #### OS:
 - administrator / root access
 - Have AWS Credentials Configured with profiles in:
@@ -30,6 +18,8 @@
 - If you do not have AWS Credentials configured:
     - in `common\.aws-example` you have a pre-configured set of credentials that you can inspire
     - or check this: [Configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
+
+### INSTALL AND USE
 
 ### INSTALL AND USE
 #### Ubuntu-Based Linux & WSL
@@ -69,8 +59,40 @@ cd C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\windows
 .\setup.ps1
 ```
 
-   
+### Main Author
+- [Mircea Adam](https://github.com/mirceaadam)
 
+### Contributions
+- [ChatGPT4](https://chat.openai.com/)
+- [devops Team](https://google.com)
+- [Trond Kristiansen](https://github.com) //access docker socket from container
+
+### Based On
+- [Developing Inside A Container](https://code.visualstudio.com/docs/devcontainers/containers#_quick-start-open-an-existing-folder-in-a-container)
+
+### Version 4 features
+Cross-Platform:
+- re-written with modularity and easy cloning in mind.
+- awscli finally standardized: 
+    - credentials
+    - getToken available system-wide
+    - getToken script improved
+- vscode extensions 
+
+Windows:
+- fix Path Variables for software
+- use of netget, chocolately, nuget.
+- installation options: 
+    - awscli-only (getToken+)
+    - minimal 
+    - full(WSL+Docker)  
+
+WSL:
+- ready to configure with awscli+WSL+getToken
+- software & tools
+
+Container:
+- easy to maintain, configure and set-up
 ### Major Versions 
 - Version 4.0 ( June 2023 )
 - Version 3.0 ( november 2022 )
