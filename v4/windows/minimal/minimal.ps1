@@ -57,7 +57,7 @@ else {
             Configure-GetToken            
         }
         "n" {
-            $ $REPO_HOME\v4\windows\shared\awscli.ps1            
+            & $REPO_HOME\v4\windows\shared\awscli.ps1            
             Configure-GetToken            
         }
     }
