@@ -56,6 +56,12 @@ Let's start the windows setup:
 cd C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\windows
 .\setup.ps1
 ```
+Notes/Bugs:
+    - When the installation finishes, you must open a separate powershell/cmd to use the tools !
+    - Don't forget to install you VSCode extensions with this command:
+    ```
+    Start-Process Powershell C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\common\extensions\extensions.ps1 -wait
+    ```
 
 ### Main Author
 - [Mircea Adam](https://github.com/mirceaadam)
@@ -70,16 +76,15 @@ cd C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\windows
 
 ### Version 4 features
 Cross-Platform:
-- re-written with modularity and easy cloning in mind.
-- awscli finally standardized: 
+- re-written with solid base to promote modularity, easy install and maintenance.
     - credentials
     - getToken available system-wide
     - getToken script improved
 - vscode extensions 
 
 Windows:
-- fix Path Variables for software
-- use of netget, chocolately, nuget.
+- fixed anoying Windows Path Variables in `[EnvironmentVariableTarget]::User` 
+- use of netget(90%), chocolately, nuget or custom scripts.
 - installation options: 
     - awscli-only (getToken+)
     - minimal 
