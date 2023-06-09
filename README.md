@@ -79,6 +79,7 @@ cd C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\windows
 
 ### Version 4 features
 Cross-Platform:
+- .aws now in sync with all: powershell, wsl, containers
 - re-written with solid base to promote modularity, easy install and maintenance.
     - credentials
     - getToken available system-wide

@@ -35,8 +35,5 @@ $wc2.Downloadfile($ubuntu_url, $local_ubuntu_installer)
 "When prompted, Hit LAUNCH and install ubuntu."
 "Provide a username/password when prompted - DO NOT LOSE IT !"
 wsl --set-default-version 2
-Write-Host "loop?"
 Add-AppxPackage $local_ubuntu_installer
-Write-Host "loop 2"
 Start-Process PowerShell $local_ubuntu_installer -wait
-Write-Host "loop 3"
