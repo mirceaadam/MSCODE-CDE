@@ -1,4 +1,6 @@
 #2
+#GLOBALS
+$shortcutPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\2.ps1.lnk"
 # WE INSTALL MSCODE + KERNEL UPDATE for WSL + UBUNTU
 #$ubuntu_url = 'https://aka.ms/wslubuntu2204'
 $ubuntu_url = 'https://wslstorestorage.blob.core.windows.net/wslblob/Ubuntu2204LTS-230418_x64.appx'
@@ -168,6 +170,13 @@ if (Test-Path $flagFile) {
 
     # Remove the flag file to indicate that the reboot has been processed
     Remove-Item -Path $flagFile -Force
+
+    # Delete the shortcut from the Startup folder
+    if (Test-Path $shortcutPath) {
+      Remove-Item -Path $shortcutPath -Force
+      Write-Host "Shortcut deleted from the Startup folder."
+      }
+
 } else {
     # Reboot was not performed, skip the remaining installations
     Write-Host "Reboot not performed. Skipping remaining installations."
