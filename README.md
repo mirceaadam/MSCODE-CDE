@@ -58,9 +58,10 @@ cd C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\windows
 ```
 ### Notes and Known Bugs:
 
-    - When the installation finishes, you must open a separate powershell/cmd to use the tools !
+- When the installation finishes, you must open a separate powershell/cmd to use the tools !
 
-    - Do not forget to install you VSCode extensions with this command:
+- Do not forget to install you VSCode extensions with this command:
+
     ```
     Start-Process Powershell C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\common\extensions\extensions.ps1 -wait
     ```
