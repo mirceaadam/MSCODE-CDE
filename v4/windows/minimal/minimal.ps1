@@ -54,9 +54,16 @@ function Install-Optional-WinGet {
     }
 }
 
-function Install-Mandatory-Script {
+function Configure-GetToken {
     # getToken (script:mandatory)
+    Write-Host "Fetching getToken and adding to $HOME\.aws"
     cp $REPO_HOME\v4\common\aws\getToken.ps1 $HOME\.aws\
+    Write-Host "Adding the script system-wide"
+    New-Item -ItemType Directory -Path "C:\Program Files\AWS"
+    New-Item -ItemType SymbolicLink -Path "C:\Program Files\AWS\getToken.ps1" -Target "$HOME\.aws\getToken.ps1"
+    [Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Program Files\AWS", [EnvironmentVariableTarget]::Machine)
+    [Environment]::Refresh()
+    Write-Host "getToken is now available system-wide."
 }
 
 # function Install-Optional-Script {
@@ -83,16 +90,16 @@ else {
     switch ($selectedOption.ToLower()) {
         "y" {
             Install-Mandatory-WinGet
-            Install-Mandatory-Script
             & $REPO_HOME\v4\windows\shared\python.ps1
             & $REPO_HOME\v4\windows\shared\pip-tools.ps1
             & $REPO_HOME\v4\windows\shared\vscode.ps1
             & $REPO_HOME\v4\common\extensions\extensions.ps1
             Install-Optional-WinGet
+            Configure-GetToken            
         }
         "n" {
             Install-Mandatory-WinGet
-            Install-Mandatory-Script
+            Configure-GetToken            
         }
     }
 }
