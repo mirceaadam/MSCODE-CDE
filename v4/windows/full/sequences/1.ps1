@@ -11,21 +11,9 @@ $local_aws_credentials = 'C:\Temp\devops\.aws'
 " "
 " ....::: DevOps Container Setup Init :::...."
 
-# Create the scheduled task
-"Creating Scheduled Task OnRestart.."
-schtasks /Create /SC ONLOGON /TN $TaskName /TR $TaskCommand /RL HIGHEST
-
-" "
-"Let's configure AWS Locally."
-$input3 = Read-Host "Configure AWS in Powershell? [Y](yes) or [N](no)"
-if ($input3 -eq "Y") {
-                mkdir $env:USERPROFILE\.aws
-                cp -v $local_getToken_script $env:USERPROFILE\.aws\
-                cp -v $local_aws_credentials\* $env:USERPROFILE\.aws\
-				"You have to use the documentation to run this further."
-    } else { 
-        "OK."
-}
+# # Create the scheduled task
+# "Creating Scheduled Task OnRestart.."
+# schtasks /Create /SC ONLOGON /TN $TaskName /TR $TaskCommand /RL HIGHEST
 
 
 # Windows Features for WSL
@@ -33,12 +21,9 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
 
 #REBOOT FLAG
-# Set a registry key to indicate that reboot is pending
-New-ItemProperty -Path "HKCU:\Software\CDE" -Name "RebootPending" -Value 1 -PropertyType DWORD
-
-# Perform the reboot
-Restart-Computer -Force
-
+# Create the flag file to indicate reboot is pending
+$flagFile = "C:\Temp\InstallationCompleted.flag"
+New-Item -ItemType File -Path $flagFile -Force
 
 #RESTART REQUIRED
 shutdown /r /t 0

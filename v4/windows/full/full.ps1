@@ -7,20 +7,31 @@ $PacketManagersFolder = "$REPO_HOME\v4\windows\shared"
 
 function CheckScriptStatus {
     # Check if installation is already completed
-    $completed = Get-ItemProperty -Path "HKCU:\Software\CDE" -Name "InstallationCompleted" -ErrorAction SilentlyContinue
+    $flagFile = "C:\Temp\CDE\InstallationCompleted.flag"
 
-    if ($completed -eq $null) {
+    if (!(Test-Path $flagFile)) {
         # Installation not completed, run the scripts in sequence
         & $REPO_HOME\v4\windows\full\sequences\1.ps1
         & $REPO_HOME\v4\windows\full\sequences\2.ps1
-        & $REPO_HOME\v4\windows\full\sequences\3.ps1
+        #& $REPO_HOME\v4\windows\full\sequences\3.ps1
 
-        # Set a registry key to indicate that the installation is completed
-        New-ItemProperty -Path "HKCU:\Software\CDE" -Name "InstallationCompleted" -Value 1 -PropertyType DWORD
+        # Create the flag file to indicate that the installation is completed
+        New-Item -ItemType File -Path $flagFile -Force
+
+        # Create a shortcut in the Startup folder to run 2.ps1 at user logon
+        $shortcutPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\2.ps1.lnk"
+        $scriptPath = "REPO_HOME\v4\windows\full\sequences\2.ps1"
+
+        $WshShell = New-Object -ComObject WScript.Shell
+        $shortcut = $WshShell.CreateShortcut($shortcutPath)
+        $shortcut.TargetPath = "powershell.exe"
+        $shortcut.Arguments = "-ExecutionPolicy Bypass -File `"$scriptPath`""
+        $shortcut.Save()
     } else {
         # Installation already completed, do nothing
         Write-Host "Installation already completed."
     }
+
 }
 
 
