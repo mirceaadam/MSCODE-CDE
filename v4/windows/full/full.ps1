@@ -27,9 +27,6 @@ function Render-Full {
                                 |_cdk, etc. "               
 }
 
-function Show-Help {
-    Write-Host " Options are y or n. Type y or n. "
-}
 
 function Render-FinalMessage {
     Write-Host "Install complete."
@@ -37,6 +34,10 @@ function Render-FinalMessage {
     Write-Host "vscode has issues with env and extensions fail at 1st try."
     Write-Host "To fix that, run in an elevated powershell this command:"
     Write-Host " Start-Process Powershell $REPO_HOME\v4\common\extensions\extensions.ps1 -wait   "
+}
+
+function Show-Help {
+    Write-Host " Options are y or n. Type y or n. "
 }
 
 $validOptions = @("y", "n")
