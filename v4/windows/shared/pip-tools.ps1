@@ -4,4 +4,4 @@ pip install cfn-lint
 " "
 " "
 " "
-"Done. Closing this window."
+"Done with pip-tools"
