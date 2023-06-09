@@ -34,6 +34,16 @@ function Render-FinalMessage {
     Write-Host " Start-Process Powershell $REPO_HOME\v4\common\extensions\extensions.ps1 -wait   "
 }
 
+function Configure-GetToken {
+    # getToken (script:mandatory)
+    Write-Host "Fetching getToken and adding to $HOME\.aws"
+    cp $REPO_HOME\v4\common\aws\getToken.ps1 $HOME\.aws\
+    Write-Host "Adding the script system-wide"
+    New-Item -ItemType Directory -Path "C:\Program Files\AWS"
+    New-Item -ItemType SymbolicLink -Path "C:\Program Files\AWS\getToken.ps1" -Target "$HOME\.aws\getToken.ps1"
+    [Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Program Files\AWS", [EnvironmentVariableTarget]::Machine)
+    Write-Host "getToken is now available system-wide."
+}
 
 
 $validOptions = @("y", "n")
@@ -52,11 +62,13 @@ else {
             & $REPO_HOME\v4\windows\shared\git.ps1
             & $REPO_HOME\v4\windows\shared\pip-tools.ps1
             & $REPO_HOME\v4\windows\shared\vscode.ps1
-            & $REPO_HOME\v4\common\extensions\extensions.ps1
+            #& $REPO_HOME\v4\common\extensions\extensions.ps1
+            Configure-GetToken
             Render-FinalMessage
         }
         "n" {
-            & $REPO_HOME\v4\windows\shared\awscli.ps1            
+            & $REPO_HOME\v4\windows\shared\awscli.ps1
+            Configure-GetToken          
         }
     }
 }
