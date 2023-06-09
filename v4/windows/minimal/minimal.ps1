@@ -62,21 +62,8 @@ function Configure-GetToken {
     New-Item -ItemType Directory -Path "C:\Program Files\AWS"
     New-Item -ItemType SymbolicLink -Path "C:\Program Files\AWS\getToken.ps1" -Target "$HOME\.aws\getToken.ps1"
     [Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Program Files\AWS", [EnvironmentVariableTarget]::Machine)
-    [Environment]::Refresh()
     Write-Host "getToken is now available system-wide."
 }
-
-# function Install-Optional-Script {
-#     #choco install vscode -y
-#     #vscode-extensions (script:optional)
-#     #$install_extensions = "$REPO_HOME\v4\common\extensions\extensions.ps1"
-#     #Start-Process powershell.exe -ArgumentList "-File `"$install_extensions`""
-#     #Start-Process Powershell $install_extensions -wait
-#     #code-commit-helper (command:optional)
-#     #pip install git-remote-codecommit    
-#     #cfn-lint (command:optional)
-#     #pip install cfn-lint     
-# }
 
 $validOptions = @("y", "n")
 
@@ -93,7 +80,7 @@ else {
             & $REPO_HOME\v4\windows\shared\python.ps1
             & $REPO_HOME\v4\windows\shared\pip-tools.ps1
             & $REPO_HOME\v4\windows\shared\vscode.ps1
-            & $REPO_HOME\v4\common\extensions\extensions.ps1
+            Start-Process Powershell $REPO_HOME\v4\common\extensions\extensions.ps1 -wait
             Install-Optional-WinGet
             Configure-GetToken            
         }

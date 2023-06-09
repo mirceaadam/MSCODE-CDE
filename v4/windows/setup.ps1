@@ -30,16 +30,8 @@ else {
 # PACKAGE MANAGERS CHECK
 function PacketManagers {
     Write-Host "Setup is checking local package managers.."
-    # & $PacketManagersFolder\choco.ps1
-    # & $PacketManagersFolder\winget.ps1
-
-    $scripts = Get-ChildItem -Path $PacketManagersFolder -Filter "*.ps1" | Sort-Object
-
-    foreach ($script in $scripts) {
-        Write-Host "Running script: $($script.Name)"
-        & $script.FullName
-        Write-Host "Script completed: $($script.Name)`n"
-    }
+    & $PacketManagersFolder\choco.ps1
+    & $PacketManagersFolder\winget.ps1
 }
 
 # Ask what to install: minimal or full or update
