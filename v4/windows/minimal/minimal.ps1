@@ -60,10 +60,11 @@ function Install-Mandatory-Script {
 }
 
 function Install-Optional-Script {
-    choco install vscode -y
+    #choco install vscode -y
     #vscode-extensions (script:optional)
     $install_extensions = "$REPO_HOME\v4\common\extensions\extensions.ps1"
-    Start-Process powershell.exe -ArgumentList "-File `"$install_extensions`""
+    #Start-Process powershell.exe -ArgumentList "-File `"$install_extensions`""
+    Start-Process Powershell $install_extensions -wait
     #code-commit-helper (command:optional)
     #pip install git-remote-codecommit    
     #cfn-lint (command:optional)
