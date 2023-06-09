@@ -2,24 +2,23 @@
 #winget failed
 #Script to install python, pip and git-commit-helper
 
-#GLOBALS
+# GLOBALS
 $INSTALL_DIR = 'C:\Temp\CDE'
 $REPO_HOME = 'C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main'
 $USER = $env:UserName
 $local_pip_helper_installer = "$REPO_HOME\v4\windows\managers\optional\pip.ps1"
 
-#Get new version here: https://www.python.org/ftp/python/
+# PYTHON VERSION
+# ---> Get new version here: https://www.python.org/ftp/python/
 $python_url  = 'https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe'
-$local_python_installer = "$INSTALL_DIR\python-installer-amd64.exe"
 $PYTHON_VERSION = 'Python311'
+$local_python_installer = "$INSTALL_DIR\python-installer-amd64.exe"
 $PYTHON_PATH = "C:\Users\$USER\AppData\Local\Programs\Python\$PYTHON_VERSION\"
 $PYTHON_PATH_SCRIPTS = "C:\Users\$USER\AppData\Local\Programs\Python\$PYTHON_VERSION\Scripts\"
 
-clear
 "Hi! This will install: "
-"	- python 3.11 (as of 07 Feb 2023) (silent install)"
+"	- $PYTHON_VERSION (silent install)"
 " 	- pip"
-"	- git-remote-codecommit (needs pip & git)"
 
 #------ PYTHON Download & INSTALLATION ---------
 "Fething the defined PYTHON Image (it could take a while - DO NOT CLOSE this powershell window)"

@@ -3,7 +3,7 @@ $INSTALL_DIR = 'C:\Temp\CDE'
 $REPO_HOME = 'C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main'
 $AWS = "$HOME\.aws"
 $USER = $env:UserName
-$PacketManagersFolder = "$REPO_HOME\v4\windows\managers\mandatory"
+$PacketManagersFolder = "$REPO_HOME\v4\windows\shared"
 
 function Render-Minimal {
     Write-Host " "
@@ -59,17 +59,17 @@ function Install-Mandatory-Script {
     cp $REPO_HOME\v4\common\aws\getToken.ps1 $HOME\.aws\
 }
 
-function Install-Optional-Script {
-    #choco install vscode -y
-    #vscode-extensions (script:optional)
-    $install_extensions = "$REPO_HOME\v4\common\extensions\extensions.ps1"
-    #Start-Process powershell.exe -ArgumentList "-File `"$install_extensions`""
-    Start-Process Powershell $install_extensions -wait
-    #code-commit-helper (command:optional)
-    #pip install git-remote-codecommit    
-    #cfn-lint (command:optional)
-    #pip install cfn-lint     
-}
+# function Install-Optional-Script {
+#     #choco install vscode -y
+#     #vscode-extensions (script:optional)
+#     #$install_extensions = "$REPO_HOME\v4\common\extensions\extensions.ps1"
+#     #Start-Process powershell.exe -ArgumentList "-File `"$install_extensions`""
+#     #Start-Process Powershell $install_extensions -wait
+#     #code-commit-helper (command:optional)
+#     #pip install git-remote-codecommit    
+#     #cfn-lint (command:optional)
+#     #pip install cfn-lint     
+# }
 
 $validOptions = @("y", "n")
 
@@ -84,10 +84,11 @@ else {
         "y" {
             Install-Mandatory-WinGet
             Install-Mandatory-Script
-            & $REPO_HOME\v4\windows\managers\optional\python.ps1
+            & $REPO_HOME\v4\windows\shared\python.ps1
+            & $REPO_HOME\v4\windows\shared\pip-tools.ps1
+            & $REPO_HOME\v4\windows\shared\vscode.ps1
+            & $REPO_HOME\v4\common\extensions\extensions.ps1
             Install-Optional-WinGet
-            Install-Optional-Script
-
         }
         "n" {
             Install-Mandatory-WinGet
