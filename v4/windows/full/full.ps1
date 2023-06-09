@@ -72,14 +72,28 @@ function Container-Prep {
         }
 }
 
-
 function Check-Restart {
-    $flagFile = "C:\Temp\CDE\PerformedRestart.flag"
-    if (Test-Path $flagFile) {
-        Write-Host "Restart performed, resuming.."
+    param (
+        [Parameter(Mandatory = $true)]
+        [ValidateScript({Test-Path $_ -PathType 'Leaf'})]
+        [string]$FlagFile
+    )
+
+    if (Test-Path $FlagFile -PathType 'Leaf') {
+        return $true
     } else {
-        Write-Host "Fresh Install detected, Enable Windows Features..."
-        & $REPO_HOME\v4\windows\shared\win-features.ps1
+        return $false
+    }
+}
+
+function VSCODE {
+    #VSCODE
+    Write-Host "Install VSCODE ?.."
+    $input5 = Read-Host "Enter [y]es or [n]o:"
+    if ($input5 -eq "y") {
+        & $REPO_HOME\v4\windows\shared\vscode.ps1 
+    } else {
+        Write-Host "VSCODE Install skipped."
     }
 }
 
@@ -99,19 +113,33 @@ else {
     switch ($selectedOption.ToLower()) {
         "y" {
             VSCODE
-            check-restart
-            WSL
-            WSL-prep
-            Docker
-            Container-Prep
-            Render-FinalMessage
+            $flagFile = "C:\Temp\CDE\PerformedRestart.flag"
+            $flagExists = Check-Restart -FlagFile $flagFile
+            if ($flagExists) {
+                Write-Host "Restart performed, resuming.."
+                WSL
+                WSL-prep
+                Docker
+                Container-Prep                
+                Render-FinalMessage
+            } else {
+                Write-Host "Fresh Install detected, Enable Windows Features..."
+                & $REPO_HOME\v4\windows\shared\win-features.ps1                
+            }
         }
         "n" {
             VSCODE
-            check-restart
-            WSL
-            WSL-prep
-            Render-FinalMessage
+            $flagFile = "C:\Temp\CDE\PerformedRestart.flag"
+            $flagExists = Check-Restart -FlagFile $flagFile
+            if ($flagExists) {
+                Write-Host "Restart performed, resuming.."
+                WSL
+                WSL-prep
+                Render-FinalMessage
+            } else {
+                Write-Host "Fresh Install detected, Enable Windows Features..."
+                & $REPO_HOME\v4\windows\shared\win-features.ps1                
+            }            
         }
     }
 }
