@@ -44,27 +44,27 @@ function Show-Help {
 }
 
 function Show-MinimalSetup {
-    Write-Host "[ minimal ]"
+    Write-Host "[ minimal ] - no restart "
     Write-Host "- awscli"
     Write-Host "- awscli MFA: getToken (script) + add to Environment Variables"
     Write-Host "- Microsoft Code (vscode) (optional)"
     Write-Host "- Microsoft Code (vscode) Extensions (optional)"
-    Write-Host "- git (optional)"
-    Write-Host "- code-commit-helper (optional)"
+    Write-Host "- git (optional / ask to install )"
     Write-Host "- Python.Python.3.8 (required to install code-commit-helper)"
-    Write-Host "- pip (required to install code-commit-helper)"
-    Write-Host "- cfn-lint (optional)"
+    Write-Host "-   pip (required to install code-commit-helper)"
+    Write-Host "-       code-commit-helper (optional)"    
+    Write-Host "-       cfn-lint (optional)"
 }
 
 function Show-FullSetup {
-    Write-Host "[ full ]"
-    Write-Host "- Minimal Setup (optional)"
+    Write-Host "[ full ] - 2 restarts "
     Write-Host "- Windows Settings to enable WSL Properly"
     Write-Host "- Windows Kernel Update for WSL"
     Write-Host "- WSL + Ubuntu:latest"
     Write-Host "- Microsoft Code (vscode)"
     Write-Host "- Microsoft Code (vscode) Extensions"
-    Write-Host "- Docker: latest (optional)"
+    Write-Host "- Docker: latest (optional / ask to be installed)"
+    Write-Host "- Minimal Setup (if you need powershell cli access)"
 }
 
 function Show-UpdateSetup {
