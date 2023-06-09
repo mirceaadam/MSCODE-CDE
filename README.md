@@ -20,8 +20,6 @@
     - or check this: [Configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
 
 ### INSTALL AND USE
-
-### INSTALL AND USE
 #### Ubuntu-Based Linux & WSL
 1. Clone & Change Dir:
 ```
