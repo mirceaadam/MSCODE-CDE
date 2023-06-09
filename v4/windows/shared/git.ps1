@@ -29,11 +29,5 @@ function AddGitToENV {
 }
 
 
-Write-Host "Install git?.."
-$input = Read-Host "Enter [y]es or [n]o:"
-if ($input -eq "y") {
-    InstallGit
-    AddGitToENV
-} else {
-    Write-Host "Git Install skipped."
-}
+InstallGit
+AddGitToENV

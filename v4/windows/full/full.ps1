@@ -5,46 +5,23 @@ $AWS = "$HOME\.aws"
 $USER = $env:UserName
 $PacketManagersFolder = "$REPO_HOME\v4\windows\shared"
 
-function CheckScriptStatus {
-    # Check if installation is already completed
-    $flagFile = "C:\Temp\CDE\InstallationCompleted.flag"
-
-    if (!(Test-Path $flagFile)) {
-        # Installation not completed, run the scripts in sequence
-        & $REPO_HOME\v4\windows\full\sequences\1.ps1
-        & $REPO_HOME\v4\windows\full\sequences\2.ps1
-        #& $REPO_HOME\v4\windows\full\sequences\3.ps1
-
-        # Create the flag file to indicate that the installation is completed
-        New-Item -ItemType File -Path $flagFile -Force
-
-        # Create a shortcut in the Startup folder to run 2.ps1 at user logon
-        $shortcutPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\2.ps1.lnk"
-        $scriptPath = "REPO_HOME\v4\windows\full\sequences\2.ps1"
-
-        $WshShell = New-Object -ComObject WScript.Shell
-        $shortcut = $WshShell.CreateShortcut($shortcutPath)
-        $shortcut.TargetPath = "powershell.exe"
-        $shortcut.Arguments = "-ExecutionPolicy Bypass -File `"$scriptPath`""
-        $shortcut.Save()
-    } else {
-        # Installation already completed, do nothing
-        Write-Host "Installation already completed."
-    }
-
-}
-
-
 function Render-Full {
     Write-Host " "
     Write-Host "     ... :: Full Setup ::: ... "
-    Write-Host " Full Contains:
-                    - BASE: Win:Features, Kernel , WSL, Ubuntu:latest
-                    - VSCODE (ask: optional)
-                    - VSCODE-Extensions (ask: optional)
-                    - Docker (ask: optional)
-                    - WSL-Prep (ask: optional)
-                    - Container-Prep (ask: optional) "               
+    Write-Host "Setup Will Install:
+                    VSCODE                              (stable release)
+                    VSCODE-Extensions                   (script:afterSetup)    
+                    Windows Subsystem For Linux (WSL)
+                        |_Enable Windows Features        (req. restart!)
+                        |_Kernel+WSL+Ubuntu             (latest available)
+                        |_WSL-Prep                      (WillAskToInstall) 
+                            |_awscli
+                            |_getToken
+                            |_cdk, etc.                                          
+                OPTIONAL List Includes:
+                        AWS DEV CONTAINER               (WillAskToInstall)
+                            |_Docker                    (WillAskToInstall)
+                            |_Container-Prep            (WillAskToInstall) "               
 }
 
 function Show-Help {
@@ -62,7 +39,7 @@ function Render-FinalMessage {
 $validOptions = @("y", "n")
 
 Render-Full
-$selectedOption = Read-Host " Begin Installation ? [y]es or [n]o"
+$selectedOption = Read-Host " Install Optional (incl. AWS Dev Containers) as well ? [y]es or [n]o"
 
 if (-not $validOptions.Contains($selectedOption.ToLower())) {
     Show-Help
@@ -70,7 +47,7 @@ if (-not $validOptions.Contains($selectedOption.ToLower())) {
 else {
     switch ($selectedOption.ToLower()) {
         "y" {
-            CheckScriptStatus
+            & $REPO_HOME\v4\windows\shared\win-features.ps1
             Render-FinalMessage
         }
         "n" {

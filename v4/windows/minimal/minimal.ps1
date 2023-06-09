@@ -8,30 +8,19 @@ $PacketManagersFolder = "$REPO_HOME\v4\windows\shared"
 function Render-Minimal {
     Write-Host " "
     Write-Host "     ... :: Minimal Setup ::: ... "
-    Write-Host " "
-    Write-Host "Mandatory: "
-    Write-Host "    Amazon.AWSCLI (winget:mandatory)"
-    Write-Host "    $HOME/.aws/getToken.ps1 (script:mandatory) + added in ENV"
-    Write-Host "Optional: "
-    Write-Host "    Python.Python.3.11 (winget:optional)
-                    Git.Git (winget:optional)
-                    vscode (winget:optional)
-                    vscode-extensions (script:optional)
-                    code-commit-helper (script:optional)    
-                    cfn-lint (script:optional) "
+    Write-Host "Setup will install: "
+    Write-Host "    powershell: Amazon.AWSCLI"
+    Write-Host "    powershell: getToken script (2FA for AWS)"
+    Write-Host "OPTIONAL List Includes: "
+    Write-Host "    Git.Git                       (WillAskToInstall)
+                    Python.Python.3.11            (WillAskToInstall)
+                        |_ pip
+                            |_ code-commit-helper (WillAskToInstall)    
+                            |_ cfn-lint           (WillAskToInstall) 
+                    vscode                        (WillAskToInstall)
+                    vscode-extensions             (script:afterSetup)                        
+                        "
     Write-Host " "                
-}
-
-function Show-Help {
-    Write-Host " Options are y or n. Type y or n. "
-}
-
-function Render-FinalMessage {
-    Write-Host "Install complete."
-    Write-Host ""
-    Write-Host "vscode has issues with env and extensions fail at 1st try."
-    Write-Host "To fix that, run in an elevated powershell this command:"
-    Write-Host " Start-Process Powershell $REPO_HOME\v4\common\extensions\extensions.ps1 -wait   "
 }
 
 function Configure-GetToken {
@@ -45,11 +34,70 @@ function Configure-GetToken {
     Write-Host "getToken is now available system-wide."
 }
 
+function pip-tools {
+    Write-Host "Also Install cfn-lint and code commit helper?"
+    $input4 = Read-Host "Enter [y]es or [n]o:" 
+    if ($input4 -eq "y"){
+        & $REPO_HOME\v4\windows\shared\pip-tools.ps1
+    } else {
+        Write-Host "cfn-lint and code commit helper Install skipped."                
+    }
+}
 
-$validOptions = @("y", "n")
+function Git {
+    Write-Host "Install git?.."
+    $input2 = Read-Host "Enter [y]es or [n]o:"
+    if ($input2 -eq "y") {
+        & $REPO_HOME\v4\windows\shared\git.ps1
+    } else {
+        Write-Host "Git Install skipped."
+    }
+}
 
+function Python {
+    #Python
+    Write-Host "Install python?.."
+    $input3 = Read-Host "Enter [y]es or [n]o:"
+    if ($input3 -eq "y") {
+        & $REPO_HOME\v4\windows\shared\python.ps1
+        pip-tools    
+    } else {
+        Write-Host "Python Install skipped."
+    }
+}
+
+function VSCODE {
+    #VSCODE
+    Write-Host "Install VSCODE ?.."
+    $input5 = Read-Host "Enter [y]es or [n]o:"
+    if ($input5 -eq "y") {
+        & $REPO_HOME\v4\windows\shared\vscode.ps1 
+    } else {
+        Write-Host "VSCODE Install skipped."
+    }
+}
+
+function AWSCLI {
+    & $REPO_HOME\v4\windows\shared\awscli.ps1
+    Configure-GetToken
+}
+
+function Render-FinalMessage {
+    Write-Host "Install complete."
+    Write-Host ""
+    Write-Host "vscode has issues with env and extensions fail at 1st try."
+    Write-Host "To fix that, run in an elevated powershell this command:"
+    Write-Host " Start-Process Powershell $REPO_HOME\v4\common\extensions\extensions.ps1 -wait   "
+}
+
+function Show-Help {
+    Write-Host " Options are y or n. Type y or n. "
+}
+
+# MENIU CASE
 Render-Minimal
-$selectedOption = Read-Host " Install Optional? [y]es or [n]o"
+$selectedOption = Read-Host " Install Optional Also ? [y]es or [n]o"
+$validOptions = @("y", "n")
 
 if (-not $validOptions.Contains($selectedOption.ToLower())) {
     Show-Help
@@ -57,18 +105,14 @@ if (-not $validOptions.Contains($selectedOption.ToLower())) {
 else {
     switch ($selectedOption.ToLower()) {
         "y" {
-            & $REPO_HOME\v4\windows\shared\awscli.ps1
-            & $REPO_HOME\v4\windows\shared\python.ps1
-            & $REPO_HOME\v4\windows\shared\git.ps1
-            & $REPO_HOME\v4\windows\shared\pip-tools.ps1
-            & $REPO_HOME\v4\windows\shared\vscode.ps1
-            #& $REPO_HOME\v4\common\extensions\extensions.ps1
-            Configure-GetToken
+            AWSCLI
+            Git
+            Python
+            VSCODE
             Render-FinalMessage
         }
         "n" {
-            & $REPO_HOME\v4\windows\shared\awscli.ps1
-            Configure-GetToken          
+            AWSCLI          
         }
     }
 }
