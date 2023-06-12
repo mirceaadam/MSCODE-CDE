@@ -19,22 +19,6 @@
     - in `common\.aws-example` you have a pre-configured set of credentials that you can inspire
     - or check this: [Configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
 
-### INSTALL AND USE
-#### Ubuntu-Based Linux & WSL
-1. Clone & Change Dir:
-```
-git clone https://github.com/mirceaadam/MSCODE-CDE.git && cd MSCODE-CDE
-```
-2. Edit `user.config` with your personal details
-```
-nano v4/common/user.config
-```
-3. Run the setup
-```
-bash v4/wsl/setup.sh
-```
-#### MacOS
-#### Dev Containers 
 #### Windows
 
 1. Open Powershell AS ADMINISTRATOR
@@ -66,6 +50,22 @@ cd C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\windows
     Start-Process Powershell C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\common\extensions\extensions.ps1 -wait
     ```
 
+### INSTALL AND USE
+#### Ubuntu-Based Linux & WSL
+1. Clone & Change Dir:
+```
+git clone https://github.com/mirceaadam/MSCODE-CDE.git && cd MSCODE-CDE
+```
+2. Edit `user.config` with your personal details
+```
+nano v4/common/user.config
+```
+3. Run the setup
+```
+bash v4/wsl/setup.sh
+```
+#### MacOS
+#### Dev Containers
 ### Main Author
 - [Mircea Adam](https://github.com/mirceaadam)
 
