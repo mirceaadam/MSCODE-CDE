@@ -5,7 +5,7 @@ echo "Please authorize by providing the sudo password."
 sudo apt update && sudo apt install wslu -y
 
 echo "Creating the link."
-ln -s "$(wslvar USERPROFILE)/.aws" ~/.aws
+getPATH=`wslpath "$(wslvar USERPROFILE)"` && ln -s "$getPATH/.aws" ~/.aws
 echo "Check that it is created:"
 ls -larnt ~/.aws
 
