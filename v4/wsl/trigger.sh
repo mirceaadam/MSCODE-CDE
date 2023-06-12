@@ -1,8 +1,8 @@
 #!/bin/bash
 echo "If you see this message, then we will start the WSL customization."
-echo "I will need permission to install wslu tool with apt in order to link correctly ~/.aws"
+echo "I will need permission to update apt and install wslu tool with apt in order to link correctly ~/.aws"
 echo "Please authorize by providing the sudo password."
-sudo apt-get install wslu #used to do translation of paths from windows to wsl
+sudo apt update && sudo apt install wslu -y
 
 echo "Creating the link."
 ln -s "$(wslvar USERPROFILE)/.aws" ~/.aws
