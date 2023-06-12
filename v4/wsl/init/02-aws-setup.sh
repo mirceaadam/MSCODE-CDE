@@ -19,6 +19,8 @@ if [ "$AWS_SETUP" = "yes" ]; then
     #add to bash for quick access
     alias getToken='bash ~/.aws/getToken.sh'
     source ~/.bashrc
+    echo "Making getToken available system-wide"
+    sudo ln -s ~/.aws/getToken.sh /usr/local/bin/getToken
     echo -e "Completed \xE2\x9C\x94"
 else
     echo "Skipped by request."
