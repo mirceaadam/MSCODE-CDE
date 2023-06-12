@@ -1,0 +1,6 @@
+{
+    "name": "$CONTAINER_NAME", 
+    "image": "$CONTAINER_LOCAL_IMG",
+    "forwardPorts": [3000],
+    "postCreateCommand": "bash .devcontainer/entrypoint.sh"
+  }
