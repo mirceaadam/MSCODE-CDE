@@ -2,7 +2,7 @@
 #GLOBALS
 PWD=`pwd`
 REPO_HOME=${PWD}
-SETUP_DIR=${PWD}/v4/wsl
+SETUP_DIR=${PWD}/v4/container
 
 #Fetch INFO
 source ~/.aws/user.config

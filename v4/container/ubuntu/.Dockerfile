@@ -1,4 +1,4 @@
-# MS CODE Custom Development ENV v2.0 Docker Image
+# MS CODE Custom Development ENV v4.0 Docker Image
 # Customize & install what tools you like and need.
 FROM ubuntu:latest
 ARG DEBIAN_FRONTEND=noninteractive
