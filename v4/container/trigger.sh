@@ -1,14 +1,23 @@
 #!/bin/bash
-echo "If you see this message, then we will start the WSL customization."
-echo "I will need permission to update apt and install wslu tool with apt in order to link correctly ~/.aws"
-echo "Please authorize by providing the sudo password."
-sudo apt update && sudo apt install wslu -y
+echo -e "If you see this message, then we will start the devcontainer installation.."
+echo -e " "
+echo -e " "
 
-echo "Creating the link."
-getPATH=`wslpath "$(wslvar USERPROFILE)"` && ln -s "$getPATH/.aws" ~/.aws
-echo "Check that it is created:"
-ls -larnt ~/.aws
+echo -e "Enter the FULL PATH of location where you want to install."
+echo -e "Examples:"
+echo -e "- in WSL: /mnt/f/work or ~/work"
+echo -e "- in Linux: /home/$USER/work or ~/work"
+echo -e "- in MacOS: /home/$USER/work or ~/work"
+echo -e "Type Location:"
+read $DESTINATION
+#Create a check here for $DESTINATION
 
-cd ~ \
-    && git clone https://github.com/mirceaadam/MSCODE-CDE.git \
-    && cd MSCODE-CDE && bash v4/wsl/setup.sh
+mkdir $DESTINATION && cd $DESTINATION
+git clone https://github.com/mirceaadam/MSCODE-CDE.git \
+    && cd MSCODE-CDE/v4 \
+    chmod +x setup.sh \
+    bash setup.sh \
+    && cd .. \
+    echo -e "STARING DEVCONTAINER..." \
+    echo -e "When Prompted in vscode, press: [ REOPEN IN CONTAINER ]" \
+    && code .
