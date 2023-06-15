@@ -1,5 +1,5 @@
 #!/bin/bash
-$SETUP_LOCATION="MSCODE-CDE/v4/container"
+SETUP_LOCATION="MSCODE-CDE/v4/container"
 
 echo -e "If you see this message, then we will start the devcontainer installation.."
 echo -e " "
