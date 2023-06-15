@@ -1,6 +1,6 @@
 #GLOBALS
 $packageName = "Amazon.AWSCLI"
-$awsCliInstallPath = "C:\Program Files\Amazon\AWSCLIV2"
+$awsCliInstallPath = "C:\Program Files\Amazon\AWSCLIV2\"
 
 function InstallAwsCli {
     

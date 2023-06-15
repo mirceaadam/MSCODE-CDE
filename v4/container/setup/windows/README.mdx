@@ -1,0 +1,112 @@
+### INSTALLATION STEPS:
+
+#### 1. Download, unzip, prepare installation.
+
+1. Open Powershell AS ADMINISTRATOR
+2. RUN the following commands in succesion:
+```
+mkdir C:\Temp\devops
+cd C:\Temp\devops
+Invoke-WebRequest -Uri "https://github.com/mirceaadam/MSCODE-CDE/archive/refs/heads/main.zip" -OutFile "C:\Temp\devops\MSCODE-CDE.zip"
+Expand-Archive -Path "./MSCODE-CDE.zip" -DestinationPath "./MSCODE-CDE"
+```
+
+#### 2. START THE INSTALLATION:
+
+Next, RUN the following two commands with 
+**[A] - YES TO ALL !** :
+```
+cd C:\Temp\devops\MSCODE-CDE\MSCODE-CDE-main\setup\windows
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine 
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass 
+.\1.ps1
+```
+
+#### 3. Observations:
+- it will perform in total: 2 restarts (1 automatically , last one asks nicely)
+- if it does not continue automatically, after the 1st install, then run manually:
+```
+./2.ps1
+./3.ps1
+```
+- follow the instructions in the powershell installer window that opens up.
+
+
+#### 4. If you installed Docker and you want to use the container
+-> additional configuration is required to have a perfect experience
+### a) establish a working directory
+1. Open Powershell AS ADMINISTRATOR
+2. type:
+``` bash ```
+Next, Establish a preffered working directory!
+In this example I will create a folder called "work" under `/mnt/c/Users/[YOUR_WINDOWS_USERNAME]`.
+In the command below, replace "[YOUR_WINDOWS_USERNAME]" with your windows user.
+```
+cd /mnt/c/Users/[YOUR_WINDOWS_USERNAME]
+```
+Then run this:
+    ```
+    mkdir work && cd work
+    ```
+##### b) configure `~/.aws`
+###### b.1: if you already have an `~/.aws` saved then, just copy it to:
+-  `~/.aws` if WSL
+-  or `C:\User\[YOUR_WINDOWS_USERNAME]\.aws` if using windows explorer
+###### b.2: if you don't have it, you have to configure it. 
+- in `~/.aws` for linux
+- in `C:\User\[YOUR_WINDOWS_USERNAME]\.aws`
+- in this repository, `.aws-example` is an example of credentials
+- just replace: `xxxxxx` in `config` and `credentials`
+
+### c) configure user.settings file of this setup
+    ```
+    git clone https://github.com/mirceaadam/MSCODE-CDE.git && cd MSCODE-CDE
+    cp setup/user.config-example ../user.config && cd ..
+    ```
+- next, customize the variables in `user.config` replace `john.doe` with your name:
+    
+    [ CONTAINER-SPECIFIC ]
+    - CONTAINER_NAME="MY-AWEOSAME-CDE" `#the name that will be displayed in MSCODE`
+    - CONTAINER_LOCAL_IMG="mscodecde:latest" `#a random name for your docker image`
+   
+    [ AWS ]
+    - AWS_SETUP="yes"
+    - AWS_IAM_USERNAME="john.doe"
+    - AWS_ARN_OF_MFA="arn:aws:iam::12345678910:mfa/john.doe" `#add your mfa ARN from IAM from your AWS user` 
+    - AWS_TOKEN_DURATION=129600
+    
+    [ GIT ]
+    - GIT_SETUP="yes"
+    - GIT_EMAIL="john.doe@company.com"
+    - GIT_USERNAME="John Doe"
+
+### d) run the setup
+    ```
+    cd MSCODE-CDE
+    chmod +x setup.sh
+    bash setup.sh && cd .. && code .
+    ```     
+- `Note:` the script will delete the cloned repo at the end.
+
+#### STRUCTURE:
+
+```
+C:\Temp\devops
+  |-- 1.ps1 (file, mandatory)
+  |-- 2.ps1 (file, mandatory)
+  |-- 3.ps1 (file, mandatory)
+  |-- getToken.ps1 (file, optional)
+  |-- .aws (folder, optional)
+        |-- credentials (file, optional)
+        |-- config (file, optional)
+```
+ 
+```
+C:\Temp:
+  |-- Ubuntu.appx (1Gb file, optional)
+```
+
+
+
+
+
