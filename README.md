@@ -106,3 +106,7 @@ Container:
 - Version 3.0 ( november 2022 )
 - Version 2.0 ( january 2022 )
 - Version 1.0 ( november 2021 )
+
+### TODO's
+
+https://www.powershellgallery.com/packages/idf-ext/1.0/Content/Update-SessionEnvironment.ps1
