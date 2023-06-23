@@ -23,7 +23,7 @@ if ($currentPath -split ';' -contains $awsCliInstallPath) {
 else {
 
     # Update the system PATH environment variable
-    [Environment]::SetEnvironmentVariable("Path", "$env:Path;$awsCliInstallPath", [EnvironmentVariableTarget]::User) #Possible Issue identified might need Machine instead of User
+    [Environment]::SetEnvironmentVariable("Path", "$env:Path;$awsCliInstallPath", [EnvironmentVariableTarget]::Machine) #Possible Issue identified might need Machine instead of User
     Write-Host "AWS CLI has been added to the system PATH."
 }
 }
