@@ -30,8 +30,24 @@ function Configure-GetToken {
     Write-Host "Adding the script system-wide"
     New-Item -ItemType Directory -Path "C:\Program Files\AWS"
     New-Item -ItemType SymbolicLink -Path "C:\Program Files\AWS\getToken.ps1" -Target "$HOME\.aws\getToken.ps1"
-    [Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Program Files\AWS", [EnvironmentVariableTarget]::Machine)
-    Write-Host "getToken is now available system-wide."
+    # [Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Program Files\AWS", [EnvironmentVariableTarget]::Machine)
+    $variableName = 'Path'
+    $existingPath = [Environment]::GetEnvironmentVariable($variableName, 'User')
+    $newPath = "C:\Program Files\AWS\"
+
+    # Check if the path already exists in the environment variable
+    if ($existingPath -split ';' -contains $newPath) {
+        Write-Host "The path '$newPath' already exists in the environment variable."
+    }
+    else {
+        $updatedPath = "$existingPath;$newPath"
+        [Environment]::SetEnvironmentVariable($variableName, $updatedPath, 'User')
+        Write-Host "The path '$newPath' has been added to the environment variable."
+    }
+
+    # Refresh the environment variable for the current PowerShell session
+    $env:Path = [Environment]::GetEnvironmentVariable($variableName, 'User')
+    Write-Host "getToken is now available for the user in any powershell."
 }
 
 function pip-tools {
