@@ -7,7 +7,6 @@ $INSTALL_DIR = 'C:\Temp\CDE'
 $REPO_HOME = 'C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main'
 $USER = $env:UserName
 $local_pip_helper_installer = "$REPO_HOME\v4\windows\managers\optional\pip.ps1"
-$script_location = 'C:\Temp\CDE\Update-SessionEnvironment.ps1'
 
 # PYTHON VERSION
 # ---> Get new version here: https://www.python.org/ftp/python/
@@ -53,7 +52,8 @@ if ($env:Path -notlike "*$pathValue*") {
 }
 
 function RefreshWindowsEnv {
-    Start-Process PowerShell $script_location -wait
+    Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+    refreshenv
 }
 
 "Installing the rest of tools in a separate window...(because windows..)"

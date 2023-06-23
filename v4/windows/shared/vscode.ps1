@@ -1,7 +1,6 @@
 #GLOBALS
 $mscode_url = 'https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user'
 $local_mscode_installer = 'C:\Temp\CDE\VSCodeUserSetup-x64.exe'
-$script_location = 'C:\Temp\CDE\Update-SessionEnvironment.ps1'
 
 function CustomInstallVSCode {
       #------ MSCODE INSTALLATION ---------
@@ -28,20 +27,22 @@ function CustomInstallVSCode {
   }
 
 function AddToPath {
-    $vscodePath = "$env:LOCALAPPDATA\Programs\Microsoft VS Code\bin"
-    $existingPath = [Environment]::GetEnvironmentVariable("PATH", "Machine")
 
-    if ($existingPath -split ';' -notcontains $vscodePath) {
-        #$newPath = $existingPath + ";" + $vscodePath
-        [Environment]::SetEnvironmentVariable("Path", "$env:Path;$vscodePath", [EnvironmentVariableTarget]::User)      
-        Write-Host "VS Code path added to the system's PATH variable."
-    } else {
-        Write-Host "VS Code path is already present in the system's PATH variable."
-    }
+    # $vscodePath = "$env:LOCALAPPDATA\Programs\Microsoft VS Code\bin"
+    # $existingPath = [Environment]::GetEnvironmentVariable("PATH", "Machine")
+
+    # if ($existingPath -split ';' -notcontains $vscodePath) {
+    #     #$newPath = $existingPath + ";" + $vscodePath
+    #     [Environment]::SetEnvironmentVariable("Path", "$env:Path;$vscodePath", [EnvironmentVariableTarget]::User)      
+    #     Write-Host "VS Code path added to the system's PATH variable."
+    # } else {
+    #     Write-Host "VS Code path is already present in the system's PATH variable."
+    # }
 
 }
 function RefreshWindowsEnv {
-  Start-Process PowerShell $script_location -wait
+  Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+  refreshenv
 }
 
   CustomInstallVSCode

@@ -32,7 +32,9 @@ function PacketManagers {
     Write-Host "Setup is checking local package managers.."
     & $PacketManagersFolder\choco.ps1
     & $PacketManagersFolder\winget.ps1
-    & $PacketManagersFolder\win-refresh-env.ps1
+    Import-Module $env:ChocolateyInstall\helpers\chocolateyProfile.psm1
+    refreshenv
+    #& $PacketManagersFolder\win-refresh-env.ps1
 }
 
 # Ask what to install: minimal or full or update
