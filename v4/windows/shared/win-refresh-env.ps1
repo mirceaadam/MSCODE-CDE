@@ -14,7 +14,9 @@ function RefreshWindowsEnvironment {
       $TotalMinutes = $ElapsedTime.TotalMinutes
       # Display the elapsed time in minutes
       "Finished Download, Elapsed time: $TotalMinutes minutes"
+      "Refreshing Windows Environment.."
       Start-Process PowerShell $script_location -wait
+      "Done."
   }
 
   RefreshWindowsEnvironment  

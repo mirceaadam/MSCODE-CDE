@@ -7,6 +7,7 @@ $INSTALL_DIR = 'C:\Temp\CDE'
 $REPO_HOME = 'C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main'
 $USER = $env:UserName
 $local_pip_helper_installer = "$REPO_HOME\v4\windows\managers\optional\pip.ps1"
+$script_location = 'C:\Temp\CDE\Update-SessionEnvironment.ps1'
 
 # PYTHON VERSION
 # ---> Get new version here: https://www.python.org/ftp/python/
@@ -51,11 +52,18 @@ if ($env:Path -notlike "*$pathValue*") {
     [Environment]::SetEnvironmentVariable("Path", $env:Path, [EnvironmentVariableTarget]::User)
 }
 
+function RefreshWindowsEnv {
+    Start-Process PowerShell $script_location -wait
+}
+
 "Installing the rest of tools in a separate window...(because windows..)"
 Start-Process Powershell $local_pip_helper_installer -wait	
 
 "Cleaning up after myself.."
 rm $local_python_installer
+
+"Refreshing Windows Env"
+RefreshWindowsEnv
 			
 			
 

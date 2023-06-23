@@ -2,6 +2,7 @@
 $packageName = "Git.Git"
 $GitInstallPath1 = "C:\Program Files\Git\bin"
 $GitInstallPath2 = "C:\Program Files\Git\cmd"
+$script_location = 'C:\Temp\CDE\Update-SessionEnvironment.ps1'
 
 function InstallGit {
     
@@ -28,6 +29,10 @@ function AddGitToENV {
     }
 }
 
+function RefreshWindowsEnv {
+    Start-Process PowerShell $script_location -wait
+}
 
 InstallGit
 AddGitToENV
+RefreshWindowsEnv

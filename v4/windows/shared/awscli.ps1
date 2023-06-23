@@ -1,6 +1,7 @@
 #GLOBALS
 $packageName = "Amazon.AWSCLI"
 $awsCliInstallPath = "C:\Program Files\Amazon\AWSCLIV2\"
+$script_location = 'C:\Temp\CDE\Update-SessionEnvironment.ps1'
 
 function InstallAwsCli {
     
@@ -27,5 +28,10 @@ else {
 }
 }
 
+function RefreshWindowsEnv {
+    Start-Process PowerShell $script_location -wait
+}
+
 InstallAwsCli
 AddAwsCliToENV
+RefreshWindowsEnv

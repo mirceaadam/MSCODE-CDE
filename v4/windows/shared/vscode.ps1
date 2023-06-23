@@ -1,6 +1,7 @@
 #GLOBALS
 $mscode_url = 'https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user'
 $local_mscode_installer = 'C:\Temp\CDE\VSCodeUserSetup-x64.exe'
+$script_location = 'C:\Temp\CDE\Update-SessionEnvironment.ps1'
 
 function CustomInstallVSCode {
       #------ MSCODE INSTALLATION ---------
@@ -39,6 +40,10 @@ function AddToPath {
     }
 
 }
+function RefreshWindowsEnv {
+  Start-Process PowerShell $script_location -wait
+}
 
   CustomInstallVSCode
-  AddToPath  
+  AddToPath
+  RefreshWindowsEnv  
