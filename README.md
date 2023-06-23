@@ -80,6 +80,7 @@ bash v4/wsl/setup.sh
 ### Version 4 features
 Cross-Platform:
 - .aws now in sync with all: powershell, wsl, containers
+- fixed again environment variables for current user 
 - docker created symbolic links in wsl to sync cross-platforms.
 - re-written with solid base to promote modularity, easy install and maintenance.
     - credentials
@@ -108,5 +109,4 @@ Container:
 - Version 1.0 ( november 2021 )
 
 ### TODO's
-
-https://www.powershellgallery.com/packages/idf-ext/1.0/Content/Update-SessionEnvironment.ps1
+- bash / zsh for gettoken script in wsl/containers
