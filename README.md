@@ -5,6 +5,9 @@
 - It's a custom development environment based on containers so that that it can be easy to share between machines and teams across different operating systems.
 - Current main tools: git, aws-tools(awscli, MFA, ecs, k8s, etc.), cdk v2, etc.
 
+# Overview
+![](mscode-cde.png)
+
 ### Requirements
 #### HW:
 - a decent x86/ARM64 minimum 4-core machine, 16GB RAM for containers
