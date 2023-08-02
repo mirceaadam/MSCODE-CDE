@@ -124,8 +124,8 @@ else {
                 Container-Prep                
                 Render-FinalMessage
             } else {
-                Write-Host "Fresh Install detected, Enable Windows Features..."
-                & $REPO_HOME\v4\windows\shared\win-features.ps1                
+                Write-Host "Fresh Install detected."
+                #& $REPO_HOME\v4\windows\shared\win-features.ps1                
             }
         }
         "n" {
