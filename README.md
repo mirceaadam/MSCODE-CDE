@@ -24,7 +24,7 @@
 
 #### Windows
 
-![](media/setup-2.png)
+![](media/setup.png)
 
 1. Open Powershell AS ADMINISTRATOR
 2. RUN the following commands in succesion:
