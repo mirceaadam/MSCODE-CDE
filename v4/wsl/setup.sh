@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 #GLOBALS
 PWD=`pwd`
@@ -23,11 +23,14 @@ for file in `ls -1 $PRE_INSTALL/ | sort`; do
     fi
 done
 
-# -----   INSTALL  -----   
+# -----   INSTALL  -----
+echo -e ".....:: Begin INSTALL ::...."
 bash $SETUP_DIR/software/install.sh
+echo -e ".....:: Finish INSTALL ::...."
 
 
 # -----   POST_INSTALL -------
+echo -e ".....:: Begin POST_INSTALL ::...."
 POST_INSTALL=${SETUP_DIR}/init
 
 for file in `ls -1 $POST_INSTALL/ | sort`; do
