@@ -5,6 +5,7 @@ output = json
 [profile xxxxxx]
 account = xxxxxx
 role_arn = arn:aws:iam::xxxxxx:role/xxxxxx
-source_profile = mfa
+mfa_serial = arn:aws:iam::xxxxxxxx:mfa/your.name (optional, used for awsume tool)
+source_profile = mfa (iam for awsume tool)
 region = eu-central-1
 output = json
