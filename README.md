@@ -6,7 +6,7 @@
 - Current main tools: git, aws-tools(awscli, MFA, ecs, k8s, etc.), cdk v2, etc.
 
 # Overview
-![](mscode-cde.png)
+![](media/mscode-cde-2.png)
 
 ### Requirements
 #### HW:
@@ -23,6 +23,8 @@
     - or check this: [Configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
 
 #### Windows
+
+![](media/setup-2.png)
 
 1. Open Powershell AS ADMINISTRATOR
 2. RUN the following commands in succesion:
