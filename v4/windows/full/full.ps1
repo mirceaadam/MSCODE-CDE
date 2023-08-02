@@ -125,7 +125,12 @@ else {
                 Render-FinalMessage
             } else {
                 Write-Host "Fresh Install detected."
-                #& $REPO_HOME\v4\windows\shared\win-features.ps1                
+                #& $REPO_HOME\v4\windows\shared\win-features.ps1
+                WSL-install
+                WSL-prep
+                #Docker-install
+                Container-Prep                
+                Render-FinalMessage                
             }
         }
         "n" {
