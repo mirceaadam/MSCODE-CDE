@@ -26,6 +26,9 @@
 
 ![](media/setup.png)
 
+0. Prepare your manadatory .aws folder situated in `C:\Users\your.user`
+![](media/files.png)
+
 1. Open Powershell AS ADMINISTRATOR
 2. RUN the following commands in succesion:
 ```
