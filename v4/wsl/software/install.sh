@@ -39,6 +39,9 @@ source ~/.bashrc
 nvm install node
 nvm use node
 
+# CDK
+npm install -g aws-cdk
+
 # INSTALL DOCKER UNDER WSL
 curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
 sudo usermod -aG docker $USER
