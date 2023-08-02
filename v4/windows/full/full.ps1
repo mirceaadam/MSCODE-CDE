@@ -87,6 +87,20 @@ function Check-Restart {
     }
 }
 
+function Perform-Restart{
+#RESTART REQUIRED
+$input = Read-Host "Can I restart now ? (required) [Y]es / [N]o"
+  if ($input -eq "Y") {
+    "Restarting.."
+    $flagFile = "C:\Temp\CDE\PerformedRestart.flag"
+    New-Item -ItemType File -Path $flagFile -Force
+    shutdown /r /t 0
+  } else {
+    "Don't forget to restart. WSL and Docker installation fails without restart."
+    "Bye."
+  }
+}
+
 function VSCODE {
     #VSCODE
     Write-Host "Install VSCODE ?.."
@@ -127,10 +141,7 @@ else {
                 Write-Host "Fresh Install detected."
                 #& $REPO_HOME\v4\windows\shared\win-features.ps1
                 WSL-install
-                WSL-prep
-                #Docker-install
-                Container-Prep                
-                Render-FinalMessage                
+                Perform-Restart              
             }
         }
         "n" {
