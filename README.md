@@ -58,6 +58,8 @@ cd C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\windows
     Start-Process Powershell C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\common\extensions\extensions.ps1 -wait
     ```
 
+- do not install win devops tools from the terminal under mscode: it's buggy because it does not allow Admin access to PATH
+
 - getToken Script fails for no apparent reason even if correct code was entered and it worked before with current credendials and config. In this case check your timesettings in the OS you are and press "Sync now" in windows for example and try again. 
 
 ### INSTALL AND USE
