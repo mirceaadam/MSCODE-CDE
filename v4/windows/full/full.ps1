@@ -127,7 +127,6 @@ if (-not $validOptions.Contains($selectedOption.ToLower())) {
 else {
     switch ($selectedOption.ToLower()) {
         "y" {
-            VSCODE
             $flagFile = "C:\Temp\CDE\PerformedRestart.flag"
             $flagExists = Check-Restart -FlagFile $flagFile
             if ($flagExists) {
@@ -135,7 +134,8 @@ else {
                 WSL-install
                 WSL-prep
                 #Docker-install
-                Container-Prep                
+                Container-Prep
+                VSCODE
                 Render-FinalMessage
             } else {
                 Write-Host "Fresh Install detected."
@@ -145,17 +145,19 @@ else {
             }
         }
         "n" {
-            VSCODE
             $flagFile = "C:\Temp\CDE\PerformedRestart.flag"
             $flagExists = Check-Restart -FlagFile $flagFile
             if ($flagExists) {
                 Write-Host "Restart performed, resuming.."
-                WSL-install
+                #WSL-install
                 WSL-prep
+                VSCODE
                 Render-FinalMessage
             } else {
-                Write-Host "Fresh Install detected, Enable Windows Features..."
-                & $REPO_HOME\v4\windows\shared\win-features.ps1                
+                Write-Host "Fresh Install detected, Begin install WSL..."
+                #& $REPO_HOME\v4\windows\shared\win-features.ps1
+                WSL-install
+                Perform-Restart                 
             }            
         }
     }
