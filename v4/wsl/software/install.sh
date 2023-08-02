@@ -46,9 +46,6 @@ npm install -g aws-cdk
 curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
 sudo usermod -aG docker $USER
 
-# CDK
-npm install -g aws-cdk
-
 # Uses "robbyrussell" theme (original Oh My Zsh theme), with no plugins
 #sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
 #    -t robbyrussell
