@@ -120,7 +120,7 @@ else {
                 Write-Host "Restart performed, resuming.."
                 WSL-install
                 WSL-prep
-                Docker-install
+                #Docker-install
                 Container-Prep                
                 Render-FinalMessage
             } else {
