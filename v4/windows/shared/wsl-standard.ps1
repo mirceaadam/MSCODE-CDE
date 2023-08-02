@@ -1,0 +1,2 @@
+#Globals
+wsl --install
