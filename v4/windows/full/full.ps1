@@ -38,7 +38,8 @@ function Render-FinalMessage {
 
 function WSL-install {
     #INSTALL WSL
-    & $REPO_HOME\v4\windows\shared\wsl-custom.ps1 
+    #& $REPO_HOME\v4\windows\shared\wsl-custom.ps1
+    & $REPO_HOME\v4\windows\shared\wsl-standard.ps1
 }
 
 function WSL-prep {
