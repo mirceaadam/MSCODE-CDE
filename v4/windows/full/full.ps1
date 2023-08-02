@@ -89,9 +89,15 @@ function Check-Restart {
 
 function Perform-Restart{
 #RESTART REQUIRED
+clear
+Write-Host "              ----                 "
 Write-Host "...:: A restart is required. ::..."
-Write-Host "-> Make sure to wait a few seconds after reboot for the WSL Install to Complete Fully!"
-Write-Host "  -> Provide a username and a password for WSL."
+Write-Host "              ----                 "
+Write-Host "(!)-> Make sure to wait a few seconds after reboot for the WSL Install to Complete Fully!"
+Write-Host "              ----                 "
+Write-Host "(!)-> Provide a username and a password for WSL."
+Write-Host "              ----                 "
+Write-Host "                                   "
 $input = Read-Host "Can I restart now ? (required) [Y]es / [N]o"
   if ($input -eq "Y") {
     "Restarting.."

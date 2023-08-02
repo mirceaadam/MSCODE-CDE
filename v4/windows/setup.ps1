@@ -27,6 +27,21 @@ else {
     Exit
 }
 
+#check restart
+function Check-Restart {
+    param (
+        [Parameter(Mandatory = $true)]
+        [ValidateScript({Test-Path $_ -PathType 'Leaf'})]
+        [string]$FlagFile
+    )
+
+    if (Test-Path $FlagFile -PathType 'Leaf') {
+        return $true
+    } else {
+        return $false
+    }
+}
+
 # PACKAGE MANAGERS CHECK
 function PacketManagers {
     Write-Host "Setup is checking local package managers.."
@@ -37,17 +52,16 @@ function PacketManagers {
     #& $PacketManagersFolder\win-refresh-env.ps1
 }
 
-# Ask what to install: minimal or full or update
+# Ask what to install: minimal or full or continue
 function Show-Help {
+    clear
     Write-Host "(!)Usage -You have to actually type a setup option."
-    Write-Host "  - minimal: awscli + mfa (mandatory), python+pip+code-commit-helper (optional)"
-    Write-Host "  - full: WSL full configuration + MSCODE + Docker(optional) + minimal setup (optional) "
-    Write-Host "  - update: //under construction: Will check and update Docker + MSCODE + python + git (and update)"
-    Write-Host "TYPE for example: minimal or full or update"
+    Write-Host "Check: https://github.com/mirceaadam/MSCODE-CDE/blob/main/media/setup.png"
+    Write-Host "TYPE for example: win or wsl or continue"
 }
 
 function Show-MinimalSetup {
-    Write-Host "[ minimal ] - no restart "
+    Write-Host "[ win ] - windows only - no restart "
     Write-Host "- awscli"
     Write-Host "- awscli MFA: getToken (script) + add to Environment Variables"
     Write-Host "- Microsoft Code (vscode) (optional)"
@@ -60,7 +74,7 @@ function Show-MinimalSetup {
 }
 
 function Show-FullSetup {
-    Write-Host "[ full ] - 2 restarts "
+    Write-Host "[ wsl ] - 2 restarts "
     Write-Host "- Windows Settings to enable WSL Properly"
     Write-Host "- Windows Kernel Update for WSL"
     Write-Host "- WSL + Ubuntu:latest"
@@ -71,40 +85,41 @@ function Show-FullSetup {
 }
 
 function Show-UpdateSetup {
-    Write-Host "[ update ]"
-    Write-Host "//under construction: Will check and update Docker + MSCODE + python + git (and update)"
+    Write-Host "[ continue ]"
+    Write-Host "Not available yet, work in progress, continue from a wsl --install reboot."
 }
 
 function Render-Meniu {
+    clear
     Write-Host "..::: Welcome to Windows Custom Development Environment version 4.0 ::.."
-    Write-Host "THE SETUP OPTIONS ARE:"
+    Write-Host "THE SETUP OPTIONS available here: https://github.com/mirceaadam/MSCODE-CDE/blob/main/media/setup.png"
     Show-MinimalSetup
     Show-FullSetup
     Show-UpdateSetup
 }
 
-$validOptions = @("minimal", "full", "update")
+$validOptions = @("win", "wsl", "continue")
 
 Render-Meniu
-$selectedOption = Read-Host "Type Exactly the word for what setup type you would like - [ minimal ] or [ full ] or [ update ]"
+$selectedOption = Read-Host "Type Exactly the word for what setup type you would like - [ win ] or [ wsl ] or [ continue ]"
 
 if (-not $validOptions.Contains($selectedOption.ToLower())) {
     Show-Help
 }
 else {
     switch ($selectedOption.ToLower()) {
-        "minimal" {
+        "win" {
             clear
             PacketManagers
             & $MinimalSetup
             
         }
-        "full" {
+        "wsl" {
             clear
             PacketManagers
             & $FullSetup
         }
-        "update" {
+        "continue" {
             clear
             PacketManagers
             Show-UpdateSetup
