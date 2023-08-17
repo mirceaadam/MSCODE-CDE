@@ -29,6 +29,7 @@ function Check-Restart {
 
 function StartupChecks{
 # ESENTIAL CHECKS
+clear
     if (Test-Path -Path $REPO_HOME -PathType Container) {
         Write-Host "The directory '$REPO_HOME' exists."
     }
@@ -42,7 +43,6 @@ function StartupChecks{
     }
     else {
         #new!
-        clear
         Write-Host "The directory '$AWS' does not exist. Follow instructions below."
         & $REPO_HOME\v4\common\aws\awsCredentialsConfigurator.ps1
     }
@@ -51,7 +51,7 @@ function StartupChecks{
     $flagExists = Check-Restart -FlagFile $flagFile
 
     if ($flagExists) {
-        Write-Host " ( ! ) Restart detected - - resuming setup!"
+        Write-Host " ( ! ) Restart detected - - resuming wsl setup!"
         Pause
         clear
         Write-Host "Can WSL be now customized ? "
