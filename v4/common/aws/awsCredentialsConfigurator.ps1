@@ -86,6 +86,7 @@ function Meniu {
 }
 
 # ------------START--------
+clear
 CheckAWS
 Meniu
 Options  
