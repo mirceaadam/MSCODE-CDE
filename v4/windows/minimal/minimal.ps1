@@ -7,7 +7,7 @@ $PacketManagersFolder = "$REPO_HOME\v4\windows\shared"
 
 function Render-Minimal {
     Write-Host " "
-    Write-Host "     ... :: Minimal Setup ::: ... "
+    Write-Host "     ... :: Windows-Only Setup ::: ... "
     Write-Host "Setup will install: "
     Write-Host "    powershell: Amazon.AWSCLI"
     Write-Host "    powershell: getToken script (2FA for AWS)"

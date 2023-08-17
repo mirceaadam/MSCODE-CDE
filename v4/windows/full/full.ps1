@@ -7,24 +7,17 @@ $PacketManagersFolder = "$REPO_HOME\v4\windows\shared"
 
 function Render-Full {
     Write-Host " "
-    Write-Host "     ... :: Full Setup ::: ... "
-    Write-Host "SETUP Will Install:
-                    VSCODE                               (stable release)
-                    VSCODE-Extensions                   (script:afterSetup)    
+    Write-Host "     ... :: WSL Setup ::: ... "
+    Write-Host "SETUP Will Install:   
                     Windows Subsystem For Linux (WSL)
-                        |_Enable Windows Features       (REQUIRES RESTART)
-                        |_Kernel+WSL+Ubuntu             (latest available)
-                        |_WSL-Prep                      (WillAskToInstall) 
+                        |_wsl --install                 (REQUIRES RESTART)
+                        |_WSL-Prep                  (optional: WillAskToInstall) 
                             |_awscli
-                            |_getToken
-                            |_cdk, etc.                                          
-                OPTIONAL List Includes:                 (   OPTIONAL    )
-                        AWS DEV CONTAINER               
-                            |_Docker                    (WillAskToInstall)
-                            |_Container-Prep            (WillAskToInstall) 
-                                |_awscli
-                                |_getToken
-                                |_cdk, etc. "               
+                            |_getToken script
+                            |_cdk, etc.
+                            |_Docker in wsl                                           
+                        VSCODE                      (optional: WillAskToInstall)
+                        VSCODE-Extensions              (script:afterSetup)"                                               
 }
 
 
