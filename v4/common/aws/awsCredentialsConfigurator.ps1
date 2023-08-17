@@ -29,20 +29,17 @@ function Options{
         switch ($selectedOption.ToLower()) {
             "retry" {
                 Write-Host "Retrying..."
-                Write-Host "Press any key to continue..."
-                Pause
+                clear
                 & $REPO_HOME\v4\common\aws\awsCredentialsConfigurator.ps1
             }
             "create" {
-                Write-Host "You chose to create a template..."
-                Write-Host "Press any key to continue..."
-                Pause
+                Write-Host "Creating Example AWS Creds"
+                clear
                 createExampleCreds
             }
             "help" {
-                Write-Host "You chose help..."
-                Write-Host "Press any key to continue..."
-                Pause
+                Write-Host "Help:"
+                clear
                 Help
             }
         }
@@ -53,7 +50,7 @@ function createExampleCreds{
     Write-Host " "
     Write-Host " Copying an example aws credentials/config files for current user. "
     mkdir $AWS
-    cp -v $REPO_HOME\v4\common\.aws-example $AWS
+    cp -v $REPO_HOME\v4\common\.aws-example\* $AWS\
     ConfigSupport
     Write-Host "Press any key to continue..."
     Pause
@@ -92,7 +89,4 @@ function Meniu {
 # ------------START--------
 CheckAWS
 Meniu
-Options
-#check for .aws
-# !exist => offer to create or retry
-# exist => exit   
+Options  
