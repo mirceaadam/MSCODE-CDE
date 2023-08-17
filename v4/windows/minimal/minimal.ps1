@@ -25,7 +25,7 @@ function Render-Minimal {
 
 
 function Configure-Credentials {
-    & $REPO_HOME\v4\common\aws\getTokenChecker.ps1
+    & $REPO_HOME\v4\common\aws\awsCredentialsConfigurator.ps1
 }
 function Configure-GetToken {
     # getToken (script:mandatory)

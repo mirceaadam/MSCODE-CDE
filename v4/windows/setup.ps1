@@ -25,7 +25,7 @@ if (Test-Path -Path $AWS -PathType Container) {
 else {
     #new!
     Write-Host "The directory '$AWS' does not exist. Make sure you configure it first."
-    & $REPO_HOME\v4\common\aws\getTokenChecker.ps1
+    & $REPO_HOME\v4\common\aws\awsCredentialsConfigurator.ps1
 }
 
 #check restart
