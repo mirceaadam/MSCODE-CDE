@@ -10,10 +10,12 @@ function CheckAWS{
     $awsFolderPath = Join-Path $env:USERPROFILE ".aws"
 
     if (-not (Test-Path -Path $awsFolderPath -PathType Container)) {
-        Write-Host "Folder $awsFolderPath does not exist."
+        Write-Host "Folder $awsFolderPath NOT FOUND !"
     } 
     else {
+        Write-Host "Well done!"
         Write-Host "Folder '$awsFolderPath' already exists => Nothing to do."
+        Pause
         exit
     }
     
@@ -52,7 +54,6 @@ function createExampleCreds{
     mkdir $AWS
     cp -v $REPO_HOME\v4\common\.aws-example\* $AWS\
     ConfigSupport
-    Write-Host "Press any key to continue..."
     Pause
     exit
 }
@@ -64,7 +65,6 @@ function Help{
     Write-Host " -> [SCENARIO 1] <- FIRST time use: just let the setup [ create ] a template for you and you can edit later."
     Write-Host " -> [SCENARIO 2] <- $AWS exists => just ignore or you can [ retry ] if you forgot them."
     Write-Host " ------------------------------------------------------------------------------------------------------------"
-    Write-Host "Press any key to continue..."
     Pause
     & $REPO_HOME\v4\common\aws\awsCredentialsConfigurator.ps1
 }
