@@ -1,4 +1,4 @@
-# DEVOPS WIN ENV v4.0
+# DEVOPS WIN ENV v4.1
 
 #GLOBALS
 $INSTALL_DIR = 'C:\Temp\CDE'
@@ -23,8 +23,9 @@ if (Test-Path -Path $AWS -PathType Container) {
     Write-Host "The directory '$AWS' exists."
 }
 else {
+    #new!
     Write-Host "The directory '$AWS' does not exist. Make sure you configure it first."
-    Exit
+    & $REPO_HOME\v4\common\aws\getTokenChecker.ps1
 }
 
 #check restart
