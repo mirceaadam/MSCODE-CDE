@@ -12,15 +12,19 @@ $FullSetup = "$REPO_HOME\v4\windows\full\full.ps1"
 function Check-Restart {
     param (
         [Parameter(Mandatory = $true)]
-        [ValidateScript({Test-Path $_ -PathType 'Leaf'})]
+        #[ValidateScript({Test-Path $_ -PathType 'Leaf'})]
         [string]$FlagFile
     )
 
-    if (Test-Path $FlagFile -PathType 'Leaf') {
-        return $true
-    } else {
-        return $false
-    }
+    $flagExists = Test-Path $FlagFile -PathType 'Leaf'
+
+    return $flagExists
+
+    # if (Test-Path $FlagFile -PathType 'Leaf') {
+    #     return $true
+    # } else {
+    #     return $false
+    # }
 }
 
 function StartupChecks{
