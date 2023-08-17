@@ -20,7 +20,7 @@ else {
 }
 
 if (Test-Path -Path $AWS -PathType Container) {
-    Write-Host "The directory '$AWS' exists."
+    Write-Host "'$AWS' already configured."
 }
 else {
     #new!
@@ -28,6 +28,27 @@ else {
     Write-Host "The directory '$AWS' does not exist. Follow instructions below."
     & $REPO_HOME\v4\common\aws\awsCredentialsConfigurator.ps1
 }
+
+$flagFile = "C:\Temp\CDE\PerformedRestart.flag"
+$flagExists = Check-Restart -FlagFile $flagFile
+if ($flagExists) {
+    Write-Host " ( ! ) Restart detected - - resuming setup!"
+    Pause
+    clear
+    Write-Host "Can WSL be now customized ? "
+    Write-Host "Setup will continue to install: WSL getToken, awscli, cdk, cfn-lint, codecommit, etc."
+    $input_prep = Read-Host "Enter [y] or [n]:" 
+        if ($input_prep -eq "y"){
+            & $REPO_HOME\v4\windows\shared\wsl-prep.ps1
+        } else {
+            Write-Host "WSL-Prep Skipped."
+            Write-Host "You can still trigger manually from inside wsl like this: "
+            Write-Host "/mnt/[$REPO_HOME]/v4/wsl/setup.sh"           
+        }
+} else {
+    Write-Host "Fresh Install detected."             
+}
+
 
 #check restart
 function Check-Restart {
@@ -53,13 +74,11 @@ function PacketManagers {
     refreshenv
     #& $PacketManagersFolder\win-refresh-env.ps1
 }
-
-# Ask what to install: minimal or full or continue
 function Show-Help {
     clear
     Write-Host "(!) Usage - You have to actually type a setup option."
     Write-Host "Check: https://github.com/mirceaadam/MSCODE-CDE/blob/main/media/setup.png"
-    Write-Host "TYPE for example: 'win' or 'wsl' or 'continue'"
+    Write-Host "TYPE for example: 'win' or 'wsl'"
     Pause
     & $REPO_HOME\v4\windows\setup.ps1
 }
@@ -93,13 +112,12 @@ function Render-Meniu {
     Write-Host "THE SETUP OPTIONS available here: https://github.com/mirceaadam/MSCODE-CDE"
     Show-MinimalSetup
     Show-FullSetup
-    Show-UpdateSetup
 }
 
-$validOptions = @("win", "wsl", "continue")
+$validOptions = @("win", "wsl")
 
 Render-Meniu
-$selectedOption = Read-Host "Type Exactly the word for what setup type you would like - [ win ] or [ wsl ] or [ continue ]"
+$selectedOption = Read-Host "Type Exactly the word for what setup type you would like - [ win ] or [ wsl ]"
 
 if (-not $validOptions.Contains($selectedOption.ToLower())) {
     Show-Help
@@ -117,11 +135,6 @@ else {
             clear
             PacketManagers
             & $FullSetup
-        }
-        "continue" {
-            clear
-            PacketManagers
-            Show-UpdateSetup
         }
     }
 }

@@ -114,56 +114,21 @@ function VSCODE {
     }
 }
 
-function Show-Help {
-    Write-Host " Options are y or n. Type y or n. "
-}
-
-$validOptions = @("y", "n")
-
+# ----- START HERE --------
 Render-Full
-$selectedOption = Read-Host " Install Optional (incl. AWS Dev Containers) as well ? [y]es or [n]o"
-
-if (-not $validOptions.Contains($selectedOption.ToLower())) {
-    Show-Help
+$flagFile = "C:\Temp\CDE\PerformedRestart.flag"
+$flagExists = Check-Restart -FlagFile $flagFile
+if ($flagExists) {
+    Write-Host "Restart performed, resuming.."
+    WSL-install
+    WSL-prep
+    #Docker-install
+    Container-Prep
+    VSCODE
+    Render-FinalMessage
+} else {
+    Write-Host "Fresh Install detected - starting WSL installation..."
+    #& $REPO_HOME\v4\windows\shared\win-features.ps1
+    WSL-install
+    Perform-Restart              
 }
-else {
-    switch ($selectedOption.ToLower()) {
-        "y" {
-            $flagFile = "C:\Temp\CDE\PerformedRestart.flag"
-            $flagExists = Check-Restart -FlagFile $flagFile
-            if ($flagExists) {
-                Write-Host "Restart performed, resuming.."
-                WSL-install
-                WSL-prep
-                #Docker-install
-                Container-Prep
-                VSCODE
-                Render-FinalMessage
-            } else {
-                Write-Host "Fresh Install detected."
-                #& $REPO_HOME\v4\windows\shared\win-features.ps1
-                WSL-install
-                Perform-Restart              
-            }
-        }
-        "n" {
-            $flagFile = "C:\Temp\CDE\PerformedRestart.flag"
-            $flagExists = Check-Restart -FlagFile $flagFile
-            if ($flagExists) {
-                Write-Host "Restart performed, resuming.."
-                #WSL-install
-                WSL-prep
-                VSCODE
-                Render-FinalMessage
-            } else {
-                Write-Host "Fresh Install detected, Begin install WSL..."
-                #& $REPO_HOME\v4\windows\shared\win-features.ps1
-                WSL-install
-                Perform-Restart                 
-            }            
-        }
-    }
-}
-
-
-
