@@ -9,6 +9,20 @@ $PacketManagersFolder = "$REPO_HOME\v4\windows\shared"
 $MinimalSetup = "$REPO_HOME\v4\windows\minimal\minimal.ps1"
 $FullSetup = "$REPO_HOME\v4\windows\full\full.ps1"
 
+function Check-Restart {
+    param (
+        [Parameter(Mandatory = $true)]
+        [ValidateScript({Test-Path $_ -PathType 'Leaf'})]
+        [string]$FlagFile
+    )
+
+    if (Test-Path $FlagFile -PathType 'Leaf') {
+        return $true
+    } else {
+        return $false
+    }
+}
+
 function StartupChecks{
 # ESENTIAL CHECKS
     if (Test-Path -Path $REPO_HOME -PathType Container) {
