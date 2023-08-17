@@ -5,7 +5,7 @@ $REPO_HOME = 'C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main'
 
 function CheckAWS{
     Write-Host " "
-    Write-Host " Checking for .aws folder for current user."
+    Write-Host "AWS CREDENTIAL CONFIGURATOR:"
 
     $awsFolderPath = Join-Path $env:USERPROFILE ".aws"
 
@@ -14,7 +14,7 @@ function CheckAWS{
     } 
     else {
         Write-Host "Well done!"
-        Write-Host "Folder '$awsFolderPath' already exists => Nothing to do."
+        Write-Host "Found '$awsFolderPath' already configured."
         Pause
         exit
     }
@@ -22,8 +22,8 @@ function CheckAWS{
 }
 
 function Options{
-    $validOptions = @("retry", "create", "help")
-    $selectedOption = Read-Host "Type the Options you want - [ retry / create / help ]:"
+    $validOptions = @("retry", "ignore", "help")
+    $selectedOption = Read-Host "Type the Options you want - [ retry / ignore / help ]:"
     if (-not $validOptions.Contains($selectedOption.ToLower())) {
         help
     }
@@ -34,7 +34,7 @@ function Options{
                 clear
                 & $REPO_HOME\v4\common\aws\awsCredentialsConfigurator.ps1
             }
-            "create" {
+            "ignore" {
                 Write-Host "Creating Example AWS Creds"
                 clear
                 createExampleCreds
@@ -62,10 +62,10 @@ function Help{
     Write-Host "The Example credentials profided as a template (if you don't already have one), are compatible with getToken script and awsume."
     Write-Host "This configuration is mandatory in order for your aws cli to work for your organization you are part of."
     Write-Host "Click this link for details: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-help.html"
-    Write-Host " -----------------------------------------------SCENARIOS----------------------------------------------------"
-    Write-Host " -> [SCENARIO 1] <- FIRST time use: just let the setup [ create ] a template for you and you can edit later."
+    Write-Host " ---------------------------------------------------------SCENARIOS----------------------------------------------------------------"
+    Write-Host " -> [SCENARIO 1] <- FIRST time use: just type [ ignore ] and the setup will create a dummy template for you and you can edit later."
     Write-Host " -> [SCENARIO 2] <- ALERADY have a '.aws' folder => COPY IT NOW to $env:USERPROFILE and type [ retry ] here."
-    Write-Host " ------------------------------------------------------------------------------------------------------------"
+    Write-Host " ----------------------------------------------------------------------------------------------------------------------------------"
     Pause
     & $REPO_HOME\v4\common\aws\awsCredentialsConfigurator.ps1
 }
@@ -80,10 +80,10 @@ function ConfigSupport{
 
 function Meniu {
     Write-Host " Hi $env:USERNAME !"
-    Write-Host " -----------------------------------------------(!)(!)(!)----------------------------------------------------"
-    Write-Host " -> [SCENARIO 1] <- FIRST time use: just let the setup  [ create ] a template for you and you can edit later."
+    Write-Host " -----------------------------------------------(!)(!)(!)--------------------------------------------------------------------------"
+    Write-Host " -> [SCENARIO 1] <- FIRST time use: just type [ ignore ] and the setup will create a dummy template for you and you can edit later."
     Write-Host " -> [SCENARIO 2] <- ALERADY have a '.aws' folder => COPY IT NOW to $env:USERPROFILE and type [ retry ] here."
-    Write-Host " -----------------------------------------------(!)(!)(!)----------------------------------------------------"
+    Write-Host " -----------------------------------------------(!)(!)(!)--------------------------------------------------------------------------"
 }
 
 # ------------START--------

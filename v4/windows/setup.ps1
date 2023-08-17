@@ -61,7 +61,7 @@ function Show-Help {
     Write-Host "Check: https://github.com/mirceaadam/MSCODE-CDE/blob/main/media/setup.png"
     Write-Host "TYPE for example: 'win' or 'wsl' or 'continue'"
     Pause
-    Render-Meniu
+    & $REPO_HOME\v4\windows\setup.ps1
 }
 
 function Show-MinimalSetup {
@@ -103,6 +103,7 @@ $selectedOption = Read-Host "Type Exactly the word for what setup type you would
 
 if (-not $validOptions.Contains($selectedOption.ToLower())) {
     Show-Help
+    Render-Meniu
 }
 else {
     switch ($selectedOption.ToLower()) {
