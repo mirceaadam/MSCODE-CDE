@@ -9,59 +9,46 @@ $PacketManagersFolder = "$REPO_HOME\v4\windows\shared"
 $MinimalSetup = "$REPO_HOME\v4\windows\minimal\minimal.ps1"
 $FullSetup = "$REPO_HOME\v4\windows\full\full.ps1"
 
-
+function StartupChecks{
 # ESENTIAL CHECKS
-if (Test-Path -Path $REPO_HOME -PathType Container) {
-    Write-Host "The directory '$REPO_HOME' exists."
-}
-else {
-    Write-Host "The directory '$REPO_HOME' does not exist."
-    Exit
-}
+    if (Test-Path -Path $REPO_HOME -PathType Container) {
+        Write-Host "The directory '$REPO_HOME' exists."
+    }
+    else {
+        Write-Host "The directory '$REPO_HOME' does not exist."
+        Exit
+    }
 
-if (Test-Path -Path $AWS -PathType Container) {
-    Write-Host "'$AWS' already configured."
-}
-else {
-    #new!
-    clear
-    Write-Host "The directory '$AWS' does not exist. Follow instructions below."
-    & $REPO_HOME\v4\common\aws\awsCredentialsConfigurator.ps1
-}
+    if (Test-Path -Path $AWS -PathType Container) {
+        Write-Host "'$AWS' already configured."
+    }
+    else {
+        #new!
+        clear
+        Write-Host "The directory '$AWS' does not exist. Follow instructions below."
+        & $REPO_HOME\v4\common\aws\awsCredentialsConfigurator.ps1
+    }
 
-$flagFile = "C:\Temp\CDE\PerformedRestart.flag"
-$flagExists = Check-Restart -FlagFile $flagFile
-if ($flagExists) {
-    Write-Host " ( ! ) Restart detected - - resuming setup!"
-    Pause
-    clear
-    Write-Host "Can WSL be now customized ? "
-    Write-Host "Setup will continue to install: WSL getToken, awscli, cdk, cfn-lint, codecommit, etc."
-    $input_prep = Read-Host "Enter [y] or [n]:" 
-        if ($input_prep -eq "y"){
-            & $REPO_HOME\v4\windows\shared\wsl-prep.ps1
-        } else {
-            Write-Host "WSL-Prep Skipped."
-            Write-Host "You can still trigger manually from inside wsl like this: "
-            Write-Host "/mnt/[$REPO_HOME]/v4/wsl/setup.sh"           
-        }
-} else {
-    Write-Host "Fresh Install detected."             
-}
+    $flagFile = "C:\Temp\CDE\PerformedRestart.flag"
+    $flagExists = Check-Restart -FlagFile $flagFile
 
-
-#check restart
-function Check-Restart {
-    param (
-        [Parameter(Mandatory = $true)]
-        [ValidateScript({Test-Path $_ -PathType 'Leaf'})]
-        [string]$FlagFile
-    )
-
-    if (Test-Path $FlagFile -PathType 'Leaf') {
-        return $true
+    if ($flagExists) {
+        Write-Host " ( ! ) Restart detected - - resuming setup!"
+        Pause
+        clear
+        Write-Host "Can WSL be now customized ? "
+        Write-Host "Setup will continue to install: WSL getToken, awscli, cdk, cfn-lint, codecommit, etc."
+        $input_prep = Read-Host "Enter [y] or [n]:" 
+            if ($input_prep -eq "y"){
+                & $REPO_HOME\v4\windows\shared\wsl-prep.ps1
+            } else {
+                Write-Host "WSL-Prep Skipped."
+                Write-Host "You can still trigger manually from inside wsl like this: "
+                Write-Host "/mnt/[$REPO_HOME]/v4/wsl/setup.sh"           
+            }
     } else {
-        return $false
+        Write-Host "Fresh Install detected."
+        Pause             
     }
 }
 
@@ -114,9 +101,11 @@ function Render-Meniu {
     Show-FullSetup
 }
 
-$validOptions = @("win", "wsl")
 
+# --- START HERE ---
+StartupChecks
 Render-Meniu
+$validOptions = @("win", "wsl")
 $selectedOption = Read-Host "Type Exactly the word for what setup type you would like - [ win ] or [ wsl ]"
 
 if (-not $validOptions.Contains($selectedOption.ToLower())) {

@@ -91,7 +91,7 @@ Write-Host "              ----                 "
 Write-Host "(!)-> Provide a username and a password for WSL."
 Write-Host "              ----                 "
 Write-Host "                                   "
-$input = Read-Host "Can I restart now ? (required) [Y]es / [N]o"
+$input = Read-Host "Can I restart now ? (required) [y] / [n]"
   if ($input -eq "Y") {
     "Restarting.."
     $flagFile = "C:\Temp\CDE\PerformedRestart.flag"
