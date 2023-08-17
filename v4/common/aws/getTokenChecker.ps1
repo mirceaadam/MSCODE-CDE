@@ -19,7 +19,8 @@ function checkAWSFolder{
         else {
             switch ($selectedOption.ToLower()) {
                 "retry" {
-                    checkAWSFolder
+                    Write-Host "Retrying..."
+                    & $REPO_HOME\v4\common\aws\getTokenChecker.ps1
                 }
                 "create" {
                     createExampleCreds
@@ -29,12 +30,11 @@ function checkAWSFolder{
                 }
             }
         }
-    } else {
+    } 
+    else {
         Write-Host "Folder '$awsFolderPath' already exists => Nothing to do."
         exit
     }
-
-
 }
 
 function createExampleCreds{
