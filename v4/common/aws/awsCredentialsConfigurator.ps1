@@ -52,7 +52,7 @@ function createExampleCreds{
     Write-Host " "
     Write-Host " Copying an example aws credentials/config files for current user. "
     mkdir $AWS
-    cp -v $REPO_HOME\v4\common\.aws-example\* $AWS\
+    cp $REPO_HOME\v4\common\.aws-example\* $AWS\
     ConfigSupport
     exit
 }
@@ -63,17 +63,17 @@ function Help{
     Write-Host "Click this link for details: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-help.html"
     Write-Host " -----------------------------------------------SCENARIOS----------------------------------------------------"
     Write-Host " -> [SCENARIO 1] <- FIRST time use: just let the setup [ create ] a template for you and you can edit later."
-    Write-Host " -> [SCENARIO 2] <- $AWS exists => just ignore or you can [ retry ] if you forgot them."
+    Write-Host " -> [SCENARIO 2] <- ALERADY have a '.aws' folder => COPY IT NOW to $env:USERPROFILE and type [ retry ] here."
     Write-Host " ------------------------------------------------------------------------------------------------------------"
     Pause
     & $REPO_HOME\v4\common\aws\awsCredentialsConfigurator.ps1
 }
 
 function ConfigSupport{
-    Write-Host "NEXT:"
+    Write-Host "NEXT, you need to:"
     Write-Host " - Contact an AWS Accounts Administrator."
-    Write-Host " - $AWS\credentials: modify lines 2+3 and 6+7"
-    Write-Host " - $AWS\config: for just one profile modify lines 5+6+7+8"
+    Write-Host " - open '$AWS\credentials': MODIFY lines 2+3 and 6+7"
+    Write-Host " - open '$AWS\config': for just one profile, MODIFY lines 5+6+7+8"
     Pause
 }
 
@@ -81,7 +81,7 @@ function Meniu {
     Write-Host " Hi $env:USERNAME !"
     Write-Host " -----------------------------------------------(!)(!)(!)----------------------------------------------------"
     Write-Host " -> [SCENARIO 1] <- FIRST time use: just let the setup  [ create ] a template for you and you can edit later."
-    Write-Host " -> [SCENARIO 2] <- $AWS exists => just ignore or you can [ retry ] if you forgot them."
+    Write-Host " -> [SCENARIO 2] <- ALERADY have a '.aws' folder => COPY IT NOW to $env:USERPROFILE and type [ retry ] here."
     Write-Host " -----------------------------------------------(!)(!)(!)----------------------------------------------------"
 }
 
