@@ -28,12 +28,20 @@ function Options{
         switch ($selectedOption.ToLower()) {
             "retry" {
                 Write-Host "Retrying..."
+                Write-Host "Press any key to continue..."
+                Pause
                 & $REPO_HOME\v4\common\aws\awsCredentialsConfigurator.ps1
             }
             "create" {
+                Write-Host "You chose to create a template..."
+                Write-Host "Press any key to continue..."
+                Pause
                 createExampleCreds
             }
             "help" {
+                Write-Host "You chose help..."
+                Write-Host "Press any key to continue..."
+                Pause
                 Help
             }
         }
