@@ -23,6 +23,10 @@ function Render-Minimal {
     Write-Host " "                
 }
 
+
+function Configure-Credentials {
+    & $REPO_HOME\v4\common\aws\getTokenChecker.ps1
+}
 function Configure-GetToken {
     # getToken (script:mandatory)
     Write-Host "Fetching getToken and adding to $HOME\.aws"
@@ -95,6 +99,7 @@ function VSCODE {
 
 function AWSCLI {
     & $REPO_HOME\v4\windows\shared\awscli.ps1
+    Configure-Credentials
     Configure-GetToken
 }
 
