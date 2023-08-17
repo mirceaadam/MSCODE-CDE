@@ -83,7 +83,7 @@ function Show-Help {
     clear
     Write-Host "(!) Usage - You have to actually type a setup option."
     Write-Host "Check: https://github.com/mirceaadam/MSCODE-CDE/blob/main/media/setup.png"
-    Write-Host "TYPE for example: 'win' or 'wsl'"
+    Write-Host "TYPE for example: 'win' or 'wsl' or 'exit'"
     Pause
     & $REPO_HOME\v4\windows\setup.ps1
 }
@@ -123,8 +123,8 @@ function Render-Meniu {
 # --- START HERE ---
 StartupChecks
 Render-Meniu
-$validOptions = @("win", "wsl")
-$selectedOption = Read-Host "Type Exactly the word for what setup type you would like - [ win ] or [ wsl ]"
+$validOptions = @("win", "wsl", "exit")
+$selectedOption = Read-Host "Type Exactly the word for what setup type you would like - [ win ] or [ wsl ] or [ exit ]"
 
 if (-not $validOptions.Contains($selectedOption.ToLower())) {
     Show-Help
@@ -143,6 +143,9 @@ else {
             PacketManagers
             & $FullSetup
         }
+        "exit" {
+            exit
+        }        
     }
 }
 
