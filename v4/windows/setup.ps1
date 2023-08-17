@@ -57,44 +57,40 @@ function PacketManagers {
 # Ask what to install: minimal or full or continue
 function Show-Help {
     clear
-    Write-Host "(!)Usage -You have to actually type a setup option."
+    Write-Host "(!) Usage - You have to actually type a setup option."
     Write-Host "Check: https://github.com/mirceaadam/MSCODE-CDE/blob/main/media/setup.png"
-    Write-Host "TYPE for example: win or wsl or continue"
+    Write-Host "TYPE for example: 'win' or 'wsl' or 'continue'"
+    Pause
+    Render-Meniu
 }
 
 function Show-MinimalSetup {
+    Write-Host " "
     Write-Host "[ win ] - windows only - no restart "
-    Write-Host "- awscli"
-    Write-Host "- awscli MFA: getToken (script) + add to Environment Variables"
-    Write-Host "- Microsoft Code (vscode) (optional)"
-    Write-Host "- Microsoft Code (vscode) Extensions (optional)"
-    Write-Host "- git (optional / ask to install )"
-    Write-Host "- Python.Python.3.8 (required to install code-commit-helper)"
-    Write-Host "-   pip (required to install code-commit-helper)"
-    Write-Host "-       code-commit-helper (optional)"    
-    Write-Host "-       cfn-lint (optional)"
+    Write-Host "- mandatory: awscli + getToken (MFA script)"
+    Write-Host "- optional: Microsoft Code + git + Python.Python.3.8 + pip + code-commit-helper + cfn-lint"
+    Write-Host " "
 }
 
 function Show-FullSetup {
-    Write-Host "[ wsl ] - 2 restarts "
-    Write-Host "- Windows Settings to enable WSL Properly"
-    Write-Host "- Windows Kernel Update for WSL"
-    Write-Host "- WSL + Ubuntu:latest"
-    Write-Host "- Microsoft Code (vscode)"
-    Write-Host "- Microsoft Code (vscode) Extensions"
-    Write-Host "- Docker: latest (optional / ask to be installed)"
-    Write-Host "- Minimal Setup (if you need powershell cli access)"
+    Write-Host " "
+    Write-Host "[ wsl ] - 1 restart "
+    Write-Host "- mandatory: WSL"
+    Write-Host "- optional: WSL Customization with gettoken and all software [incl. git, pip, Docker (latest) inside wsl,etc. ] + Microsoft Code"
+    Write-Host " "
 }
 
 function Show-UpdateSetup {
+    Write-Host " "
     Write-Host "[ continue ]"
     Write-Host "Not available yet, work in progress, continue from a wsl --install reboot."
+    Write-Host " "
 }
 
 function Render-Meniu {
     clear
-    Write-Host "..::: Welcome to Windows Custom Development Environment version 4.0 ::.."
-    Write-Host "THE SETUP OPTIONS available here: https://github.com/mirceaadam/MSCODE-CDE/blob/main/media/setup.png"
+    Write-Host "..::: Welcome to Windows Custom Development Environment version 4.5 ::.."
+    Write-Host "THE SETUP OPTIONS available here: https://github.com/mirceaadam/MSCODE-CDE"
     Show-MinimalSetup
     Show-FullSetup
     Show-UpdateSetup
