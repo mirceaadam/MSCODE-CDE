@@ -20,6 +20,7 @@ function CheckAWS{
 }
 
 function Options{
+    $validOptions = @("retry", "create", "help")
     $selectedOption = Read-Host "Type the Options you want - [ retry / create / help ]:"
     if (-not $validOptions.Contains($selectedOption.ToLower())) {
         help
