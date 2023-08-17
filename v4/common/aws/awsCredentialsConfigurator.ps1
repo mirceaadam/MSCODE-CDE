@@ -59,6 +59,7 @@ function createExampleCreds{
 function Help{
     clear
     Write-Host "This setup is for configuring your local credentials and config file which should normally exist here: $AWS"
+    Write-Host "The Example credentials profided as a template (if you don't already have one), are compatible with getToken script and awsume."
     Write-Host "This configuration is mandatory in order for your aws cli to work for your organization you are part of."
     Write-Host "Click this link for details: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-help.html"
     Write-Host " -----------------------------------------------SCENARIOS----------------------------------------------------"
