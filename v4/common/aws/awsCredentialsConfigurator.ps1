@@ -54,10 +54,10 @@ function createExampleCreds{
     mkdir $AWS
     cp -v $REPO_HOME\v4\common\.aws-example\* $AWS\
     ConfigSupport
-    Pause
     exit
 }
 function Help{
+    clear
     Write-Host "This setup is for configuring your local credentials and config file which should normally exist here: $AWS"
     Write-Host "This configuration is mandatory in order for your aws cli to work for your organization you are part of."
     Write-Host "Click this link for details: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-help.html"
@@ -74,7 +74,6 @@ function ConfigSupport{
     Write-Host " - Contact an AWS Accounts Administrator."
     Write-Host " - $AWS\credentials: modify lines 2+3 and 6+7"
     Write-Host " - $AWS\config: for just one profile modify lines 5+6+7+8"
-    Write-Host "Press any key to continue..."
     Pause
 }
 
