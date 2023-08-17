@@ -46,6 +46,8 @@ function createExampleCreds{
     mkdir $AWS
     cp -v $REPO_HOME\v4\common\.aws-example $AWS
     ConfigSupport
+    Write-Host "Press any key to continue..."
+    Pause
     exit
 }
 function Help{
@@ -56,6 +58,9 @@ function Help{
     Write-Host " -> [SCENARIO 1] <- FIRST time use: just let the setup [ create ] a template for you and you can edit later."
     Write-Host " -> [SCENARIO 2] <- $AWS exists => just ignore or you can [ retry ] if you forgot them."
     Write-Host " ------------------------------------------------------------------------------------------------------------"
+    Write-Host "Press any key to continue..."
+    Pause
+    & $REPO_HOME\v4\common\aws\awsCredentialsConfigurator.ps1
 }
 
 function ConfigSupport{
@@ -63,6 +68,8 @@ function ConfigSupport{
     Write-Host " - Contact an AWS Accounts Administrator."
     Write-Host " - $AWS\credentials: modify lines 2+3 and 6+7"
     Write-Host " - $AWS\config: for just one profile modify lines 5+6+7+8"
+    Write-Host "Press any key to continue..."
+    Pause
 }
 
 function Meniu {
