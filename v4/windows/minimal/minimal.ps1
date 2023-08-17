@@ -30,10 +30,10 @@ function Configure-Credentials {
 function Configure-GetToken {
     # getToken (script:mandatory)
     Write-Host "Fetching getToken and adding to $HOME\.aws"
-    cp $REPO_HOME\v4\common\aws\getToken.ps1 $HOME\.aws\
+    cp $REPO_HOME\v4\common\aws\getTokenV2.ps1 $HOME\.aws\
     Write-Host "Adding the script system-wide"
     New-Item -ItemType Directory -Path "C:\Program Files\AWS"
-    New-Item -ItemType SymbolicLink -Path "C:\Program Files\AWS\getToken.ps1" -Target "$HOME\.aws\getToken.ps1"
+    New-Item -ItemType SymbolicLink -Path "C:\Program Files\AWS\getToken.ps1" -Target "$HOME\.aws\getTokenV2.ps1"
     # [Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Program Files\AWS", [EnvironmentVariableTarget]::Machine)
     $variableName = 'Path'
     $existingPath = [Environment]::GetEnvironmentVariable($variableName, 'User')

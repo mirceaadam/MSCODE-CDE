@@ -3,7 +3,7 @@ $env:AWS_SECRET_ACCESS_KEY = $null
 $env:AWS_SECRET_KEY = $null
 $env:AWS_SESSION_TOKEN = $null
 
-$userConfigFile = "~/.aws/user.config"
+$userConfigFile = "~/.aws/credentials"
 if (Test-Path $userConfigFile) {
     $userConfig = Get-Content $userConfigFile
     $userConfig | ForEach-Object {
@@ -19,8 +19,8 @@ if (Test-Path $userConfigFile) {
 
 $AWS_USER_PROFILE = "iam"
 $AWS_2AUTH_PROFILE = "mfa"
-$ARN_OF_MFA = $env:AWS_ARN_OF_MFA -replace '[\r\n]+'
-$DURATION = $env:AWS_TOKEN_DURATION -replace '[\r\n]+'
+$ARN_OF_MFA = $env:mfa_arn -replace '[\r\n]+'
+$DURATION = $env:mfa_duration -replace '[\r\n]+'
 $USER = $env:AWS_IAM_USERNAME -replace '[\r\n]+'
 
 Write-Output "Hi $USER!"

@@ -73,7 +73,7 @@ function Help{
 function ConfigSupport{
     Write-Host "NEXT, you need to:"
     Write-Host " - Contact an AWS Accounts Administrator."
-    Write-Host " - open '$AWS\credentials': MODIFY lines 2+3 and 6+7"
+    Write-Host " - open '$AWS\credentials': MODIFY lines 2+3, 6+7 and 13+16"
     Write-Host " - open '$AWS\config': for just one profile, MODIFY lines 5+6+7+8"
     Pause
 }
