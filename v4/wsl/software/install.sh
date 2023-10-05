@@ -30,7 +30,7 @@ sudo pip3 install git-remote-codecommit
 sudo pip3 install cfn-lint
 
 # awsume
-sudo sudo pip3 install awsume
+sudo pip3 install awsume
 
 # NVM / NODE
 # check this: https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-wsl
