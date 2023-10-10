@@ -45,6 +45,8 @@ npm install -g aws-cdk
 # INSTALL DOCKER UNDER WSL
 curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
 sudo usermod -aG docker $USER
+sudo systemctl enable docker.service
+sudo service docker start
 
 # Uses "robbyrussell" theme (original Oh My Zsh theme), with no plugins
 #sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
