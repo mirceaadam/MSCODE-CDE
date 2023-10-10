@@ -47,6 +47,8 @@ curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh ./get-docker.sh
 sudo usermod -aG docker $USER
 sudo systemctl enable docker.service
 sudo service docker start
+#If docker fails to start: https://github.com/docker/for-linux/issues/1406#issuecomment-1183487816
+echo "sudo service docker status || sudo service docker start" >> ~/.profile
 
 # Uses "robbyrussell" theme (original Oh My Zsh theme), with no plugins
 #sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.1/zsh-in-docker.sh)" -- \
