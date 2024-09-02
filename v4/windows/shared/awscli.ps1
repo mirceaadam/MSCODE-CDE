@@ -1,19 +1,19 @@
 #GLOBALS
-$packageName = "Amazon.AWSCLI"
+$packageName = "awscli"
 $awsCliInstallPath = "C:\Program Files\Amazon\AWSCLIV2"
 $script_location = 'C:\Temp\CDE\Update-SessionEnvironment.ps1'
 
 function InstallAwsCli {
     
-        Write-Host "Trying to install or update AWS CLI using msiexec..."
+        Write-Host "Trying to install or update AWS CLI using choco..."
         
         # Download and install the AWS CLI MSI installer for Windows (64-bit)
-        Invoke-WebRequest -Uri https://awscli.amazonaws.com/AWSCLIV2.msi -OutFile 'C:\Temp\AWSCLI.msi'
-        
+        #Invoke-WebRequest -Uri https://awscli.amazonaws.com/AWSCLIV2.msi -OutFile 'C:\Temp\AWSCLI.msi'
+        choco install $packageName -y
         #msiexec.exe /i 'C:\Temp\AWSCLI.msi' /qn
         #/qn option is not installing correctly across the system :(
-        msiexec.exe /i 'C:\Temp\AWSCLI.msi'
-        Write-Host "AWS CLI installed or updated successfully using msiexec."
+        #msiexec.exe /i 'C:\Temp\AWSCLI.msi'
+        Write-Host "AWS CLI installed or updated successfully using choco."
     }
 
 function AddAwsCliToENV {

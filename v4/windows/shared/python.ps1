@@ -10,7 +10,7 @@ $local_pip_helper_installer = "$REPO_HOME\v4\windows\managers\optional\pip.ps1"
 
 # PYTHON VERSION
 # ---> Get new version here: https://www.python.org/ftp/python/
-$python_url  = 'https://www.python.org/ftp/python/3.12.4/python-3.11.4-amd64.exe'
+$python_url  = 'https://www.python.org/ftp/python/3.12.4/python-3.12.4-amd64.exe'
 $PYTHON_VERSION = 'Python312'
 $local_python_installer = "$INSTALL_DIR\python-installer-amd64.exe"
 $PYTHON_PATH = "C:\Users\$USER\AppData\Local\Programs\Python\$PYTHON_VERSION\"
