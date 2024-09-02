@@ -10,7 +10,9 @@ function InstallAwsCli {
         # Download and install the AWS CLI MSI installer for Windows (64-bit)
         Invoke-WebRequest -Uri https://awscli.amazonaws.com/AWSCLIV2.msi -OutFile 'C:\Temp\AWSCLI.msi'
         
-        msiexec.exe /i 'C:\Temp\AWSCLI.msi' /qn
+        #msiexec.exe /i 'C:\Temp\AWSCLI.msi' /qn
+        #/qn option is not installing correctly across the system :(
+        msiexec.exe /i 'C:\Temp\AWSCLI.msi'
         Write-Host "AWS CLI installed or updated successfully using msiexec."
     }
 
