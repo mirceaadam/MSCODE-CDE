@@ -5,9 +5,10 @@ $GitInstallPath2 = "C:\Program Files\Git\cmd"
 
 function InstallGit {
     
-        Write-Host "Trying to install or update GIT using Winget..."
-        winget install $packageName -e
-        Write-Host "GIT installed or updated successfully using Winget."
+        Write-Host "Trying to install or update GIT using Choco..."
+        #winget install $packageName -e
+        choco install git.install -y --params "'/GitAndUnixToolsOnPath /WindowsTerminal /NoAutoCrlf'"
+        Write-Host "GIT installed or updated successfully using Choco."
 
     }
 
