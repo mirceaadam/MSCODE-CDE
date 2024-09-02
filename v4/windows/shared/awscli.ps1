@@ -1,14 +1,17 @@
 #GLOBALS
 $packageName = "Amazon.AWSCLI"
-$awsCliInstallPath = "C:\Program Files\Amazon\AWSCLIV2\"
+$awsCliInstallPath = "C:\Program Files\Amazon\AWSCLIV2"
 $script_location = 'C:\Temp\CDE\Update-SessionEnvironment.ps1'
 
 function InstallAwsCli {
     
-        Write-Host "Trying to install or update AWS CLI using Winget..."
-        winget install $packageName -e
-        Write-Host "AWS CLI installed or updated successfully using Winget."
-
+        Write-Host "Trying to install or update AWS CLI using msiexec..."
+        
+        # Download and install the AWS CLI MSI installer for Windows (64-bit)
+        Invoke-WebRequest -Uri https://awscli.amazonaws.com/AWSCLIV2.msi -OutFile 'C:\Temp\AWSCLI.msi'
+        
+        msiexec.exe /i 'C:\Temp\AWSCLI.msi' /qn
+        Write-Host "AWS CLI installed or updated successfully using msiexec."
     }
 
 function AddAwsCliToENV {
@@ -23,11 +26,9 @@ if ($currentPath -split ';' -contains $awsCliInstallPath) {
 else {
 
     # Update the system PATH environment variable
-    # [Environment]::SetEnvironmentVariable("Path", "$env:Path;$awsCliInstallPath", [EnvironmentVariableTarget]::Machine) #Possible Issue identified might need Machine instead of User
     $variableName = 'Path'
     $existingPath = [Environment]::GetEnvironmentVariable($variableName, 'User')
-    #$newPath = "C:\Program Files\Amazon\AWSCLIV2\"
-
+    $newPath = "$awsCliInstallPath"
     # Check if the path already exists in the environment variable
     if ($existingPath -split ';' -contains $newPath) {
         Write-Host "The path '$newPath' already exists in the environment variable."
