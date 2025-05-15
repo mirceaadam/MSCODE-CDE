@@ -127,8 +127,8 @@ else {
     switch ($selectedOption.ToLower()) {
         "y" {
             AWSCLI
-            Git
             Python
+            Git
             VSCODE
             Render-FinalMessage
         }

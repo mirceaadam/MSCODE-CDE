@@ -1,5 +1,5 @@
 #GLOBALS
-$packageName = "Git.Git"
+$packageName = "git.install"
 $GitInstallPath1 = "C:\Program Files\Git\bin"
 $GitInstallPath2 = "C:\Program Files\Git\cmd"
 
@@ -7,7 +7,7 @@ function InstallGit {
     
         Write-Host "Trying to install or update GIT using Choco..."
         #winget install $packageName -e
-        choco install git.install
+        choco install $packageName
         #choco install git.install --params "'/GitAndUnixToolsOnPath /WindowsTerminal /NoAutoCrlf'"
         Write-Host "GIT installed or updated successfully using Choco."
 
