@@ -6,22 +6,24 @@ $USER = $env:UserName
 $PacketManagersFolder = "$REPO_HOME\v4\windows\shared"
 
 function Render-Minimal {
+    clear
     Write-Host " "
-    Write-Host "     ... :: PowerShell Windows Setup ::: ... "
+    Write-Host "     ... :: PowerShell Windows Setup :: ... "
     Write-Host "SOFTWARE:"
     Write-Host "     [STANDARD] awscli"
     Write-Host "     [STANDARD] getToken powershell script"
     Write-Host "     [STANDARD] GitLab: openSSH"
     Write-Host "     [STANDARD] GitLab: Auto Generate key"
     Write-Host " "
-    Write-Host "     [OPTIONAL] Git                       
-                     [OPTIONAL] Python.3.13            
-                                    |_ pip
-                                        |_ code-commit-helper     
-                                        |_ cfn-lint                    
-                     [OPTIONAL] vscode                        
-                     [OPTIONAL] vscode-extensions                                                         "
-    Write-Host "All have << skip >> options.."                            
+    Write-Host "     [OPTIONAL] Git"                    
+    Write-Host "     [OPTIONAL] Python.3.13"          
+    Write-Host "                     |- pip "
+    Write-Host "                         |- code-commit-helper"   
+    Write-Host "                         |- cfn-lint "         
+    Write-Host "     [OPTIONAL] vscode"
+    Write-Host "     [OPTIONAL] vscode-extensions"
+    Write-Host " "
+    Write-Host "   ... :: You can skip any software you want :: ..."                            
     Write-Host " "
                     
 } 
