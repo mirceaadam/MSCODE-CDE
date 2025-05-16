@@ -1,4 +1,4 @@
-# MS CODE CUSTOM DEVELOPMENT ENVIRONMENT
+# Restore your dev or ops environment
 
 
 - The main goal is to have the same env quickly reinstalled and same tools in MSCode.
