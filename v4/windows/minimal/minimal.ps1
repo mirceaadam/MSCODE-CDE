@@ -7,18 +7,21 @@ $PacketManagersFolder = "$REPO_HOME\v4\windows\shared"
 
 function Render-Minimal {
     Write-Host " "
-    Write-Host "     ... :: Windows-Only Setup ::: ... "
+    Write-Host "     ... :: PowerShell Windows-Only Setup ::: ... "
     Write-Host "Setup will install: "
-    Write-Host "    powershell: Amazon.AWSCLI"
-    Write-Host "    powershell: GitLab.OpenSSH"
-    Write-Host "    powershell: getToken script (2FA for AWS)"
+    Write-Host "    Amazon.AWSCLI"
+    Write-Host "    GitLab.OpenSSH"
+    Write-Host "    getToken script (2FA for AWS)"
+    Write-Host "    OpenSSH and Generate key for GitLab "
     Write-Host "OPTIONAL List Includes: "
-    Write-Host "    Git.Git                       (WillAskToInstall)
-                    Python.Python.3.11            (WillAskToInstall)
+    Write-Host "    Git.Git                       
+                    Python.Python.3.13            
                         |_ pip
                             |_ code-commit-helper (WillAskToInstall)    
                             |_ cfn-lint           (WillAskToInstall) 
-                    vscode                        (WillAskToInstall)
+                    openSSH for GitLab
+                    generate ssh key for Gitlab
+                    vscode                        
                     vscode-extensions             (script:afterSetup)                        
                         "
     Write-Host " "                

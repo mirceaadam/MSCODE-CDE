@@ -7,7 +7,7 @@ function InstallGit {
     
         Write-Host "Trying to install or update GIT using Choco..."
         #winget install $packageName -e
-        choco install $packageName
+        choco install $packageName -y
         #choco install git.install --params "'/GitAndUnixToolsOnPath /WindowsTerminal /NoAutoCrlf'"
         Write-Host "GIT installed or updated successfully using Choco."
 
