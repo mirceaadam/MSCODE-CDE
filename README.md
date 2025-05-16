@@ -10,23 +10,10 @@
 
 
 1. Open an Elevated Powershell (**As Administrator**)
-2. RUN the following commands in **succesion**:
-```
-mkdir C:\Temp\CDE
-cd C:\Temp\CDE
-Invoke-WebRequest -Uri "https://github.com/mirceaadam/MSCODE-CDE/archive/refs/heads/main.zip" -OutFile "C:\Temp\CDE\MSCODE-CDE.zip"
-Expand-Archive -Path "./MSCODE-CDE.zip" -DestinationPath "./MSCODE-CDE"
-```
-Next, RUN the following two commands with 
-**[A] - YES TO ALL !** :
-```
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine 
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-```
-Let's start the windows setup:
-``` 
-cd C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\windows
-.\setup.ps1
+2. RUN the following log command to start the script:
+
+```powershell
+PowerShell.exe -Command "mkdir C:\Temp\CDE; cd C:\Temp\CDE; Invoke-WebRequest -Uri 'https://github.com/mirceaadam/MSCODE-CDE/archive/refs/heads/main.zip' -OutFile 'C:\Temp\CDE\MSCODE-CDE.zip'; Expand-Archive -Path './MSCODE-CDE.zip' -DestinationPath './MSCODE-CDE'; Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine; Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; cd C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\windows; .\setup.ps1"
 ```
 
 ### Quick MENU process.
