@@ -80,12 +80,12 @@ function Git {
 }
 
 function OpenSSH {
-    Write-Host "Install openssh (for GitLab key Access)?.."
+    Write-Host "Install openSSH (for GitLab key Access)?.."
     $input2 = Read-Host "Enter [y]es or [n]o:"
     if ($input2 -eq "y") {
         & $REPO_HOME\v4\windows\shared\openssh.ps1
     } else {
-        Write-Host "Giopenssht Install skipped."
+        Write-Host "openSSH Install skipped."
     }
 }
 

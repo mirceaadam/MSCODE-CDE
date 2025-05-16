@@ -29,13 +29,12 @@ cd C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\windows
 .\setup.ps1
 ```
 
-Just Follow the setup process.
+### Quick MENU process.
+- Type **ignore** at sript start (if 1st time user or you lost your `.aws` folder)
+- Type **win**
+- Install OPTIONAL Also ?  `y` or `n`
 
 ` !!! Observations`: 
-
-Type **ignore** at sript start: 
-- if you don't have any `.aws` folder.
-- if you are first time user.
 
 ### Main Author
 - [Mircea Adam](https://github.com/mirceaadam)
