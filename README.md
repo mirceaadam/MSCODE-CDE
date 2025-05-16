@@ -50,7 +50,7 @@ Type **ignore** at sript start:
 
 
 ### Major Versions
-- Version 4.1 ( May 2024 ) 
+- Version 4.8 ( May 2024 ) 
 - Version 4.0 ( June 2023 )
 - Version 3.0 ( november 2022 )
 - Version 2.0 ( january 2022 )

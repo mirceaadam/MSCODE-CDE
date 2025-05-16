@@ -113,7 +113,7 @@ function Show-UpdateSetup {
 
 function Render-Meniu {
     clear
-    Write-Host "..::: Welcome to Windows Custom Development Environment version 4.5 ::.."
+    Write-Host "..::: Welcome to Windows Custom Development Environment version 4.8 ::.."
     Write-Host "THE SETUP OPTIONS available here: https://github.com/mirceaadam/MSCODE-CDE"
     Show-MinimalSetup
     Show-FullSetup

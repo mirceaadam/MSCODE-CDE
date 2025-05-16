@@ -7,25 +7,24 @@ $PacketManagersFolder = "$REPO_HOME\v4\windows\shared"
 
 function Render-Minimal {
     Write-Host " "
-    Write-Host "     ... :: PowerShell Windows-Only Setup ::: ... "
-    Write-Host "Setup will install: "
-    Write-Host "    Amazon.AWSCLI"
-    Write-Host "    GitLab.OpenSSH"
-    Write-Host "    getToken script (2FA for AWS)"
-    Write-Host "    OpenSSH and Generate key for GitLab "
-    Write-Host "OPTIONAL List Includes: "
-    Write-Host "    Git.Git                       
-                    Python.Python.3.13            
-                        |_ pip
-                            |_ code-commit-helper (WillAskToInstall)    
-                            |_ cfn-lint           (WillAskToInstall) 
-                    openSSH for GitLab
-                    generate ssh key for Gitlab
-                    vscode                        
-                    vscode-extensions             (script:afterSetup)                        
-                        "
-    Write-Host " "                
-}
+    Write-Host "     ... :: PowerShell Windows Setup ::: ... "
+    Write-Host "SOFTWARE:"
+    Write-Host "     [STANDARD] awscli"
+    Write-Host "     [STANDARD] getToken powershell script"
+    Write-Host "     [STANDARD] GitLab: openSSH"
+    Write-Host "     [STANDARD] GitLab: Auto Generate key"
+    Write-Host " "
+    Write-Host "     [OPTIONAL] Git                       
+                     [OPTIONAL] Python.3.13            
+                                    |_ pip
+                                        |_ code-commit-helper     
+                                        |_ cfn-lint                    
+                     [OPTIONAL] vscode                        
+                     [OPTIONAL] vscode-extensions                                                         "
+    Write-Host "All have << skip >> options.."                            
+    Write-Host " "
+                    
+} 
 
 
 function Configure-Credentials {
@@ -128,11 +127,12 @@ function AWSCLI {
 }
 
 function Render-FinalMessage {
-    Write-Host "Install complete."
-    Write-Host ""
-    Write-Host "vscode has issues with env and extensions fail at 1st try."
-    Write-Host "To fix that, run in an elevated powershell this command:"
-    Write-Host " Start-Process Powershell $REPO_HOME\v4\common\extensions\extensions.ps1 -wait   "
+    Write-Host " "
+    Write-Host "P.S: if you want some vscode extensions, use this command:"
+    Write-Host " Start-Process Powershell $REPO_HOME\v4\common\extensions\extensions.ps1 -wait   "    
+    Write-Host " "
+    Write-Host "     --- Happy coding, THANK YOU FOR USING MY SCRIPT ---   "
+    Write-Host " "
 }
 
 function Show-Help {
@@ -141,7 +141,7 @@ function Show-Help {
 
 # MENIU CASE
 Render-Minimal
-$selectedOption = Read-Host " Install Optional Also ? [y]es or [n]o"
+$selectedOption = Read-Host " Install OPTIONAL Also ? [y]es or [n]o"
 $validOptions = @("y", "n")
 
 if (-not $validOptions.Contains($selectedOption.ToLower())) {
@@ -150,12 +150,12 @@ if (-not $validOptions.Contains($selectedOption.ToLower())) {
 else {
     switch ($selectedOption.ToLower()) {
         "y" {
-            AWSCLI
+            AWSCLI            
             Python
-            Git
+            Git            
             OpenSSH
-            VSCODE
             GenerateSSHKey
+            VSCODE
             Render-FinalMessage
         }
         "n" {

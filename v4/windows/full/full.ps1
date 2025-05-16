@@ -22,11 +22,12 @@ function Render-Full {
 
 
 function Render-FinalMessage {
-    Write-Host "Install complete."
-    Write-Host ""
-    Write-Host "vscode has issues with env and extensions fail at 1st try."
-    Write-Host "To fix that, run in an elevated powershell this command:"
-    Write-Host " Start-Process Powershell $REPO_HOME\v4\common\extensions\extensions.ps1 -wait   "
+    Write-Host " "
+    Write-Host "P.S: if you want some vscode extensions, use this command:"
+    Write-Host " Start-Process Powershell $REPO_HOME\v4\common\extensions\extensions.ps1 -wait   "    
+    Write-Host " "
+    Write-Host "     --- Happy coding, THANK YOU FOR USING MY SCRIPT ---   "
+    Write-Host " "
 }
 
 function WSL-install {
