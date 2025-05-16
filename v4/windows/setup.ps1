@@ -90,15 +90,15 @@ function Show-Help {
 
 function Show-MinimalSetup {
     Write-Host " "
-    Write-Host "[ win ] - windows only - no restart "
+    Write-Host "[ win ] - Just Choose this. Windows. No restart."
     Write-Host "- mandatory: awscli + getToken (MFA script)"
-    Write-Host "- optional: Microsoft Code + git + Python.Python.3.8 + pip + code-commit-helper + cfn-lint"
+    Write-Host "- optional: git + gitlab stuff + Python + pip + code-commit-helper + cfn-lint"
     Write-Host " "
 }
 
 function Show-FullSetup {
     Write-Host " "
-    Write-Host "[ wsl ] - 1 restart "
+    Write-Host "[ wsl ] - (!) Experimental - do not choose unless you have to. "
     Write-Host "- mandatory: WSL"
     Write-Host "- optional: WSL Customization with gettoken and all software [incl. git, pip, Docker (latest) inside wsl,etc. ] + Microsoft Code"
     Write-Host " "
