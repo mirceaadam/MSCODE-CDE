@@ -1,36 +1,16 @@
 # MS CODE CUSTOM DEVELOPMENT ENVIRONMENT
-# MSCODE-CDE
+
 
 - The main goal is to have the same env quickly reinstalled and same tools in MSCode.
-- It's a custom development environment based on containers so that that it can be easy to share between machines and teams across different operating systems.
-- Current main tools: git, aws-tools(awscli, MFA, ecs, k8s, etc.), cdk v2, etc.
+- It's a custom development environment 
 
-# Overview
-![](media/mscode-cde-2.png)
-
-### Requirements
-#### HW:
-- a decent x86/ARM64 minimum 4-core machine, 16GB RAM for containers
-- decent internet access
-#### OS:
-- administrator / root access
-- Have AWS Credentials Configured with profiles in:
-    Windows `$HOME\.aws`
-    macOS `$HOME/.aws`
-    Linux `$HOME/.aws`
-- If you do not have AWS Credentials configured:
-    - in `common\.aws-example` you have a pre-configured set of credentials that you can inspire
-    - or check this: [Configure AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
+# Installation
 
 #### Windows
 
-![](media/setup.png)
 
-0. Prepare your manadatory .aws folder situated in `C:\Users\your.user`
-![](media/files.png)
-
-1. Open Powershell AS ADMINISTRATOR
-2. RUN the following commands in succesion:
+1. Open an Elevated Powershell (**As Administrator**)
+2. RUN the following commands in **succesion**:
 ```
 mkdir C:\Temp\CDE
 cd C:\Temp\CDE
@@ -48,77 +28,31 @@ Let's start the windows setup:
 cd C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\windows
 .\setup.ps1
 ```
-### Notes and Known Bugs:
 
-- When the installation finishes, you must open a separate powershell/cmd to use the tools !
+Just Follow the setup process.
 
-- Do not forget to install you VSCode extensions with this command:
+` !!! Observations`: 
 
-    ```
-    Start-Process Powershell C:\Temp\CDE\MSCODE-CDE\MSCODE-CDE-main\v4\common\extensions\extensions.ps1 -wait
-    ```
+Type **ignore** at sript start: 
+- if you don't have any `.aws` folder.
+- if you are first time user.
 
-- do not install win devops tools from the terminal under mscode: it's buggy because it does not allow Admin access to PATH
-
-- getToken Script fails for no apparent reason even if correct code was entered and it worked before with current credendials and config. In this case check your timesettings in the OS you are and press "Sync now" in windows for example and try again. 
-
-### INSTALL AND USE
-#### Ubuntu-Based Linux & WSL
-1. Clone & Change Dir:
-```
-git clone https://github.com/mirceaadam/MSCODE-CDE.git && cd MSCODE-CDE
-```
-2. Edit `user.config` with your personal details
-```
-nano v4/common/user.config
-```
-3. Run the setup
-```
-bash v4/wsl/setup.sh
-```
-#### MacOS
-#### Dev Containers
 ### Main Author
 - [Mircea Adam](https://github.com/mirceaadam)
 
 ### Contributions
-- [ChatGPT4](https://chat.openai.com/)
+- AI Support
 - [devops Team](https://google.com)
 - [Trond Kristiansen](https://github.com) //access docker socket from container
 
 ### Based On
 - [Developing Inside A Container](https://code.visualstudio.com/docs/devcontainers/containers#_quick-start-open-an-existing-folder-in-a-container)
 
-### Version 4 features
-Cross-Platform:
-- .aws now in sync with all: powershell, wsl, containers
-- fixed again environment variables for current user 
-- docker created symbolic links in wsl to sync cross-platforms.
-- re-written with solid base to promote modularity, easy install and maintenance.
-    - credentials
-    - getToken available system-wide
-    - getToken script improved
-- vscode extensions 
 
-Windows:
-- fixed anoying Windows Path Variables in `[EnvironmentVariableTarget]::User` 
-- use of netget(90%), chocolately, nuget or custom scripts.
-- installation options: 
-    - awscli-only (getToken+)
-    - minimal 
-    - full(WSL+Docker)  
-
-WSL:
-- ready to configure with awscli+WSL+getToken
-- software & tools
-
-Container:
-- easy to maintain, configure and set-up
-### Major Versions 
+### Major Versions
+- Version 4.1 ( May 2024 ) 
 - Version 4.0 ( June 2023 )
 - Version 3.0 ( november 2022 )
 - Version 2.0 ( january 2022 )
 - Version 1.0 ( november 2021 )
 
-### TODO's
-- bash / zsh for gettoken script in wsl/containers

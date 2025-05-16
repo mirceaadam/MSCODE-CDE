@@ -10,6 +10,7 @@ function Render-Minimal {
     Write-Host "     ... :: Windows-Only Setup ::: ... "
     Write-Host "Setup will install: "
     Write-Host "    powershell: Amazon.AWSCLI"
+    Write-Host "    powershell: GitLab.OpenSSH"
     Write-Host "    powershell: getToken script (2FA for AWS)"
     Write-Host "OPTIONAL List Includes: "
     Write-Host "    Git.Git                       (WillAskToInstall)
@@ -74,6 +75,26 @@ function Git {
     }
 }
 
+function OpenSSH {
+    Write-Host "Install openssh (for GitLab key Access)?.."
+    $input2 = Read-Host "Enter [y]es or [n]o:"
+    if ($input2 -eq "y") {
+        & $REPO_HOME\v4\windows\shared\openssh.ps1
+    } else {
+        Write-Host "Giopenssht Install skipped."
+    }
+}
+
+function GenerateSSHKey {
+    Write-Host "Would you like to also generate the GitLab key Access ?.."
+    $input2 = Read-Host "Enter [y]es or [n]o:"
+    if ($input2 -eq "y") {
+        & $REPO_HOME\v4\windows\shared\gitlabAccess.ps1
+    } else {
+        Write-Host "Auto Key Gen skipped."
+    }
+}
+
 function Python {
     #Python
     Write-Host "Install python?.."
@@ -129,11 +150,15 @@ else {
             AWSCLI
             Python
             Git
+            OpenSSH
             VSCODE
+            GenerateSSHKey
             Render-FinalMessage
         }
         "n" {
-            AWSCLI          
+            AWSCLI 
+            OpenSSH
+            GenerateSSHKey         
         }
     }
 }
